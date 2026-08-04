@@ -12,13 +12,14 @@ jobs:
 
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
+          distribution: temurin
           java-version: '17'
-          distribution: 'temurin'
+          cache: gradle
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
@@ -27,19 +28,21 @@ jobs:
         run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace
+        run: ./gradlew assembleDebug --stacktrace --info
 
       - name: Build Release APK
-        run: ./gradlew assembleRelease --stacktrace
+        run: ./gradlew assembleRelease --stacktrace --info
 
-      - name: Upload Debug APK Artifact
+      - name: Upload Debug APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: Browser-Debug
+          path: app/build/outputs/apk/debug/*.apk
 
-      - name: Upload Release APK Artifact
+      - name: Upload Release APK
+        if: success()
         uses: actions/upload-artifact@v4
         with:
-          name: release-unsigned-apk
-          path: app/build/outputs/apk/release/app-release-unsigned.apk
+          name: Browser-Release
+          path: app/build/outputs/apk/release/*.apk
