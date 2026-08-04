@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1F1F28</color>
+    <color name="colorPrimaryDark">#121216</color>
+    <color name="colorAccent">#4F46E5</color>
+    <color name="colorAccentLight">#6366F1</color>
+    
+    <color name="backgroundDark">#121216</color>
+    <color name="surfaceDark">#1F1F28</color>
+    <color name="cardDark">#2A2A36</color>
+    <color name="searchBarBackground">#2D2D3A</color>
+    
+    <color name="textPrimary">#F3F4F6</color>
+    <color name="textSecondary">#9CA3AF</color>
+    <color name="textHint">#6B7280</color>
+    
+    <color name="iconTint">#E5E7EB</color>
+    <color name="dividerColor">#374151</color>
+    <color name="progressBarColor">#6366F1</color>
+    
+    <color name="incognitoBackground">#0F172A</color>
+    <color name="incognitoSurface">#1E293B</color>
+</resources>

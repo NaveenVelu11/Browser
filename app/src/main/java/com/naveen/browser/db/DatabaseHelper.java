@@ -1,0 +1,179 @@
+package com.naveen.browser.db;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import com.naveen.browser.model.BookmarkItem;
+import com.naveen.browser.model.HistoryItem;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class DatabaseHelper extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = "browser_db.db";
+    private static final int DATABASE_VERSION = 1;
+
+    // Bookmarks Table
+    private static final String TABLE_BOOKMARKS = "bookmarks";
+    private static final String COLUMN_BM_ID = "id";
+    private static final String COLUMN_BM_TITLE = "title";
+    private static final String COLUMN_BM_URL = "url";
+    private static final String COLUMN_BM_TIMESTAMP = "timestamp";
+
+    // History Table
+    private static final String TABLE_HISTORY = "history";
+    private static final String COLUMN_HIST_ID = "id";
+    private static final String COLUMN_HIST_TITLE = "title";
+    private static final String COLUMN_HIST_URL = "url";
+    private static final String COLUMN_HIST_TIMESTAMP = "timestamp";
+
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String createBookmarksTable = "CREATE TABLE " + TABLE_BOOKMARKS + " (" +
+                COLUMN_BM_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_BM_TITLE + " TEXT, " +
+                COLUMN_BM_URL + " TEXT UNIQUE, " +
+                COLUMN_BM_TIMESTAMP + " INTEGER)";
+
+        String createHistoryTable = "CREATE TABLE " + TABLE_HISTORY + " (" +
+                COLUMN_HIST_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_HIST_TITLE + " TEXT, " +
+                COLUMN_HIST_URL + " TEXT, " +
+                COLUMN_HIST_TIMESTAMP + " INTEGER)";
+
+        db.execSQL(createBookmarksTable);
+        db.execSQL(createHistoryTable);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKMARKS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
+        onCreate(db);
+    }
+
+    // --- Bookmarks Methods ---
+
+    public boolean addBookmark(BookmarkItem bookmark) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_BM_TITLE, bookmark.getTitle());
+        values.put(COLUMN_BM_URL, bookmark.getUrl());
+        values.put(COLUMN_BM_TIMESTAMP, bookmark.getTimestamp());
+
+        long result = db.insertWithOnConflict(TABLE_BOOKMARKS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        db.close();
+        return result != -1;
+    }
+
+    public List<BookmarkItem> getAllBookmarks(String query) {
+        List<BookmarkItem> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        
+        String selection = null;
+        String[] selectionArgs = null;
+        if (query != null && !query.trim().isEmpty()) {
+            selection = COLUMN_BM_TITLE + " LIKE ? OR " + COLUMN_BM_URL + " LIKE ?";
+            selectionArgs = new String[]{"%" + query + "%", "%" + query + "%"};
+        }
+
+        Cursor cursor = db.query(TABLE_BOOKMARKS, null, selection, selectionArgs, null, null, COLUMN_BM_TIMESTAMP + " DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_BM_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BM_TITLE));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_BM_URL));
+                long timestamp = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_BM_TIMESTAMP));
+
+                list.add(new BookmarkItem(id, title, url, timestamp));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return list;
+    }
+
+    public boolean isBookmarked(String url) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_BOOKMARKS, new String[]{COLUMN_BM_ID}, COLUMN_BM_URL + "=?", new String[]{url}, null, null, null);
+        boolean exists = (cursor != null && cursor.getCount() > 0);
+        if (cursor != null) cursor.close();
+        db.close();
+        return exists;
+    }
+
+    public boolean deleteBookmark(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(TABLE_BOOKMARKS, COLUMN_BM_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return rows > 0;
+    }
+
+    public boolean deleteBookmarkByUrl(String url) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(TABLE_BOOKMARKS, COLUMN_BM_URL + "=?", new String[]{url});
+        db.close();
+        return rows > 0;
+    }
+
+    // --- History Methods ---
+
+    public void addHistory(HistoryItem history) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_HIST_TITLE, history.getTitle());
+        values.put(COLUMN_HIST_URL, history.getUrl());
+        values.put(COLUMN_HIST_TIMESTAMP, history.getTimestamp());
+
+        db.insert(TABLE_HISTORY, null, values);
+        db.close();
+    }
+
+    public List<HistoryItem> getAllHistory(String query) {
+        List<HistoryItem> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        
+        String selection = null;
+        String[] selectionArgs = null;
+        if (query != null && !query.trim().isEmpty()) {
+            selection = COLUMN_HIST_TITLE + " LIKE ? OR " + COLUMN_HIST_URL + " LIKE ?";
+            selectionArgs = new String[]{"%" + query + "%", "%" + query + "%"};
+        }
+
+        Cursor cursor = db.query(TABLE_HISTORY, null, selection, selectionArgs, null, null, COLUMN_HIST_TIMESTAMP + " DESC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_HIST_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HIST_TITLE));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_HIST_URL));
+                long timestamp = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_HIST_TIMESTAMP));
+
+                list.add(new HistoryItem(id, title, url, timestamp));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return list;
+    }
+
+    public boolean deleteHistory(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(TABLE_HISTORY, COLUMN_HIST_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return rows > 0;
+    }
+
+    public void clearAllHistory() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_HISTORY, null, null);
+        db.close();
+    }
+}
