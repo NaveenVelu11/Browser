@@ -119,7 +119,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
-        public void onPageScrolled(int arg0, float arg1, int arg2) {}
+        public void onPageScrolled(int arg0, float arg1, int arg2) {
+        }
 
         @Override
         public void onPageSelected(int position) {
@@ -135,7 +136,8 @@ public class OnboardingActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onPageScrollStateChanged(int arg0) {}
+        public void onPageScrollStateChanged(int arg0) {
+        }
     };
 
     private class OnboardingPagerAdapter extends PagerAdapter {
