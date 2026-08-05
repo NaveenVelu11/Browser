@@ -200,6 +200,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         });
 
+        swipeRefresh.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
+            @Override
+            public boolean canChildScrollUp(SwipeRefreshLayout parent, View child) {
+                WebView currentWeb = getCurrentWebView();
+                if (currentWeb != null) {
+                    return currentWeb.canScrollVertically(-1);
+                }
+                return false;
+            }
+        });
+
         editUrl.setOnEditorActionListener((v, actionId, event) -> {
             if (actionId == EditorInfo.IME_ACTION_GO || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
                 loadEnteredUrl();
