@@ -28,6 +28,8 @@ public class BookmarksActivity extends AppCompatActivity implements BookmarksAda
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.naveen.browser.utils.PreferenceManager pm = new com.naveen.browser.utils.PreferenceManager(this);
+        pm.applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarks);
 
@@ -39,6 +41,25 @@ public class BookmarksActivity extends AppCompatActivity implements BookmarksAda
         txtEmpty = findViewById(R.id.txt_empty_bookmarks);
 
         btnBack.setOnClickListener(v -> finish());
+
+        ImageButton btnOpenAll = findViewById(R.id.btn_open_all_bookmarks);
+        btnOpenAll.setOnClickListener(v -> {
+            List<BookmarkItem> list = dbHelper.getAllBookmarks(null);
+            if (list.isEmpty()) {
+                Toast.makeText(this, "No bookmarks to open", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (BookmarkItem item : list) {
+                if (item.getUrl() != null && !item.getUrl().trim().isEmpty()) {
+                    sb.append(item.getUrl()).append(";;;");
+                }
+            }
+            Intent data = new Intent();
+            data.putExtra("urls", sb.toString());
+            setResult(RESULT_OK, data);
+            finish();
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new BookmarksAdapter(null, this);

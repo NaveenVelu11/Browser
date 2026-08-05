@@ -3,6 +3,8 @@ package com.naveen.browser.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import androidx.appcompat.app.AppCompatDelegate;
+
 public class PreferenceManager {
     private static final String PREF_NAME = "browser_preferences";
 
@@ -18,6 +20,8 @@ public class PreferenceManager {
     private static final String KEY_SESSION_RESTORE = "session_restore_enabled";
     private static final String KEY_AUTOFILL = "autofill_enabled";
     private static final String KEY_SAVED_SESSIONS = "saved_sessions_urls";
+    private static final String KEY_FIRST_LAUNCH = "first_launch";
+    private static final String KEY_THEME_MODE = "theme_mode";
 
     public static final String DEFAULT_HOMEPAGE = "https://www.google.com";
 
@@ -121,5 +125,40 @@ public class PreferenceManager {
 
     public void setSavedSessions(String sessionData) {
         prefs.edit().putString(KEY_SAVED_SESSIONS, sessionData).apply();
+    }
+
+    public boolean isFirstLaunch() {
+        return prefs.getBoolean(KEY_FIRST_LAUNCH, true);
+    }
+
+    public void setFirstLaunch(boolean isFirst) {
+        prefs.edit().putBoolean(KEY_FIRST_LAUNCH, isFirst).apply();
+    }
+
+    public int getThemeMode() {
+        return prefs.getInt(KEY_THEME_MODE, 0); // 0 = System, 1 = Light, 2 = Dark
+    }
+
+    public void setThemeMode(int mode) {
+        prefs.edit().putInt(KEY_THEME_MODE, mode).apply();
+    }
+
+    public void applyTheme() {
+        int mode = getThemeMode();
+        if (mode == 1) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        } else if (mode == 2) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+        }
+    }
+
+    public int getLifetimeBlockedAds() {
+        return prefs.getInt("lifetime_blocked_ads", 0);
+    }
+
+    public void incrementLifetimeBlockedAds(int count) {
+        prefs.edit().putInt("lifetime_blocked_ads", getLifetimeBlockedAds() + count).apply();
     }
 }

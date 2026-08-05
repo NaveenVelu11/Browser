@@ -131,10 +131,28 @@ public class WebUtils {
                 "})();";
     }
 
-    public static String getReaderModeScript() {
+    public static String getReaderModeScript(boolean isNightMode) {
+        String bg = isNightMode ? "#121216" : "#ffffff";
+        String fg = isNightMode ? "#e5e7eb" : "#1f2937";
         return "javascript:(function() {" +
-                "var article = document.querySelector('article') || document.querySelector('main') || document.body;" +
-                "document.body.innerHTML = '<div style=\"max-width:700px;margin:auto;padding:20px;font-family:sans-serif;line-height:1.6;color:#e5e7eb;background:#121216;\">' + article.innerHTML + '</div>';" +
+                "var title = document.title;" +
+                "var article = document.querySelector('article');" +
+                "if (!article) {" +
+                "    var candidates = document.querySelectorAll('div, section, main');" +
+                "    var best = null; var max = 0;" +
+                "    for(var i=0; i<candidates.length; i++) {" +
+                "        var p = candidates[i].querySelectorAll('p').length;" +
+                "        if (p > max) { max = p; best = candidates[i]; }" +
+                "    }" +
+                "    article = best || document.body;" +
+                "}" +
+                "var clone = article.cloneNode(true);" +
+                "var junk = clone.querySelectorAll('script, style, iframe, ads, .ads, .advertisement, header, footer, nav, noscript');" +
+                "for(var j=0; j<junk.length; j++) junk[j].parentNode.removeChild(junk[j]);" +
+                "var cleanHtml = clone.innerHTML;" +
+                "document.body.innerHTML = '<div style=\"max-width:700px;margin:auto;padding:24px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;font-size:17px;color:" + fg + ";background-color:" + bg + ";\">' +" +
+                "    '<h1>' + title + '</h1>' + cleanHtml + '</div>';" +
+                "document.body.style.backgroundColor = '" + bg + "';" +
                 "})();";
     }
 }

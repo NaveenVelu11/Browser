@@ -29,6 +29,8 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        com.naveen.browser.utils.PreferenceManager pm = new com.naveen.browser.utils.PreferenceManager(this);
+        pm.applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 

@@ -1,0 +1,317 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.naveen.browser"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+9        android:targetSdkVersion="34" />
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->D:\New folder (2)\app\src\main\AndroidManifest.xml:6:5-67
+11-->D:\New folder (2)\app\src\main\AndroidManifest.xml:6:22-64
+12    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+12-->D:\New folder (2)\app\src\main\AndroidManifest.xml:7:5-79
+12-->D:\New folder (2)\app\src\main\AndroidManifest.xml:7:22-76
+13    <uses-permission
+13-->D:\New folder (2)\app\src\main\AndroidManifest.xml:8:5-107
+14        android:name="android.permission.READ_EXTERNAL_STORAGE"
+14-->D:\New folder (2)\app\src\main\AndroidManifest.xml:8:22-77
+15        android:maxSdkVersion="32" />
+15-->D:\New folder (2)\app\src\main\AndroidManifest.xml:8:78-104
+16    <uses-permission
+16-->D:\New folder (2)\app\src\main\AndroidManifest.xml:9:5-137
+17        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+17-->D:\New folder (2)\app\src\main\AndroidManifest.xml:9:22-78
+18        android:maxSdkVersion="28" />
+18-->D:\New folder (2)\app\src\main\AndroidManifest.xml:9:79-105
+19    <uses-permission android:name="android.permission.CAMERA" />
+19-->D:\New folder (2)\app\src\main\AndroidManifest.xml:10:5-65
+19-->D:\New folder (2)\app\src\main\AndroidManifest.xml:10:22-62
+20    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+20-->D:\New folder (2)\app\src\main\AndroidManifest.xml:11:5-71
+20-->D:\New folder (2)\app\src\main\AndroidManifest.xml:11:22-68
+21    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+21-->D:\New folder (2)\app\src\main\AndroidManifest.xml:12:5-79
+21-->D:\New folder (2)\app\src\main\AndroidManifest.xml:12:22-76
+22    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+22-->D:\New folder (2)\app\src\main\AndroidManifest.xml:13:5-81
+22-->D:\New folder (2)\app\src\main\AndroidManifest.xml:13:22-78
+23    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+23-->D:\New folder (2)\app\src\main\AndroidManifest.xml:14:5-77
+23-->D:\New folder (2)\app\src\main\AndroidManifest.xml:14:22-74
+24
+25    <uses-feature
+25-->D:\New folder (2)\app\src\main\AndroidManifest.xml:16:5-85
+26        android:name="android.hardware.camera"
+26-->D:\New folder (2)\app\src\main\AndroidManifest.xml:16:19-57
+27        android:required="false" />
+27-->D:\New folder (2)\app\src\main\AndroidManifest.xml:16:58-82
+28    <uses-feature
+28-->D:\New folder (2)\app\src\main\AndroidManifest.xml:17:5-95
+29        android:name="android.hardware.camera.autofocus"
+29-->D:\New folder (2)\app\src\main\AndroidManifest.xml:17:19-67
+30        android:required="false" />
+30-->D:\New folder (2)\app\src\main\AndroidManifest.xml:17:68-92
+31    <uses-feature
+31-->D:\New folder (2)\app\src\main\AndroidManifest.xml:18:5-91
+32        android:name="android.hardware.location.gps"
+32-->D:\New folder (2)\app\src\main\AndroidManifest.xml:18:19-63
+33        android:required="false" />
+33-->D:\New folder (2)\app\src\main\AndroidManifest.xml:18:64-88
+34
+35    <permission
+35-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:22:5-24:47
+36        android:name="com.naveen.browser.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"
+36-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:23:9-81
+37        android:protectionLevel="signature" />
+37-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:24:9-44
+38
+39    <uses-permission android:name="com.naveen.browser.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" />
+39-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:26:5-97
+39-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:26:22-94
+40
+41    <application
+41-->D:\New folder (2)\app\src\main\AndroidManifest.xml:20:5-109:19
+42        android:allowBackup="true"
+42-->D:\New folder (2)\app\src\main\AndroidManifest.xml:21:9-35
+43        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+43-->[androidx.core:core:1.9.0] C:\Users\navin\.gradle\caches\transforms-3\a309491863f1cad1388d82071cb60f8c\transformed\core-1.9.0\AndroidManifest.xml:28:18-86
+44        android:dataExtractionRules="@xml/file_paths"
+44-->D:\New folder (2)\app\src\main\AndroidManifest.xml:22:9-54
+45        android:debuggable="true"
+46        android:extractNativeLibs="false"
+47        android:fullBackupContent="true"
+47-->D:\New folder (2)\app\src\main\AndroidManifest.xml:23:9-41
+48        android:hardwareAccelerated="true"
+48-->D:\New folder (2)\app\src\main\AndroidManifest.xml:30:9-43
+49        android:icon="@drawable/ic_browser"
+49-->D:\New folder (2)\app\src\main\AndroidManifest.xml:24:9-44
+50        android:label="@string/app_name"
+50-->D:\New folder (2)\app\src\main\AndroidManifest.xml:25:9-41
+51        android:roundIcon="@drawable/ic_browser"
+51-->D:\New folder (2)\app\src\main\AndroidManifest.xml:26:9-49
+52        android:supportsRtl="true"
+52-->D:\New folder (2)\app\src\main\AndroidManifest.xml:27:9-35
+53        android:theme="@style/AppTheme"
+53-->D:\New folder (2)\app\src\main\AndroidManifest.xml:28:9-40
+54        android:usesCleartextTraffic="true" >
+54-->D:\New folder (2)\app\src\main\AndroidManifest.xml:29:9-44
+55        <activity
+55-->D:\New folder (2)\app\src\main\AndroidManifest.xml:32:9-40:20
+56            android:name="com.naveen.browser.SplashActivity"
+56-->D:\New folder (2)\app\src\main\AndroidManifest.xml:33:13-43
+57            android:exported="true"
+57-->D:\New folder (2)\app\src\main\AndroidManifest.xml:34:13-36
+58            android:theme="@style/AppTheme" >
+58-->D:\New folder (2)\app\src\main\AndroidManifest.xml:35:13-44
+59            <intent-filter>
+59-->D:\New folder (2)\app\src\main\AndroidManifest.xml:36:13-39:29
+60                <action android:name="android.intent.action.MAIN" />
+60-->D:\New folder (2)\app\src\main\AndroidManifest.xml:37:17-69
+60-->D:\New folder (2)\app\src\main\AndroidManifest.xml:37:25-66
+61
+62                <category android:name="android.intent.category.LAUNCHER" />
+62-->D:\New folder (2)\app\src\main\AndroidManifest.xml:38:17-77
+62-->D:\New folder (2)\app\src\main\AndroidManifest.xml:38:27-74
+63            </intent-filter>
+64        </activity>
+65        <activity
+65-->D:\New folder (2)\app\src\main\AndroidManifest.xml:42:9-45:47
+66            android:name="com.naveen.browser.OnboardingActivity"
+66-->D:\New folder (2)\app\src\main\AndroidManifest.xml:43:13-47
+67            android:exported="false"
+67-->D:\New folder (2)\app\src\main\AndroidManifest.xml:44:13-37
+68            android:theme="@style/AppTheme" />
+68-->D:\New folder (2)\app\src\main\AndroidManifest.xml:45:13-44
+69        <activity
+69-->D:\New folder (2)\app\src\main\AndroidManifest.xml:47:9-51:58
+70            android:name="com.naveen.browser.DownloadsActivity"
+70-->D:\New folder (2)\app\src\main\AndroidManifest.xml:48:13-46
+71            android:exported="false"
+71-->D:\New folder (2)\app\src\main\AndroidManifest.xml:49:13-37
+72            android:parentActivityName="com.naveen.browser.MainActivity"
+72-->D:\New folder (2)\app\src\main\AndroidManifest.xml:51:13-55
+73            android:theme="@style/AppTheme" />
+73-->D:\New folder (2)\app\src\main\AndroidManifest.xml:50:13-44
+74        <activity
+74-->D:\New folder (2)\app\src\main\AndroidManifest.xml:53:9-79:20
+75            android:name="com.naveen.browser.MainActivity"
+75-->D:\New folder (2)\app\src\main\AndroidManifest.xml:54:13-41
+76            android:configChanges="orientation|screenSize|keyboardHidden"
+76-->D:\New folder (2)\app\src\main\AndroidManifest.xml:56:13-74
+77            android:exported="true"
+77-->D:\New folder (2)\app\src\main\AndroidManifest.xml:55:13-36
+78            android:theme="@style/AppTheme"
+78-->D:\New folder (2)\app\src\main\AndroidManifest.xml:58:13-44
+79            android:windowSoftInputMode="adjustResize" >
+79-->D:\New folder (2)\app\src\main\AndroidManifest.xml:57:13-55
+80
+81            <!-- Handles Web Browsing Intents -->
+82            <intent-filter>
+82-->D:\New folder (2)\app\src\main\AndroidManifest.xml:61:13-67:29
+83                <action android:name="android.intent.action.VIEW" />
+83-->D:\New folder (2)\app\src\main\AndroidManifest.xml:62:17-69
+83-->D:\New folder (2)\app\src\main\AndroidManifest.xml:62:25-66
+84
+85                <category android:name="android.intent.category.DEFAULT" />
+85-->D:\New folder (2)\app\src\main\AndroidManifest.xml:63:17-76
+85-->D:\New folder (2)\app\src\main\AndroidManifest.xml:63:27-73
+86                <category android:name="android.intent.category.BROWSABLE" />
+86-->D:\New folder (2)\app\src\main\AndroidManifest.xml:64:17-78
+86-->D:\New folder (2)\app\src\main\AndroidManifest.xml:64:27-75
+87
+88                <data android:scheme="http" />
+88-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+88-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:23-44
+89                <data android:scheme="https" />
+89-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+89-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:23-44
+90            </intent-filter>
+91            <intent-filter>
+91-->D:\New folder (2)\app\src\main\AndroidManifest.xml:69:13-78:29
+92                <action android:name="android.intent.action.VIEW" />
+92-->D:\New folder (2)\app\src\main\AndroidManifest.xml:62:17-69
+92-->D:\New folder (2)\app\src\main\AndroidManifest.xml:62:25-66
+93
+94                <category android:name="android.intent.category.DEFAULT" />
+94-->D:\New folder (2)\app\src\main\AndroidManifest.xml:63:17-76
+94-->D:\New folder (2)\app\src\main\AndroidManifest.xml:63:27-73
+95                <category android:name="android.intent.category.BROWSABLE" />
+95-->D:\New folder (2)\app\src\main\AndroidManifest.xml:64:17-78
+95-->D:\New folder (2)\app\src\main\AndroidManifest.xml:64:27-75
+96
+97                <data android:scheme="file" />
+97-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+97-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:23-44
+98                <data android:scheme="content" />
+98-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+98-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:23-44
+99                <data android:mimeType="text/html" />
+99-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+99-->D:\New folder (2)\app\src\main\AndroidManifest.xml:75:23-51
+100                <data android:mimeType="text/plain" />
+100-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+100-->D:\New folder (2)\app\src\main\AndroidManifest.xml:75:23-51
+101                <data android:mimeType="application/xhtml+xml" />
+101-->D:\New folder (2)\app\src\main\AndroidManifest.xml:65:17-47
+101-->D:\New folder (2)\app\src\main\AndroidManifest.xml:75:23-51
+102            </intent-filter>
+103        </activity>
+104        <activity
+104-->D:\New folder (2)\app\src\main\AndroidManifest.xml:81:9-85:58
+105            android:name="com.naveen.browser.BookmarksActivity"
+105-->D:\New folder (2)\app\src\main\AndroidManifest.xml:82:13-46
+106            android:exported="false"
+106-->D:\New folder (2)\app\src\main\AndroidManifest.xml:83:13-37
+107            android:label="@string/bookmarks"
+107-->D:\New folder (2)\app\src\main\AndroidManifest.xml:84:13-46
+108            android:parentActivityName="com.naveen.browser.MainActivity" />
+108-->D:\New folder (2)\app\src\main\AndroidManifest.xml:85:13-55
+109        <activity
+109-->D:\New folder (2)\app\src\main\AndroidManifest.xml:87:9-91:58
+110            android:name="com.naveen.browser.HistoryActivity"
+110-->D:\New folder (2)\app\src\main\AndroidManifest.xml:88:13-44
+111            android:exported="false"
+111-->D:\New folder (2)\app\src\main\AndroidManifest.xml:89:13-37
+112            android:label="@string/history"
+112-->D:\New folder (2)\app\src\main\AndroidManifest.xml:90:13-44
+113            android:parentActivityName="com.naveen.browser.MainActivity" />
+113-->D:\New folder (2)\app\src\main\AndroidManifest.xml:91:13-55
+114        <activity
+114-->D:\New folder (2)\app\src\main\AndroidManifest.xml:93:9-97:58
+115            android:name="com.naveen.browser.SettingsActivity"
+115-->D:\New folder (2)\app\src\main\AndroidManifest.xml:94:13-45
+116            android:exported="false"
+116-->D:\New folder (2)\app\src\main\AndroidManifest.xml:95:13-37
+117            android:label="@string/settings"
+117-->D:\New folder (2)\app\src\main\AndroidManifest.xml:96:13-45
+118            android:parentActivityName="com.naveen.browser.MainActivity" />
+118-->D:\New folder (2)\app\src\main\AndroidManifest.xml:97:13-55
+119
+120        <provider
+120-->D:\New folder (2)\app\src\main\AndroidManifest.xml:99:9-107:20
+121            android:name="androidx.core.content.FileProvider"
+121-->D:\New folder (2)\app\src\main\AndroidManifest.xml:100:13-62
+122            android:authorities="com.naveen.browser.fileprovider"
+122-->D:\New folder (2)\app\src\main\AndroidManifest.xml:101:13-66
+123            android:exported="false"
+123-->D:\New folder (2)\app\src\main\AndroidManifest.xml:102:13-37
+124            android:grantUriPermissions="true" >
+124-->D:\New folder (2)\app\src\main\AndroidManifest.xml:103:13-47
+125            <meta-data
+125-->D:\New folder (2)\app\src\main\AndroidManifest.xml:104:13-106:54
+126                android:name="android.support.FILE_PROVIDER_PATHS"
+126-->D:\New folder (2)\app\src\main\AndroidManifest.xml:105:17-67
+127                android:resource="@xml/file_paths" />
+127-->D:\New folder (2)\app\src\main\AndroidManifest.xml:106:17-51
+128        </provider>
+129        <provider
+129-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:24:9-32:20
+130            android:name="androidx.startup.InitializationProvider"
+130-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:25:13-67
+131            android:authorities="com.naveen.browser.androidx-startup"
+131-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:26:13-68
+132            android:exported="false" >
+132-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:27:13-37
+133            <meta-data
+133-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:29:13-31:52
+134                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+134-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:30:17-75
+135                android:value="androidx.startup" />
+135-->[androidx.emoji2:emoji2:1.2.0] C:\Users\navin\.gradle\caches\transforms-3\6db5aa862a49de8667f2a7b9b0bf2022\transformed\jetified-emoji2-1.2.0\AndroidManifest.xml:31:17-49
+136            <meta-data
+136-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\navin\.gradle\caches\transforms-3\adfd241d31aa0dc8d9176e9f5dfaa47e\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:29:13-31:52
+137                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+137-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\navin\.gradle\caches\transforms-3\adfd241d31aa0dc8d9176e9f5dfaa47e\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:30:17-78
+138                android:value="androidx.startup" />
+138-->[androidx.lifecycle:lifecycle-process:2.6.1] C:\Users\navin\.gradle\caches\transforms-3\adfd241d31aa0dc8d9176e9f5dfaa47e\transformed\jetified-lifecycle-process-2.6.1\AndroidManifest.xml:31:17-49
+139            <meta-data
+139-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:29:13-31:52
+140                android:name="androidx.profileinstaller.ProfileInstallerInitializer"
+140-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:30:17-85
+141                android:value="androidx.startup" />
+141-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:31:17-49
+142        </provider>
+143
+144        <receiver
+144-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:34:9-52:20
+145            android:name="androidx.profileinstaller.ProfileInstallReceiver"
+145-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:35:13-76
+146            android:directBootAware="false"
+146-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:36:13-44
+147            android:enabled="true"
+147-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:37:13-35
+148            android:exported="true"
+148-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:38:13-36
+149            android:permission="android.permission.DUMP" >
+149-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:39:13-57
+150            <intent-filter>
+150-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:40:13-42:29
+151                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE" />
+151-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:17-91
+151-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:41:25-88
+152            </intent-filter>
+153            <intent-filter>
+153-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:43:13-45:29
+154                <action android:name="androidx.profileinstaller.action.SKIP_FILE" />
+154-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:17-85
+154-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:44:25-82
+155            </intent-filter>
+156            <intent-filter>
+156-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:46:13-48:29
+157                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE" />
+157-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:17-88
+157-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:47:25-85
+158            </intent-filter>
+159            <intent-filter>
+159-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:49:13-51:29
+160                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION" />
+160-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:17-95
+160-->[androidx.profileinstaller:profileinstaller:1.3.0] C:\Users\navin\.gradle\caches\transforms-3\0db8f035745ab68a2782efc838399652\transformed\jetified-profileinstaller-1.3.0\AndroidManifest.xml:50:25-92
+161            </intent-filter>
+162        </receiver>
+163    </application>
+164
+165</manifest>

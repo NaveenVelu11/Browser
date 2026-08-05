@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText editHomepage;
     private Spinner spinnerSearchEngine;
     private Spinner spinnerUserAgent;
+    private Spinner spinnerTheme;
 
     private SwitchMaterial switchAdBlock;
     private SwitchMaterial switchHttpsOnly;
@@ -30,15 +31,16 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        prefManager = new PreferenceManager(this);
+        prefManager.applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        prefManager = new PreferenceManager(this);
 
         ImageButton btnBack = findViewById(R.id.btn_back_settings);
         editHomepage = findViewById(R.id.edit_homepage);
         spinnerSearchEngine = findViewById(R.id.spinner_search_engine);
         spinnerUserAgent = findViewById(R.id.spinner_user_agent);
+        spinnerTheme = findViewById(R.id.spinner_theme);
 
         switchAdBlock = findViewById(R.id.switch_ad_block);
         switchHttpsOnly = findViewById(R.id.switch_https_only);
@@ -65,6 +67,7 @@ public class SettingsActivity extends AppCompatActivity {
         editHomepage.setText(prefManager.getHomepage());
         spinnerSearchEngine.setSelection(prefManager.getSearchEngineIndex());
         spinnerUserAgent.setSelection(prefManager.getUserAgentIndex());
+        spinnerTheme.setSelection(prefManager.getThemeMode());
 
         switchAdBlock.setChecked(prefManager.isAdBlockEnabled());
         switchHttpsOnly.setChecked(prefManager.isHttpsOnlyEnabled());
@@ -99,6 +102,13 @@ public class SettingsActivity extends AppCompatActivity {
         prefManager.setHomepage(hp);
         prefManager.setSearchEngineIndex(spinnerSearchEngine.getSelectedItemPosition());
         prefManager.setUserAgentIndex(spinnerUserAgent.getSelectedItemPosition());
+        
+        int oldTheme = prefManager.getThemeMode();
+        int newTheme = spinnerTheme.getSelectedItemPosition();
+        prefManager.setThemeMode(newTheme);
+        if (oldTheme != newTheme) {
+            prefManager.applyTheme();
+        }
 
         prefManager.setAdBlockEnabled(switchAdBlock.isChecked());
         prefManager.setHttpsOnlyEnabled(switchHttpsOnly.isChecked());

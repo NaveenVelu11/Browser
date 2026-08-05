@@ -8,6 +8,8 @@ public class WebTab {
     private String url;
     private WebView webView;
     private boolean isIncognito;
+    private int blockedCount = 0;
+    private boolean isDesktopMode = false;
 
     public WebTab(String id, String title, String url, WebView webView, boolean isIncognito) {
         this.id = id;
@@ -51,5 +53,25 @@ public class WebTab {
 
     public void setIncognito(boolean incognito) {
         isIncognito = incognito;
+    }
+
+    public int getBlockedCount() {
+        return blockedCount;
+    }
+
+    public void setBlockedCount(int blockedCount) {
+        this.blockedCount = blockedCount;
+    }
+
+    public void incrementBlockedCount() {
+        this.blockedCount++;
+    }
+
+    public boolean isDesktopMode() {
+        return isDesktopMode;
+    }
+
+    public void setDesktopMode(boolean desktopMode) {
+        isDesktopMode = desktopMode;
     }
 }

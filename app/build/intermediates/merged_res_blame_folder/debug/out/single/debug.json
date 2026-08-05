@@ -1,0 +1,230 @@
+[
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_warning.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_warning.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_bottom_nav_bg.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/bottom_nav_bg.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_find.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_find.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_clear.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_clear.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_menu.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_menu.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_star.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_star.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_refresh.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_refresh.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_download.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_download.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_incognito.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_incognito.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/menu_main_overflow_menu.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/menu/main_overflow_menu.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_onboarding_page.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_onboarding_page.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_settings.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_settings.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_pwa.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_pwa.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_downloads.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_downloads.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_close.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_close.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_bookmarks.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_bookmarks.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_settings.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_onboarding_adblock.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_onboarding_adblock.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_history.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_history.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_back.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_back.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_dialog_find_in_page.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/dialog_find_in_page.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_dialog_privacy_dashboard.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/dialog_privacy_dashboard.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_tabs.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_tabs.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_qr_code.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_qr_code.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_home.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_home.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_download.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_download.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser_logo.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser_logo.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/anim_splash_anim.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/anim/splash_anim.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_add.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_add.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_history.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_history.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_bookmark.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_bookmark.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_share.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_share.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_tab.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_tab.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_onboarding_speed.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_onboarding_speed.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_delete.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_delete.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_bookmark.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_bookmark.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_star_outline.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_star_outline.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_layout_home_screen.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/layout_home_screen.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_desktop.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_desktop.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_onboarding_features.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_onboarding_features.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_dialog_qr_scanner.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/dialog_qr_scanner.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_shield.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_shield.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_copy.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_copy.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/xml_file_paths.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/xml/file_paths.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_search.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_search.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_reader.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_reader.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_search_bar_bg.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/search_bar_bg.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_lock.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_lock.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_onboarding_privacy.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_onboarding_privacy.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_dialog_tabs.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/dialog_tabs.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_onboarding.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_onboarding.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_main.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_main.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_translate.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_translate.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_splash.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_splash.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_forward.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_forward.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_history.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_history.xml"
+    }
+]
