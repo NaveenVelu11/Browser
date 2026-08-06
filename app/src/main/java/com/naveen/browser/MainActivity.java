@@ -185,14 +185,22 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         shortcutDownloads.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, DownloadsActivity.class)));
         shortcutSettings.setOnClickListener(v -> startActivity(new Intent(MainActivity.this, SettingsActivity.class)));
 
-        View linkGoogle = homeScreenLayout.findViewById(R.id.link_google);
-        View linkYoutube = homeScreenLayout.findViewById(R.id.link_youtube);
-        View linkFacebook = homeScreenLayout.findViewById(R.id.link_facebook);
+        View linkGoogle    = homeScreenLayout.findViewById(R.id.link_google);
+        View linkYoutube   = homeScreenLayout.findViewById(R.id.link_youtube);
+        View linkTwitter   = homeScreenLayout.findViewById(R.id.link_twitter);
+        View linkInstagram = homeScreenLayout.findViewById(R.id.link_instagram);
+        View linkFacebook  = homeScreenLayout.findViewById(R.id.link_facebook);
+        View linkReddit    = homeScreenLayout.findViewById(R.id.link_reddit);
+        View linkGithub    = homeScreenLayout.findViewById(R.id.link_github);
         View linkWikipedia = homeScreenLayout.findViewById(R.id.link_wikipedia);
 
-        linkGoogle.setOnClickListener(v -> loadUrl("https://www.google.com"));
-        linkYoutube.setOnClickListener(v -> loadUrl("https://www.youtube.com"));
-        linkFacebook.setOnClickListener(v -> loadUrl("https://www.facebook.com"));
+        linkGoogle.setOnClickListener(v    -> loadUrl("https://www.google.com"));
+        linkYoutube.setOnClickListener(v   -> loadUrl("https://www.youtube.com"));
+        linkTwitter.setOnClickListener(v   -> loadUrl("https://x.com"));
+        linkInstagram.setOnClickListener(v -> loadUrl("https://www.instagram.com"));
+        linkFacebook.setOnClickListener(v  -> loadUrl("https://www.facebook.com"));
+        linkReddit.setOnClickListener(v    -> loadUrl("https://www.reddit.com"));
+        linkGithub.setOnClickListener(v    -> loadUrl("https://github.com"));
         linkWikipedia.setOnClickListener(v -> loadUrl("https://www.wikipedia.org"));
 
         swipeRefresh.setOnRefreshListener(() -> {
@@ -203,6 +211,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 swipeRefresh.setRefreshing(false);
             }
         });
+        // Brand blue pull-to-refresh spinner
+        swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
 
         swipeRefresh.setOnChildScrollUpCallback(new SwipeRefreshLayout.OnChildScrollUpCallback() {
             @Override
@@ -291,12 +301,20 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void createNewTab(String url, boolean isIncognito) {
+        prefManager.incrementTabsOpened();
         String finalUrl = prefManager.isHttpsOnlyEnabled() ? WebUtils.upgradeToHttps(url) : url;
         WebView webView = createConfiguredWebView(isIncognito, false);
         WebTab tab = new WebTab(UUID.randomUUID().toString(), "New Tab", finalUrl, webView, isIncognito);
         tabList.add(tab);
         switchToTab(tabList.size() - 1);
-        webView.loadUrl(WebUtils.processUrlOrQuery(finalUrl, prefManager.getSearchEngineIndex()));
+        String target = WebUtils.processUrlOrQuery(finalUrl, prefManager.getSearchEngineIndex());
+        if (prefManager.isDoNotTrack()) {
+            java.util.Map<String, String> headers = new java.util.HashMap<>();
+            headers.put("DNT", "1");
+            webView.loadUrl(target, headers);
+        } else {
+            webView.loadUrl(target);
+        }
     }
 
     @SuppressLint("SetJavaScriptEnabled")
@@ -305,36 +323,94 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         webView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
+        // === HARDWARE ACCELERATION PREFERENCE ===
+        if (prefManager.isHardwareAccelEnabled()) {
+            webView.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
+        } else {
+            webView.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null);
+        }
+
         WebSettings settings = webView.getSettings();
-        settings.setJavaScriptEnabled(true);
-        settings.setDomStorageEnabled(!isIncognito);
-        settings.setDatabaseEnabled(!isIncognito);
+
+        // === JAVASCRIPT & DOM ===
+        boolean enableJs = prefManager.isJavaScriptEnabled();
+        settings.setJavaScriptEnabled(enableJs);
+        settings.setDomStorageEnabled(!isIncognito && enableJs);
+        settings.setDatabaseEnabled(!isIncognito && enableJs);
         settings.setAllowFileAccess(true);
         settings.setAllowContentAccess(true);
+
+        // === TEXT ZOOM / SCALING ===
+        settings.setTextZoom(prefManager.getTextZoomPercent());
+
+        // === IMAGE LOADING & DATA SAVER ===
+        boolean loadImages = prefManager.isShowImages() && (!prefManager.isDataSaverMode());
+        settings.setLoadsImagesAutomatically(loadImages);
+        settings.setBlockNetworkImage(!loadImages);
+
+        // === MIXED CONTENT: TWITTER/X FIX ===
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+        }
+
+        // === SAFE BROWSING PREFERENCE ===
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            settings.setSafeBrowsingEnabled(prefManager.isSafeBrowsingEnabled());
+        }
+
+        // File URL access security
+        settings.setAllowFileAccessFromFileURLs(false);
+        settings.setAllowUniversalAccessFromFileURLs(false);
+
         settings.setSupportZoom(true);
         settings.setBuiltInZoomControls(true);
         settings.setDisplayZoomControls(false);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
-        settings.setGeolocationEnabled(!isIncognito);
-        settings.setJavaScriptCanOpenWindowsAutomatically(true);
-        settings.setSupportMultipleWindows(true);
-        settings.setMediaPlaybackRequiresUserGesture(false);
 
-        if (prefManager.isAutofillEnabled()) {
-            settings.setSavePassword(true);
+        // === MEDIA & WINDOWS & PRIVACY ===
+        settings.setGeolocationEnabled(!isIncognito && prefManager.isLocationEnabled());
+        settings.setJavaScriptCanOpenWindowsAutomatically(!prefManager.isBlockPopups());
+        settings.setSupportMultipleWindows(true);
+        settings.setMediaPlaybackRequiresUserGesture(!prefManager.isMediaAutoplay());
+
+        // === PERFORMANCE ===
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            settings.setOffscreenPreRaster(prefManager.isPreloadPages());
+        }
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            webView.setRendererPriorityPolicy(WebView.RENDERER_PRIORITY_BOUND, true);
+        }
+
+        // === CACHE MODE ===
+        if (!isIncognito) {
+            if (prefManager.isDataSaverMode()) {
+                settings.setCacheMode(WebSettings.LOAD_CACHE_ELSE_NETWORK);
+            } else {
+                settings.setCacheMode(WebSettings.LOAD_DEFAULT);
+            }
         }
 
         applyUserAgent(settings, isDesktop);
 
+        // === COOKIES & THIRD PARTY COOKIE POLICY ===
         CookieManager cookieManager = CookieManager.getInstance();
         if (isIncognito) {
             settings.setSaveFormData(false);
             settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+            settings.setDomStorageEnabled(false);
+            settings.setDatabaseEnabled(false);
             cookieManager.setAcceptCookie(false);
         } else {
-            cookieManager.setAcceptCookie(true);
-            cookieManager.setAcceptThirdPartyCookies(webView, true);
+            int cookiePolicy = prefManager.getCookiePolicy();
+            if (cookiePolicy == 2) { // Block all
+                cookieManager.setAcceptCookie(false);
+            } else {
+                cookieManager.setAcceptCookie(true);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    cookieManager.setAcceptThirdPartyCookies(webView, cookiePolicy == 0);
+                }
+            }
         }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -591,7 +667,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             settings.setUserAgentString(WebUtils.DESKTOP_USER_AGENT);
             return;
         }
-
         int uaIndex = prefManager.getUserAgentIndex();
         switch (uaIndex) {
             case 1:
@@ -602,13 +677,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 break;
             case 3:
                 String customUa = prefManager.getCustomUserAgent();
-                if (!customUa.isEmpty()) {
-                    settings.setUserAgentString(customUa);
-                }
+                if (!customUa.isEmpty()) settings.setUserAgentString(customUa);
                 break;
             case 0:
             default:
-                settings.setUserAgentString(null);
+                // Use explicit Chrome Mobile UA instead of null.
+                // null causes sites like Twitter/X to serve broken responses.
+                settings.setUserAgentString(WebUtils.MOBILE_USER_AGENT);
                 break;
         }
     }
@@ -730,7 +805,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         WebView currentWeb = getCurrentWebView();
         if (currentWeb != null) {
-            currentWeb.loadUrl(targetUrl);
+            if (prefManager.isDoNotTrack()) {
+                java.util.Map<String, String> headers = new java.util.HashMap<>();
+                headers.put("DNT", "1");
+                currentWeb.loadUrl(targetUrl, headers);
+            } else {
+                currentWeb.loadUrl(targetUrl);
+            }
         }
 
         InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);

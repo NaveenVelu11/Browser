@@ -1,24 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Premium Dark Palette -->
-    <color name="colorPrimary">#6366F1</color>
-    <color name="colorPrimaryDark">#0F172A</color>
-    <color name="colorAccent">#6366F1</color>
-    <color name="colorAccentLight">#818CF8</color>
-    
-    <color name="backgroundDark">#0F172A</color>
-    <color name="surfaceDark">#1E293B</color>
-    <color name="cardDark">#1E293B</color>
-    <color name="searchBarBackground">#334155</color>
-    
-    <color name="textPrimary">#F8FAFC</color>
-    <color name="textSecondary">#94A3B8</color>
-    <color name="textHint">#64748B</color>
-    
-    <color name="iconTint">#E2E8F0</color>
-    <color name="dividerColor">#334155</color>
-    <color name="progressBarColor">#6366F1</color>
-    
-    <color name="incognitoBackground">#0F172A</color>
-    <color name="incognitoSurface">#1E293B</color>
+    <!-- === Dark Mode Surfaces (AMOLED-friendly deep navy) === -->
+    <color name="colorPrimary">#60A5FA</color>
+    <color name="colorPrimaryDark">#0A0F1E</color>
+    <color name="colorAccent">#60A5FA</color>
+    <color name="colorAccentLight">#93C5FD</color>
+    <color name="colorAccentDark">#3B82F6</color>
+
+    <!-- Surfaces -->
+    <color name="backgroundDark">#0D1117</color>
+    <color name="surfaceDark">#161B27</color>
+    <color name="cardDark">#1C2333</color>
+    <color name="searchBarBackground">#1C2333</color>
+    <color name="elevatedSurface">#1C2333</color>
+    <color name="dividerColor">#2D3748</color>
+
+    <!-- Text -->
+    <color name="textPrimary">#F0F4FF</color>
+    <color name="textSecondary">#8B9DC3</color>
+    <color name="textHint">#4A5568</color>
+    <color name="textOnAccent">#FFFFFF</color>
+
+    <!-- Icons -->
+    <color name="iconTint">#8B9DC3</color>
+    <color name="iconTintActive">#60A5FA</color>
+    <color name="progressBarColor">#60A5FA</color>
+
+    <!-- Semantic -->
+    <color name="colorSuccess">#34D399</color>
+    <color name="colorWarning">#FBBF24</color>
+    <color name="colorError">#F87171</color>
+    <color name="colorSuccessLight">#064E3B</color>
+    <color name="colorWarningLight">#451A03</color>
+    <color name="colorErrorLight">#450A0A</color>
+
+    <!-- Incognito -->
+    <color name="incognitoBackground">#080C14</color>
+    <color name="incognitoSurface">#0F1420</color>
+    <color name="incognitoCard">#141A26</color>
+    <color name="incognitoText">#E2E8F0</color>
+    <color name="incognitoTextSecondary">#64748B</color>
+    <color name="incognito_accent">#818CF8</color>
+
+    <!-- Ripple / Overlay -->
+    <color name="rippleColor">#2060A5FA</color>
+    <color name="rippleDark">#20FFFFFF</color>
+    <color name="overlayLight">#18FFFFFF</color>
+    <color name="cardStroke">#2D3748</color>
+
+    <!-- Glass UI elements -->
+    <color name="glassToolbar">#CC161B27</color>
+    <color name="glassSurface">#B3161B27</color>
+    <color name="glassStroke">#402D3748</color>
 </resources>

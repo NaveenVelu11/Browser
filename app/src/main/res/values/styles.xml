@@ -1,20 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- ============================= -->
+    <!--  PRIMARY APP THEME (Light)    -->
+    <!-- ============================= -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/textOnAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccentDark</item>
+        <item name="colorOnSecondary">@color/textOnAccent</item>
+        <item name="colorSurface">@color/surfaceDark</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/backgroundDark</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/backgroundDark</item>
+        <item name="android:navigationBarColor">@color/backgroundDark</item>
+        <!-- Smooth Activity Transitions -->
+        <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
+        <!-- Typography -->
+        <item name="fontFamily">sans-serif</item>
     </style>
 
-    <style name="IncognitoTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/incognitoBackground</item>
-        <item name="colorPrimaryDark">#0B1120</item>
-        <item name="colorAccent">#818CF8</item>
+    <!-- ============================= -->
+    <!--  INCOGNITO DARK THEME         -->
+    <!-- ============================= -->
+    <style name="IncognitoTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/incognito_accent</item>
+        <item name="colorPrimaryVariant">@color/incognitoBackground</item>
+        <item name="colorOnPrimary">@color/incognitoText</item>
+        <item name="colorSecondary">@color/incognito_accent</item>
+        <item name="colorSurface">@color/incognitoSurface</item>
+        <item name="colorOnSurface">@color/incognitoText</item>
+        <item name="colorError">@color/colorError</item>
         <item name="android:windowBackground">@color/incognitoBackground</item>
-        <item name="android:statusBarColor">#0B1120</item>
-        <item name="android:navigationBarColor">#0B1120</item>
+        <item name="android:statusBarColor">@color/incognitoBackground</item>
+        <item name="android:navigationBarColor">@color/incognitoBackground</item>
+    </style>
+
+    <!-- ============================= -->
+    <!--  SMOOTH ACTIVITY TRANSITIONS  -->
+    <!-- ============================= -->
+    <style name="ActivityTransition" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <!-- ============================= -->
+    <!--  SETTINGS ROW STYLES          -->
+    <!-- ============================= -->
+    <style name="SettingsRowStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+    </style>
+
+    <!-- ============================= -->
+    <!--  TYPOGRAPHY STYLES            -->
+    <!-- ============================= -->
+    <style name="TextTitle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
+    </style>
+
+    <style name="TextSubtitle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="SectionHeader">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <!-- ============================= -->
+    <!--  MATERIAL BUTTON STYLES       -->
+    <!-- ============================= -->
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
+
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">15sp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeColor">@color/colorAccent</item>
+    </style>
+
+    <style name="DangerButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">14sp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">@color/colorError</item>
+        <item name="android:textColor">@color/colorError</item>
     </style>
 </resources>

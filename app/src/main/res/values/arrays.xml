@@ -4,19 +4,35 @@
         <item>Google</item>
         <item>DuckDuckGo</item>
         <item>Bing</item>
-        <item>Brave</item>
+        <item>Brave Search</item>
         <item>Yahoo</item>
+        <item>Ecosia</item>
+        <item>Startpage</item>
     </string-array>
 
     <string-array name="user_agent_names">
-        <item>Android (Default)</item>
-        <item>Desktop (Chrome)</item>
+        <item>Android Mobile (Default)</item>
+        <item>Desktop Chrome (Windows)</item>
         <item>Tablet (iPad)</item>
         <item>Custom</item>
     </string-array>
+
     <string-array name="theme_names">
         <item>System Default</item>
         <item>Light Mode</item>
-        <item>Dark Mode</item>
+        <item>Dark Mode (AMOLED)</item>
+    </string-array>
+
+    <string-array name="text_size_names">
+        <item>Small (75%)</item>
+        <item>Normal (100%)</item>
+        <item>Large (125%)</item>
+        <item>Extra Large (150%)</item>
+    </string-array>
+
+    <string-array name="cookie_policy_names">
+        <item>Allow All Cookies</item>
+        <item>Block Third-Party Cookies</item>
+        <item>Block All Cookies</item>
     </string-array>
 </resources>

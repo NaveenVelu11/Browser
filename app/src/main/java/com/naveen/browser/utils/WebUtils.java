@@ -18,44 +18,54 @@ import java.util.regex.Pattern;
 
 public class WebUtils {
 
-    public static final String DESKTOP_USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Safari/537.36";
-    public static final String TABLET_USER_AGENT = "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1";
+    /**
+     * Chrome-compatible mobile UA — required for Twitter/X, Gmail, and modern SPAs.
+     * Matches current Chrome release and identifies as Android Chrome correctly.
+     */
+    public static final String MOBILE_USER_AGENT =
+            "Mozilla/5.0 (Linux; Android 10; Mobile) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/125.0.0.0 Mobile Safari/537.36";
+
+    /**
+     * Desktop UA — exact match of Chrome on Windows for desktop-mode requests.
+     */
+    public static final String DESKTOP_USER_AGENT =
+            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
+
+    public static final String TABLET_USER_AGENT =
+            "Mozilla/5.0 (Linux; Android 10; Tablet) AppleWebKit/537.36 " +
+            "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 
     private static final Pattern WEB_URL_PATTERN = Pattern.compile(
-            "^(https?://)?([a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(/.*)?$"
+            "^(https?://)?([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(/.*)?$"
     );
 
     public static String processUrlOrQuery(String input, int searchEngineIndex) {
         if (input == null || input.trim().isEmpty()) {
             return PreferenceManager.DEFAULT_HOMEPAGE;
         }
-
         String trimmed = input.trim();
-        if (trimmed.equalsIgnoreCase("about:blank")) {
-            return "about:blank";
-        }
+        if (trimmed.equalsIgnoreCase("about:blank")) return "about:blank";
 
         if (URLUtil.isValidUrl(trimmed) || WEB_URL_PATTERN.matcher(trimmed).matches()) {
-            if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://") && !trimmed.startsWith("file://")) {
+            if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://")
+                    && !trimmed.startsWith("file://")) {
                 return "https://" + trimmed;
             }
             return trimmed;
         }
 
         try {
-            String encodedQuery = URLEncoder.encode(trimmed, "UTF-8");
+            String q = URLEncoder.encode(trimmed, "UTF-8");
             switch (searchEngineIndex) {
-                case 1:
-                    return "https://duckduckgo.com/?q=" + encodedQuery;
-                case 2:
-                    return "https://www.bing.com/search?q=" + encodedQuery;
-                case 3:
-                    return "https://search.brave.com/search?q=" + encodedQuery;
-                case 4:
-                    return "https://search.yahoo.com/search?p=" + encodedQuery;
-                case 0:
-                default:
-                    return "https://www.google.com/search?q=" + encodedQuery;
+                case 1: return "https://duckduckgo.com/?q=" + q;
+                case 2: return "https://www.bing.com/search?q=" + q;
+                case 3: return "https://search.brave.com/search?q=" + q;
+                case 4: return "https://search.yahoo.com/search?p=" + q;
+                case 5: return "https://www.ecosia.org/search?q=" + q;
+                case 6: return "https://www.startpage.com/sp/search?query=" + q;
+                default: return "https://www.google.com/search?q=" + q;
             }
         } catch (Exception e) {
             return "https://www.google.com/search?q=" + trimmed;
@@ -71,7 +81,8 @@ public class WebUtils {
 
     public static String getTranslateUrl(String url) {
         try {
-            return "https://translate.google.com/translate?sl=auto&tl=en&u=" + URLEncoder.encode(url, "UTF-8");
+            return "https://translate.google.com/translate?sl=auto&tl=en&u="
+                    + URLEncoder.encode(url, "UTF-8");
         } catch (Exception e) {
             return "https://translate.google.com/translate?u=" + url;
         }
@@ -79,9 +90,8 @@ public class WebUtils {
 
     public static boolean handleSpecialIntents(Context context, String url) {
         if (url == null) return false;
-
-        if (url.startsWith("tel:") || url.startsWith("mailto:") || url.startsWith("geo:") ||
-            url.startsWith("whatsapp:") || url.startsWith("intent:") || url.contains("youtube.com/watch") || url.startsWith("youtu.be/")) {
+        if (url.startsWith("tel:") || url.startsWith("mailto:") || url.startsWith("geo:")
+                || url.startsWith("whatsapp:") || url.startsWith("intent:")) {
             try {
                 Intent intent = Intent.parseUri(url, Intent.URI_INTENT_SCHEME);
                 if (intent != null) {
@@ -103,21 +113,20 @@ public class WebUtils {
 
     public static void createPwaShortcut(Context context, String title, String url, Bitmap favicon) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            ShortcutManager shortcutManager = context.getSystemService(ShortcutManager.class);
-            if (shortcutManager != null && shortcutManager.isRequestPinShortcutSupported()) {
+            ShortcutManager sm = context.getSystemService(ShortcutManager.class);
+            if (sm != null && sm.isRequestPinShortcutSupported()) {
                 Intent intent = new Intent(context, MainActivity.class);
                 intent.setAction(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
-
-                Icon icon = favicon != null ? Icon.createWithBitmap(favicon) : Icon.createWithResource(context, R.drawable.ic_browser);
-
-                ShortcutInfo pinShortcutInfo = new ShortcutInfo.Builder(context, "pwa_" + url.hashCode())
-                        .setShortLabel(title)
+                Icon icon = favicon != null
+                        ? Icon.createWithBitmap(favicon)
+                        : Icon.createWithResource(context, R.drawable.ic_browser);
+                ShortcutInfo info = new ShortcutInfo.Builder(context, "pwa_" + url.hashCode())
+                        .setShortLabel(title != null ? title : "Shortcut")
                         .setIcon(icon)
                         .setIntent(intent)
                         .build();
-
-                shortcutManager.requestPinShortcut(pinShortcutInfo, null);
+                sm.requestPinShortcut(info, null);
             }
         }
     }
@@ -141,21 +150,22 @@ public class WebUtils {
                 "var title = document.title;" +
                 "var article = document.querySelector('article');" +
                 "if (!article) {" +
-                "    var candidates = document.querySelectorAll('div, section, main');" +
+                "    var candidates = document.querySelectorAll('div,section,main');" +
                 "    var best = null; var max = 0;" +
-                "    for(var i=0; i<candidates.length; i++) {" +
-                "        var p = candidates[i].querySelectorAll('p').length;" +
-                "        if (p > max) { max = p; best = candidates[i]; }" +
+                "    for(var i=0;i<candidates.length;i++){" +
+                "        var p=candidates[i].querySelectorAll('p').length;" +
+                "        if(p>max){max=p;best=candidates[i];}" +
                 "    }" +
                 "    article = best || document.body;" +
                 "}" +
                 "var clone = article.cloneNode(true);" +
-                "var junk = clone.querySelectorAll('script, style, iframe, ads, .ads, .advertisement, header, footer, nav, noscript');" +
-                "for(var j=0; j<junk.length; j++) junk[j].parentNode.removeChild(junk[j]);" +
-                "var cleanHtml = clone.innerHTML;" +
-                "document.body.innerHTML = '<div style=\"max-width:700px;margin:auto;padding:24px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.6;font-size:17px;color:" + fg + ";background-color:" + bg + ";\">' +" +
-                "    '<h1>' + title + '</h1>' + cleanHtml + '</div>';" +
-                "document.body.style.backgroundColor = '" + bg + "';" +
+                "var junk = clone.querySelectorAll('script,style,iframe,.ads,header,footer,nav,noscript');" +
+                "for(var j=0;j<junk.length;j++) junk[j].parentNode.removeChild(junk[j]);" +
+                "document.body.innerHTML='<div style=\"max-width:700px;margin:auto;padding:24px;" +
+                "font-family:-apple-system,BlinkMacSystemFont,sans-serif;line-height:1.7;" +
+                "font-size:17px;color:" + fg + ";background:" + bg + "\">" +
+                "<h1>' + title + '</h1>' + clone.innerHTML + '</div>';" +
+                "document.body.style.backgroundColor='" + bg + "';" +
                 "})();";
     }
 }
