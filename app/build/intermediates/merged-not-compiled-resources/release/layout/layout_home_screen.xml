@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nested_scroll_home"
     android:layout_width="match_parent"
@@ -12,86 +13,100 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="32dp">
 
-        <!-- Logo & Branding -->
+        <!-- ================================================ -->
+        <!--  LOGO + BRANDING                                  -->
+        <!-- ================================================ -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="72dp"
-                android:layout_height="72dp"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
                 android:src="@drawable/ic_browser_logo"
                 android:contentDescription="@string/app_name" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="10dp"
                 android:text="Velocity"
                 android:textColor="@color/textPrimary"
-                android:textSize="26sp"
+                android:textSize="28sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold"
+                android:letterSpacing="0.02" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Fast. Private. Yours."
+                android:textColor="@color/textSecondary"
+                android:textSize="13sp"
+                android:fontFamily="sans-serif"
                 android:letterSpacing="0.03" />
         </LinearLayout>
 
-        <!-- Large Rounded Search / Address Bar Card -->
-        <androidx.cardview.widget.CardView
+        <!-- ================================================ -->
+        <!--  GLASS SEARCH BAR                                 -->
+        <!-- ================================================ -->
+        <LinearLayout
             android:id="@+id/card_home_search"
             android:layout_width="match_parent"
             android:layout_height="54dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginHorizontal="8dp"
-            app:cardBackgroundColor="@color/surfaceDark"
-            app:cardCornerRadius="27dp"
-            app:cardElevation="4dp"
+            android:layout_marginTop="28dp"
+            android:background="@drawable/bg_home_search"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingStart="16dp"
+            android:paddingEnd="12dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?attr/selectableItemBackground">
+            android:elevation="2dp">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingHorizontal="16dp">
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_search"
+                android:tint="@color/textHint"
+                android:contentDescription="@string/search" />
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_search"
-                    android:tint="@color/textHint"
-                    android:contentDescription="@string/search" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="12dp"
+                android:text="@string/search_or_type_url"
+                android:textColor="@color/textHint"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif" />
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="12dp"
-                    android:text="@string/search_or_type_url"
-                    android:textColor="@color/textHint"
-                    android:textSize="15sp" />
+            <ImageView
+                android:id="@+id/btn_home_voice"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_reader"
+                android:tint="@color/colorAccent"
+                android:contentDescription="Voice Search"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/btn_home_voice"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_reader"
-                    android:tint="@color/textHint"
-                    android:contentDescription="Voice Search" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-        <!-- Quick Access Shortcuts Grid -->
+        <!-- ================================================ -->
+        <!--  QUICK ACCESS SHORTCUTS                           -->
+        <!-- ================================================ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
+            android:layout_marginTop="28dp"
             android:orientation="horizontal"
             android:gravity="center">
 
@@ -103,24 +118,23 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingVertical="8dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_shortcut_icon"
+                    android:gravity="center">
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_bookmark"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/bookmarks" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -128,7 +142,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Bookmarks"
                     android:textColor="@color/textSecondary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
@@ -140,24 +154,23 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingVertical="8dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_shortcut_icon"
+                    android:gravity="center">
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_history"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/history" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -165,7 +178,7 @@
                     android:layout_marginTop="8dp"
                     android:text="History"
                     android:textColor="@color/textSecondary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
@@ -177,24 +190,23 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingVertical="8dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_shortcut_icon"
+                    android:gravity="center">
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_download"
                         android:tint="@color/colorAccent"
                         android:contentDescription="Downloads" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -202,7 +214,7 @@
                     android:layout_marginTop="8dp"
                     android:text="Downloads"
                     android:textColor="@color/textSecondary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
@@ -214,24 +226,23 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingVertical="8dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="28dp"
-                    app:cardElevation="2dp">
+                <LinearLayout
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_shortcut_icon"
+                    android:gravity="center">
                     <ImageView
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:layout_gravity="center"
                         android:src="@drawable/ic_settings"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/settings" />
-                </androidx.cardview.widget.CardView>
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -239,30 +250,47 @@
                     android:layout_marginTop="8dp"
                     android:text="Settings"
                     android:textColor="@color/textSecondary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
+
         </LinearLayout>
 
-        <!-- Quick Links / Popular Sites -->
-        <TextView
+        <!-- ================================================ -->
+        <!--  POPULAR SITES SECTION HEADER                     -->
+        <!-- ================================================ -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="36dp"
-            android:layout_marginHorizontal="8dp"
-            android:text="Popular Sites"
-            android:textColor="@color/textPrimary"
-            android:textSize="14sp"
-            android:fontFamily="sans-serif-medium"
-            android:textStyle="bold" />
+            android:layout_marginTop="28dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
+            <View
+                android:layout_width="3dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Popular Sites"
+                android:textColor="@color/textPrimary"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <!-- ================================================ -->
+        <!--  POPULAR SITES GRID                               -->
+        <!-- ================================================ -->
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="12dp"
             android:columnCount="4"
-            android:rowCount="2"
-            android:layout_marginHorizontal="4dp">
+            android:rowCount="2">
 
             <!-- Google -->
             <LinearLayout
@@ -273,30 +301,32 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
                 android:clickable="true"
-                android:focusable="true">
-                <androidx.cardview.widget.CardView
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp">
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:text="G"
                         android:textColor="#4285F4"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="Google"
                     android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
+                    android:textSize="11sp"
+                    android:fontFamily="sans-serif" />
             </LinearLayout>
 
             <!-- YouTube -->
@@ -308,28 +338,98 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
                 android:clickable="true"
-                android:focusable="true">
-                <androidx.cardview.widget.CardView
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp">
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Y"
+                        android:text="▶"
                         android:textColor="#FF0000"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
+                        android:textSize="20sp" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="YouTube"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Twitter / X -->
+            <LinearLayout
+                android:id="@+id/link_twitter"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="𝕏"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Twitter"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Instagram -->
+            <LinearLayout
+                android:id="@+id/link_instagram"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_site_icon_instagram"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="in"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Instagram"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -343,28 +443,101 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
                 android:clickable="true"
-                android:focusable="true">
-                <androidx.cardview.widget.CardView
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp">
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="F"
+                        android:text="f"
                         android:textColor="#1877F2"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
+                        android:textSize="26sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="6dp"
                     android:text="Facebook"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- Reddit -->
+            <LinearLayout
+                android:id="@+id/link_reddit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="R"
+                        android:textColor="#FF4500"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="Reddit"
+                    android:textColor="@color/textSecondary"
+                    android:textSize="11sp" />
+            </LinearLayout>
+
+            <!-- GitHub -->
+            <LinearLayout
+                android:id="@+id/link_github"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="GH"
+                        android:textColor="@color/textPrimary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:text="GitHub"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp" />
             </LinearLayout>
@@ -378,23 +551,24 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:paddingVertical="8dp"
+                android:paddingHorizontal="4dp"
                 android:clickable="true"
-                android:focusable="true">
-                <androidx.cardview.widget.CardView
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground">
+                <LinearLayout
                     android:layout_width="48dp"
                     android:layout_height="48dp"
-                    app:cardBackgroundColor="@color/surfaceDark"
-                    app:cardCornerRadius="12dp"
-                    app:cardElevation="1dp">
+                    android:background="@drawable/bg_site_icon"
+                    android:gravity="center">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
                         android:text="W"
                         android:textColor="@color/textPrimary"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
-                </androidx.cardview.widget.CardView>
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium" />
+                </LinearLayout>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -403,8 +577,8 @@
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp" />
             </LinearLayout>
+
         </GridLayout>
 
     </LinearLayout>
-
 </androidx.core.widget.NestedScrollView>

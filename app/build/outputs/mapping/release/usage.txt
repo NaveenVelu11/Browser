@@ -1362,11 +1362,9 @@ androidx.appcompat.app.AlertDialog$Builder:
     public androidx.appcompat.app.AlertDialog$Builder setInverseBackgroundForced(boolean)
     public androidx.appcompat.app.AlertDialog$Builder setItems(int,android.content.DialogInterface$OnClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setItems(java.lang.CharSequence[],android.content.DialogInterface$OnClickListener)
-    public androidx.appcompat.app.AlertDialog$Builder setMessage(java.lang.CharSequence)
     public androidx.appcompat.app.AlertDialog$Builder setMultiChoiceItems(int,boolean[],android.content.DialogInterface$OnMultiChoiceClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setMultiChoiceItems(android.database.Cursor,java.lang.String,java.lang.String,android.content.DialogInterface$OnMultiChoiceClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setMultiChoiceItems(java.lang.CharSequence[],boolean[],android.content.DialogInterface$OnMultiChoiceClickListener)
-    public androidx.appcompat.app.AlertDialog$Builder setNegativeButton(java.lang.CharSequence,android.content.DialogInterface$OnClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setNegativeButtonIcon(android.graphics.drawable.Drawable)
     public androidx.appcompat.app.AlertDialog$Builder setNeutralButton(int,android.content.DialogInterface$OnClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setNeutralButton(java.lang.CharSequence,android.content.DialogInterface$OnClickListener)
@@ -1374,7 +1372,6 @@ androidx.appcompat.app.AlertDialog$Builder:
     public androidx.appcompat.app.AlertDialog$Builder setOnCancelListener(android.content.DialogInterface$OnCancelListener)
     public androidx.appcompat.app.AlertDialog$Builder setOnDismissListener(android.content.DialogInterface$OnDismissListener)
     public androidx.appcompat.app.AlertDialog$Builder setOnItemSelectedListener(android.widget.AdapterView$OnItemSelectedListener)
-    public androidx.appcompat.app.AlertDialog$Builder setPositiveButton(java.lang.CharSequence,android.content.DialogInterface$OnClickListener)
     public androidx.appcompat.app.AlertDialog$Builder setPositiveButtonIcon(android.graphics.drawable.Drawable)
     public androidx.appcompat.app.AlertDialog$Builder setRecycleOnMeasureEnabled(boolean)
     public androidx.appcompat.app.AlertDialog$Builder setSingleChoiceItems(int,int,android.content.DialogInterface$OnClickListener)
@@ -25276,10 +25273,13 @@ androidx.appcompat.app.AlertDialog$Builder:
     public static androidx.appcompat.app.AlertDialog$Builder setAdapter()
     public static androidx.appcompat.app.AlertDialog$Builder setCustomTitle()
     public static androidx.appcompat.app.AlertDialog$Builder setIcon()
+    public static androidx.appcompat.app.AlertDialog$Builder setMessage()
     public final void setMessage(int)
+    public static androidx.appcompat.app.AlertDialog$Builder setNegativeButton()
     public final void setNegativeButton(int,com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0)
     public static androidx.appcompat.app.AlertDialog$Builder setOnKeyListener()
-    public final void setPositiveButton(int,com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0)
+    public static androidx.appcompat.app.AlertDialog$Builder setPositiveButton()
+    public final void setPositiveButton(int,android.content.DialogInterface$OnClickListener)
     public static androidx.appcompat.app.AlertDialog$Builder setSingleChoiceItems()
     public final void setTitle(int)
     public final void setTitle(java.lang.CharSequence)
@@ -33245,7 +33245,6 @@ com.google.android.material.transformation.TransformationChildCard
 com.google.android.material.transformation.TransformationChildLayout
 com.google.common.util.concurrent.ListenableFuture
 com.naveen.browser.BookmarksActivity$$InternalSyntheticLambda$1$d3cf1ca100b0fbe99d1204a7cbd3eaf52c6017c64baf188488c086a10808327f$1
-com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0
 com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$cc3f0d9ada1f4e3f17f7ab6bc9e473ce24e68eb8389c3b1abe7162c85fae93e8$1
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$157eb212e68cbec867137eec0ebac7e684527dd7aba8d2966e4e371582a578a2$0
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$157eb212e68cbec867137eec0ebac7e684527dd7aba8d2966e4e371582a578a2$1
@@ -33262,17 +33261,21 @@ com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$a85e5f1d450ce5d226482
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$ab4fc4ca3f5286329327b3e141e00884f22fd9769227fd16c7457c5364bea3ca$0
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$eaf6a89eccceda785a995e4f5b460f8c9491266a295aba1742a16f247aeca7d7$0
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$10
-com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$11:
-    public final void onRefresh()
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$11
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$12
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$13
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$14
-com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$15
-com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$16
-com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$17
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$15:
+    public final void onRefresh()
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$18
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$19
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$1
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$20
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$21
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$22
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$23
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$24
+com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$25
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$2
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$3
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$4
@@ -33283,10 +33286,13 @@ com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d33
 com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$9
 com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$1
 com.naveen.browser.OnboardingActivity$$InternalSyntheticLambda$1$d949f4e6c3ce849e12a9d5f5c6a0b40fdf081f0e1d13b0e898b4dd30f0820da9$1
+com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$083ba3f442769e2e60b98339e31e54442e0de1d7e690994a6ad81a5976425b23$0
 com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$1
 com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$2
 com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$3
 com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$4
+com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8c1b25adb8fa7b5edb9da5f565f2b0d3c3fb81be583f3ed023390de1e1e8ab2b$0
+com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8ece881b7468f71052e8261161f45749e94588b76d372ea115ba62cc5e7f7153$0
 com.naveen.browser.SplashActivity$$InternalSyntheticLambda$1$b7431b35df8387c78d113efc41701d03e0914e274ad8dfbea7eea5ad51365b76$0
 com.naveen.browser.adapter.BookmarksAdapter$$InternalSyntheticLambda$1$6c11f4a403fd4e59a09e2914dd2b96de1c352b29b8f06b860b3c16b946b819bc$1
 com.naveen.browser.adapter.DownloadsAdapter$$InternalSyntheticLambda$1$961b96c90afa2d9e09aec1628666c05cf959d71bdd79b48ca1996ab8df75a772$1

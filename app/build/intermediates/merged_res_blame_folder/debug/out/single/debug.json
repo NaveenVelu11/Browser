@@ -4,6 +4,10 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\menu\\main_overflow_menu.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser_logo.png.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser_logo.png"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_clear.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_clear.xml"
     },
@@ -82,10 +86,6 @@
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\anim_slide_in_left.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\anim\\slide_in_left.xml"
-    },
-    {
-        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_settings.xml.flat",
-        "source": "com.naveen.browser.app-main-36:/layout/activity_settings.xml"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_onboarding_features.xml.flat",
@@ -236,6 +236,10 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\bg_button_danger.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser.png.flat",
+        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser.png"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_delete.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_delete.xml"
     },
@@ -310,5 +314,9 @@
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_translate.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_translate.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_history.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_history.xml"
     }
 ]

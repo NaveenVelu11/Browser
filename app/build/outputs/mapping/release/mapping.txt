@@ -3,8 +3,8 @@
 # min_api: 23
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 23eec4b
-# pg_map_hash: SHA-256 23eec4b2901f083f2294d1ebd3205221ed90967014713ebfb80e5767e47a2be6
+# pg_map_id: bd07aed
+# pg_map_hash: SHA-256 bd07aed52db1603f068e6cfb5938c5fde1312b1f8c2a86be8d5656e08900fec7
 android.app.AppComponentFactory -> android.app.AppComponentFactory:
 # {"id":"com.android.tools.r8.synthesized"}
 android.support.v4.app.RemoteActionCompatParcelizer -> android.support.v4.app.RemoteActionCompatParcelizer:
@@ -29276,23 +29276,28 @@ androidx.fragment.app.SpecialEffectsController$Operation$LifecycleImpact$EnumUnb
     6:8:java.lang.String androidx.core.graphics.PathParser$$InternalSyntheticOutline$135$eaa9b403d43d66dd15bc56a84dcdd6099b970b24eb54931a6c94070136cb10f9$0.m(java.lang.String,java.lang.String,java.lang.String):2:2 -> g
     9:11:java.lang.String androidx.core.graphics.PathParser$$InternalSyntheticOutline$135$eaa9b403d43d66dd15bc56a84dcdd6099b970b24eb54931a6c94070136cb10f9$0.m(java.lang.String,java.lang.String,java.lang.String):3:3 -> g
     12:16:java.lang.String androidx.core.graphics.PathParser$$InternalSyntheticOutline$135$eaa9b403d43d66dd15bc56a84dcdd6099b970b24eb54931a6c94070136cb10f9$0.m(java.lang.String,java.lang.String,java.lang.String):4:4 -> g
-    1:1:void com.google.android.material.datepicker.MaterialCalendar$$InternalSyntheticThrowCCEIfNotNull$61$e95c19be951ade8f9b1e777c8e0b94646facbddb383b5b290bfe1e7003b5f94c$0.m(java.lang.Object):0:0 -> h
+    1:4:void com.naveen.browser.utils.PreferenceManager$$InternalSyntheticOutline$135$372013f73e8ead1aeeca6759dd3b5a9c377ac14e244f1c1fbdb513eccaabf8d6$0.m(android.content.SharedPreferences,java.lang.String,boolean):0:0 -> h
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.outline"}
+    5:8:void com.naveen.browser.utils.PreferenceManager$$InternalSyntheticOutline$135$372013f73e8ead1aeeca6759dd3b5a9c377ac14e244f1c1fbdb513eccaabf8d6$0.m(android.content.SharedPreferences,java.lang.String,boolean):1:1 -> h
+    9:12:void com.naveen.browser.utils.PreferenceManager$$InternalSyntheticOutline$135$372013f73e8ead1aeeca6759dd3b5a9c377ac14e244f1c1fbdb513eccaabf8d6$0.m(android.content.SharedPreferences,java.lang.String,boolean):2:2 -> h
+    1:1:void com.google.android.material.datepicker.MaterialCalendar$$InternalSyntheticThrowCCEIfNotNull$61$e95c19be951ade8f9b1e777c8e0b94646facbddb383b5b290bfe1e7003b5f94c$0.m(java.lang.Object):0:0 -> i
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/os/Parcelable;)V"}
-    1:1:void com.google.android.material.snackbar.BaseTransientBottomBar$BehaviorDelegate$$InternalSyntheticThrowCCEIfNotNull$14$4c242a01873f6bd0ec8a85d732a71da08791ebfc7e1c635d10aee1e7d2ca75ed$0.m(java.lang.Object):0:0 -> i
+    1:1:void com.google.android.material.snackbar.BaseTransientBottomBar$BehaviorDelegate$$InternalSyntheticThrowCCEIfNotNull$14$4c242a01873f6bd0ec8a85d732a71da08791ebfc7e1c635d10aee1e7d2ca75ed$0.m(java.lang.Object):0:0 -> j
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lb2/g;)V"}
-    1:1:void androidx.lifecycle.Lifecycling$$InternalSyntheticThrowCCEIfNotNull$10$9f5d826c7cb3654602020ecf8a22286878ec845e76a62dd23dd66ab85161c0f5$0.m(java.lang.Object):0:0 -> j
+    1:1:void androidx.lifecycle.Lifecycling$$InternalSyntheticThrowCCEIfNotNull$10$9f5d826c7cb3654602020ecf8a22286878ec845e76a62dd23dd66ab85161c0f5$0.m(java.lang.Object):0:0 -> k
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void androidx.appcompat.app.ToolbarActionBar$$InternalSyntheticThrowCCEIfNotNull$51$0f7682287412696056fe46462ba49ee18c10df748a4b87d5f201739390c255ea$0.m(java.lang.Object):0:0 -> k
+    1:1:void androidx.appcompat.app.ToolbarActionBar$$InternalSyntheticThrowCCEIfNotNull$51$0f7682287412696056fe46462ba49ee18c10df748a4b87d5f201739390c255ea$0.m(java.lang.Object):0:0 -> l
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.String androidx.constraintlayout.core.widgets.ConstraintAnchor$Type$EnumUnboxingLocalUtility.name(int):0:0 -> l
+    1:1:java.lang.String androidx.constraintlayout.core.widgets.ConstraintAnchor$Type$EnumUnboxingLocalUtility.name(int):0:0 -> m
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.String stringValueOf(int):0:0 -> m
+    1:1:java.lang.String stringValueOf(int):0:0 -> n
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.String androidx.fragment.app.SpecialEffectsController$Operation$State$EnumUnboxingLocalUtility.stringValueOf(int):0:0 -> n
+    1:1:java.lang.String androidx.fragment.app.SpecialEffectsController$Operation$State$EnumUnboxingLocalUtility.stringValueOf(int):0:0 -> o
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:java.lang.String androidx.constraintlayout.core.widgets.analyzer.DependencyNode$Type$EnumUnboxingLocalUtility.stringValueOf(int):0:0 -> o
+    1:1:java.lang.String androidx.constraintlayout.core.widgets.analyzer.DependencyNode$Type$EnumUnboxingLocalUtility.stringValueOf(int):0:0 -> p
       # {"id":"com.android.tools.r8.synthesized"}
 androidx.fragment.app.SpecialEffectsController$Operation$State -> R8$$REMOVED$$CLASS$$245:
 # {"id":"sourceFile","fileName":"SpecialEffectsController.java"}
@@ -40340,11 +40345,14 @@ androidx.webkit.internal.ApiHelperForO$$ExternalSyntheticApiModelOutline0 -> and
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void androidx.webkit.internal.ApiHelperForO$$InternalSyntheticApiModelOutline$1$ffb24d8d8463095267f3e3ecbf408b2f9ca7a5c14543f52c6a46823845020068$0.m(android.webkit.WebSettings,boolean):0:0 -> l
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean com.naveen.browser.utils.WebUtils$$InternalSyntheticApiModelOutline$1$e0e384f75043123c5f807584f7254b962c65dc5baa9b75256a9da513c6df2d11$2.m(android.content.pm.ShortcutManager):0:0 -> m
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticApiModelOutline$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$1.m(android.webkit.WebView,int,boolean):0:0 -> m
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean androidx.core.view.accessibility.AccessibilityNodeInfoCompat$$InternalSyntheticApiModelOutline$2$1aafc8a7e540efc36d9606a211722f1ebcefa94800f4f6843831897e7114e21a$0.m(android.view.accessibility.AccessibilityNodeInfo):0:0 -> n
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/webkit/WebView;)V"}
+    1:1:boolean com.naveen.browser.utils.WebUtils$$InternalSyntheticApiModelOutline$1$e0e384f75043123c5f807584f7254b962c65dc5baa9b75256a9da513c6df2d11$2.m(android.content.pm.ShortcutManager):0:0 -> n
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean androidx.webkit.internal.ApiHelperForO$$InternalSyntheticApiModelOutline$1$adb824be22c226cc68f8d29bd3c8a0c6c7709c19fc46c0aa99537103faf76e13$0.m(android.webkit.WebSettings):0:0 -> o
+    1:1:boolean androidx.core.view.accessibility.AccessibilityNodeInfoCompat$$InternalSyntheticApiModelOutline$2$1aafc8a7e540efc36d9606a211722f1ebcefa94800f4f6843831897e7114e21a$0.m(android.view.accessibility.AccessibilityNodeInfo):0:0 -> o
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:boolean androidx.webkit.internal.ApiHelperForO$$InternalSyntheticApiModelOutline$1$adb824be22c226cc68f8d29bd3c8a0c6c7709c19fc46c0aa99537103faf76e13$0.m(android.webkit.WebSettings):0:0 -> p
       # {"id":"com.android.tools.r8.synthesized"}
 androidx.webkit.internal.ApiHelperForOMR1 -> androidx.webkit.internal.ApiHelperForOMR1:
 # {"id":"sourceFile","fileName":"ApiHelperForOMR1.java"}
@@ -51610,6 +51618,20 @@ com.naveen.browser.HistoryActivity -> com.naveen.browser.HistoryActivity:
 com.naveen.browser.HistoryActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.c:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
+    int com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0.$r8$classId -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    com.naveen.browser.HistoryActivity com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0.f$0 -> b
+      # {"id":"com.android.tools.r8.residualsignature","signature":"Ljava/lang/Object;"}
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:8:void com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0.<init>(com.naveen.browser.HistoryActivity):0:0 -> <init>
+    1:8:void com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0.$r8$init$synthetic(java.lang.Object,int):0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(ILjava/lang/Object;)V"}
+    1:1:void com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$4cc4291eabad7c2c1698156429bddd578d2329962308ad02e4cfee9c34bc68b7$0.onClick$bridge(android.content.DialogInterface,int):0:0 -> onClick
+      # {"id":"com.android.tools.r8.synthesized"}
+com.naveen.browser.HistoryActivity$$ExternalSyntheticLambda1 -> com.naveen.browser.d:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$cc3f0d9ada1f4e3f17f7ab6bc9e473ce24e68eb8389c3b1abe7162c85fae93e8$0.$r8$classId -> a
       # {"id":"com.android.tools.r8.synthesized"}
     com.naveen.browser.HistoryActivity com.naveen.browser.HistoryActivity$$InternalSyntheticLambda$1$cc3f0d9ada1f4e3f17f7ab6bc9e473ce24e68eb8389c3b1abe7162c85fae93e8$0.f$0 -> b
@@ -51623,83 +51645,82 @@ com.naveen.browser.HistoryActivity$1 -> com.naveen.browser.HistoryActivity$1:
 # {"id":"sourceFile","fileName":"HistoryActivity.java"}
 com.naveen.browser.MainActivity -> com.naveen.browser.MainActivity:
 # {"id":"sourceFile","fileName":"MainActivity.java"}
-    1:1:void $r8$lambda$blkh0ilmM9Ve65QAx1Cpda2bUak(com.naveen.browser.MainActivity,android.view.View):0:0 -> A
+    1:1:void $r8$lambda$Xm0TKoyoLoR_OaKDCBckf_yGf70(com.naveen.browser.MainActivity,android.view.View):0:0 -> A
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$cJ9Y4IsWrTqoEhS6p_KhZdky3pI(com.naveen.browser.MainActivity,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> B
-      # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$eEmRUNzWoMtBbJGGS9qTwUcjrfU(com.naveen.browser.MainActivity,android.view.View):0:0 -> C
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$gCQ1nPS5BmNrqvT_v_NjH_ltu1g(com.naveen.browser.MainActivity,android.view.View):0:0 -> D
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean $r8$lambda$gQyMeWpZ85laWP-lNxMzkwcv9Xg(android.webkit.WebView,android.widget.EditText,android.widget.TextView,int,android.view.KeyEvent):0:0 -> E
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$gbtj7h-NxBH3puKChvp4XjUCoX4(com.naveen.browser.MainActivity,android.view.View):0:0 -> F
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$haXV9ZejXpOHzhNEYO5Vcy7Df78(com.naveen.browser.MainActivity,android.view.View):0:0 -> G
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$j4vtNwOSYpHxT06w1EMqYrPf1B4(com.naveen.browser.MainActivity,android.view.View):0:0 -> H
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$jTysmQp42CllyVceryVbTLkizIk(com.naveen.browser.MainActivity,android.view.View):0:0 -> I
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$lnWHsfiuaSMHOGaBbn6gfpeuDHY(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> J
+    1:1:void $r8$lambda$Xqtqkx3RoqJ9RMWEOoXuVEDkRE4(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> B
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$mBBMELOfu2Kih6t1m6LOZG2TDx4(com.naveen.browser.MainActivity,android.view.View):0:0 -> K
+    1:1:void $r8$lambda$Y99WC9sbceph88d32YNL0IyoAF4(com.naveen.browser.MainActivity,android.widget.EditText,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> C
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$meJP6Si2ZarbAiPPm5XRIOYqrn8(com.naveen.browser.MainActivity,android.view.View):0:0 -> L
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Landroid/widget/EditText;Ld/k;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$YALlfxndokvTEiBOfxayK_PStx4(com.naveen.browser.MainActivity,android.view.View):0:0 -> D
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$nJnHUGFFKRwI4maNiZQPWZGn6bo(com.naveen.browser.MainActivity,android.view.View):0:0 -> M
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$nnWJfT7jaqW0P0cQdhtdWqFF6xo(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> N
-      # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$ooKWSVeRQ08iODgU1P52pfE7zIg(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> O
+    1:1:void $r8$lambda$Z3Dc0J6aLf1X-w-UDlNy0Zmd4H0(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> E
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$pygSNrMuv9R2AXWhUwxdEfqgGFQ(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> P
+    1:1:void $r8$lambda$_7FxbyG10ZikINm8wZBZmLSiPL0(android.webkit.WebView,android.view.View):0:0 -> F
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:boolean $r8$lambda$_Q2_MZVSpQxXb0FTU2EqSHoZyxI(android.webkit.WebView,android.widget.EditText,android.widget.TextView,int,android.view.KeyEvent):0:0 -> G
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$bPtkQNjwXLKQ_HsytND9s_l8qOg(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> H
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$blkh0ilmM9Ve65QAx1Cpda2bUak(com.naveen.browser.MainActivity,android.view.View):0:0 -> I
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$eEmRUNzWoMtBbJGGS9qTwUcjrfU(com.naveen.browser.MainActivity,android.view.View):0:0 -> J
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$fv2JDiawDbCivHzjGcbSzOczbhg(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> K
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$ssZPueoNK7YGlllGwutkaf6OOHE(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> Q
+    1:1:void $r8$lambda$gCQ1nPS5BmNrqvT_v_NjH_ltu1g(com.naveen.browser.MainActivity,android.view.View):0:0 -> L
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$haXV9ZejXpOHzhNEYO5Vcy7Df78(com.naveen.browser.MainActivity,android.view.View):0:0 -> M
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$jTysmQp42CllyVceryVbTLkizIk(com.naveen.browser.MainActivity,android.view.View):0:0 -> N
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$lnWHsfiuaSMHOGaBbn6gfpeuDHY(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> O
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$syqVKhu0K583ab2odVrX_SsWKmo(com.naveen.browser.MainActivity,android.view.View,boolean):0:0 -> R
+    1:1:void $r8$lambda$mBBMELOfu2Kih6t1m6LOZG2TDx4(com.naveen.browser.MainActivity,android.view.View):0:0 -> P
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$ypsWn013EUyqHwjHeKFft0NQPpw(androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> S
+    1:1:void $r8$lambda$meJP6Si2ZarbAiPPm5XRIOYqrn8(com.naveen.browser.MainActivity,android.view.View):0:0 -> Q
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ld/k;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$zqAGWF8ULGOdvvDbrbflT6gQNyE(com.naveen.browser.MainActivity,android.view.View):0:0 -> T
+    1:1:void $r8$lambda$nJnHUGFFKRwI4maNiZQPWZGn6bo(com.naveen.browser.MainActivity,android.view.View):0:0 -> R
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$nnWJfT7jaqW0P0cQdhtdWqFF6xo(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> S
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$pbw0KNEk8WD0hCj912Xke7BnMYs(com.naveen.browser.MainActivity,android.view.View):0:0 -> T
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$ssZPueoNK7YGlllGwutkaf6OOHE(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> U
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$wXh8OCfjFBa1jEpp5YWNBeAKJUE(com.naveen.browser.MainActivity,android.view.View):0:0 -> V
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$yevQPyV3PYm9IIN92z-MiQjDSSU(com.naveen.browser.MainActivity,android.view.View):0:0 -> W
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$zqAGWF8ULGOdvvDbrbflT6gQNyE(com.naveen.browser.MainActivity,android.view.View):0:0 -> X
       # {"id":"com.android.tools.r8.synthesized"}
     13:16:int androidx.core.content.ContextCompat.getColor(android.content.Context,int):0:0 -> addContextOption
     13:16:void addContextOption(android.widget.LinearLayout,java.lang.String,android.view.View$OnClickListener):0 -> addContextOption
     17:51:void addContextOption(android.widget.LinearLayout,java.lang.String,android.view.View$OnClickListener):0:0 -> addContextOption
-    1:1:void $r8$lambda$-Rz6sXmA8--zQUjMx_ABIlb6rHc(android.webkit.WebView,android.view.View):0:0 -> e
+    1:1:void $r8$lambda$As396KFCSNiMaIv1e_7XSxIiiTQ(com.naveen.browser.MainActivity,android.view.View):0:0 -> e
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$12M8uP9AoZx7xQuvYtOaHqBqkmM(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> f
+    1:1:void $r8$lambda$AyzZ56cXmphdJDU-ab308dX7bF0(com.naveen.browser.MainActivity):0:0 -> f
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$3mIfnEvS040PSnQMS6f72ch18w8(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> g
+    1:1:void $r8$lambda$D-F6h4npg0k1lUMsFIu4PZYstDI(android.webkit.WebView,android.view.View):0:0 -> g
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:boolean $r8$lambda$BOUObX2us66jUingaV0wa3WywUc(com.naveen.browser.MainActivity,android.widget.TextView,int,android.view.KeyEvent):0:0 -> h
+    1:1:void $r8$lambda$Dfx_4MOKNUy0FH_lGLTEiwwC5Ck(androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> h
       # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ld/k;Landroid/view/View;)V"}
     1:1:void $r8$lambda$Dke0L9boBHMB36Re5bttiF3F7J0(com.naveen.browser.MainActivity,android.view.View):0:0 -> i
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void $r8$lambda$DvPNvhKUJTMAdlGV1pqgFt8GZ9E(com.naveen.browser.MainActivity,android.view.View):0:0 -> j
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$GxZjjjSHVDptwgBI1MbTxzKpxjY(android.webkit.WebView,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> k
+    1:1:void $r8$lambda$EL3lc7GtthAPwYRRY6xqg2NlOZQ(com.naveen.browser.MainActivity,android.view.View):0:0 -> k
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/webkit/WebView;Ld/k;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$HDImunS6aBJr_0fTrOhpvN3BYdo(com.naveen.browser.MainActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String,long):0:0 -> l
+    1:1:void $r8$lambda$ExxLuBk79ulqjd9-2b22Rq6PF2o(com.naveen.browser.MainActivity,java.lang.String,java.lang.String,java.lang.String,java.lang.String,long):0:0 -> l
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void lambda$showContextMenuBottomSheet$31(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$31
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showContextMenuBottomSheet$32(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$32
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showContextMenuBottomSheet$33(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$33
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showContextMenuBottomSheet$34(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$34
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
     1:1:void lambda$showContextMenuBottomSheet$35(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$35
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
     1:1:void lambda$showContextMenuBottomSheet$36(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$36
@@ -51712,36 +51733,42 @@ com.naveen.browser.MainActivity -> com.naveen.browser.MainActivity:
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
     1:1:void lambda$showContextMenuBottomSheet$40(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$40
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showFindInPageDialog$27(android.webkit.WebView,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showFindInPageDialog$27
+    1:1:void lambda$showContextMenuBottomSheet$41(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$41
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void lambda$showContextMenuBottomSheet$42(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$42
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void lambda$showContextMenuBottomSheet$43(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$43
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void lambda$showContextMenuBottomSheet$44(java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showContextMenuBottomSheet$44
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void lambda$showFindInPageDialog$31(android.webkit.WebView,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showFindInPageDialog$31
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/webkit/WebView;Ld/k;Landroid/view/View;)V"}
-    1:1:void lambda$showPrivacyDashboard$30(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showPrivacyDashboard$30
+    1:1:void lambda$showPrivacyDashboard$34(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showPrivacyDashboard$34
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showQrScannerDialog$22(androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showQrScannerDialog$22
+    1:1:void lambda$showQrScannerDialog$26(androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showQrScannerDialog$26
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ld/k;Landroid/view/View;)V"}
-    1:1:void lambda$showQrScannerDialog$23(android.widget.EditText,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showQrScannerDialog$23
+    1:1:void lambda$showQrScannerDialog$27(android.widget.EditText,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> lambda$showQrScannerDialog$27
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/widget/EditText;Ld/k;Landroid/view/View;)V"}
-    1:1:void lambda$showTabsManagerDialog$28(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showTabsManagerDialog$28
+    1:1:void lambda$showTabsManagerDialog$32(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showTabsManagerDialog$32
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
-    1:1:void lambda$showTabsManagerDialog$29(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showTabsManagerDialog$29
+    1:1:void lambda$showTabsManagerDialog$33(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> lambda$showTabsManagerDialog$33
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$K6MlhB8XEJHUyqhNE-xxmLud44I(com.naveen.browser.MainActivity,android.view.View):0:0 -> m
+    1:1:void $r8$lambda$FDn5OJW3t4z1wwDSovX4pjbuqgg(com.naveen.browser.MainActivity,android.view.View):0:0 -> m
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$KIHeaZieb9MiaxwTKjppvXL00OE(com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> n
-      # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$N5VZgxRBxeydwhywAwZ0MWRKwtw(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> o
+    1:1:void $r8$lambda$GeZIM1FE_pdWkFCrOI256wbxZko(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> n
       # {"id":"com.android.tools.r8.synthesized"}
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$P4-LZCady19uapfWuZ1L_dPlnKY(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> p
+    1:1:void $r8$lambda$H5KQB1KNoQFyLZTQBcgwv25yV7c(android.webkit.WebView,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> o
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$QPIHoABmCzxMbmthiLWvnwb6rcM(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> q
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/webkit/WebView;Ld/k;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$H92hu5_83YuA4ictPlftL3Ow9rE(com.naveen.browser.MainActivity,android.view.View):0:0 -> p
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$Qk3jBw0-kbmqpkvoqA1qMcCky8k(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> r
+    1:1:boolean $r8$lambda$J_YtShMnyoZYMIFKE1jGfrIE_70(com.naveen.browser.MainActivity,android.widget.TextView,int,android.view.KeyEvent):0:0 -> q
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
-    1:1:void $r8$lambda$RQMB9-xwEiu27scYGvsvijvvHwg(com.naveen.browser.MainActivity,android.view.View):0:0 -> s
+    1:1:void $r8$lambda$K4PtikCB_ewLL-CBHDw4S7keznM(com.naveen.browser.MainActivity,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> r
+      # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$Nq-HFGbCAAbhsolLInFSN8KgL4s(com.naveen.browser.MainActivity,android.view.View,boolean):0:0 -> s
       # {"id":"com.android.tools.r8.synthesized"}
     37:40:int androidx.core.content.ContextCompat.getColor(android.content.Context,int):0:0 -> showContextMenuBottomSheet
     37:40:void showContextMenuBottomSheet(android.webkit.WebView$HitTestResult):0 -> showContextMenuBottomSheet
@@ -51785,31 +51812,43 @@ com.naveen.browser.MainActivity -> com.naveen.browser.MainActivity:
     47:49:void androidx.recyclerview.widget.LinearLayoutManager.<init>(android.content.Context):0:0 -> showTabsManagerDialog
     47:49:void showTabsManagerDialog():0 -> showTabsManagerDialog
     50:88:void showTabsManagerDialog():0:0 -> showTabsManagerDialog
-    1:1:void $r8$lambda$SuoSVeh-E0gOVwnJgCwSQKAsWj0(com.naveen.browser.MainActivity):0:0 -> t
+    1:1:void $r8$lambda$P4-LZCady19uapfWuZ1L_dPlnKY(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> t
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$UIejQhKNEjBtqRd3V3irVOxxTyM(android.webkit.WebView,android.view.View):0:0 -> u
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$PTOiwY4g592-ZNugqC1Ft8G7ZFo(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> u
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$UZkKySfgA2Go1HlQWhAV4RoJSCU(com.naveen.browser.MainActivity,android.view.View):0:0 -> v
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$QPIHoABmCzxMbmthiLWvnwb6rcM(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> v
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$UpFzf8feyoEDVs0CRnaTxXbxs7c(com.naveen.browser.MainActivity,android.view.View):0:0 -> w
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$Qk3jBw0-kbmqpkvoqA1qMcCky8k(com.naveen.browser.MainActivity,java.lang.String,com.google.android.material.bottomsheet.BottomSheetDialog,android.view.View):0:0 -> w
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$Xm0TKoyoLoR_OaKDCBckf_yGf70(com.naveen.browser.MainActivity,android.view.View):0:0 -> x
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/String;Ln1/h;Landroid/view/View;)V"}
+    1:1:void $r8$lambda$RQMB9-xwEiu27scYGvsvijvvHwg(com.naveen.browser.MainActivity,android.view.View):0:0 -> x
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$YALlfxndokvTEiBOfxayK_PStx4(com.naveen.browser.MainActivity,android.view.View):0:0 -> y
+    1:1:void $r8$lambda$UZkKySfgA2Go1HlQWhAV4RoJSCU(com.naveen.browser.MainActivity,android.view.View):0:0 -> y
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$b_W-cualN4aIicRP2nSp6a6FjCg(com.naveen.browser.MainActivity,android.widget.EditText,androidx.appcompat.app.AlertDialog,android.view.View):0:0 -> z
+    1:1:void $r8$lambda$UpFzf8feyoEDVs0CRnaTxXbxs7c(com.naveen.browser.MainActivity,android.view.View):0:0 -> z
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Landroid/widget/EditText;Ld/k;Landroid/view/View;)V"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.d:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda1 -> com.naveen.browser.f:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$0.f$0 -> a
+    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$2.f$0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$0.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$2.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$0.onDownloadStart(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long):0:0 -> onDownloadStart
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$8832190263aef1bfa5fd6731d05b7545075bdacdc911a989d89f555984e0a82a$2.onDownloadStart(java.lang.String,java.lang.String,java.lang.String,java.lang.String,long):0:0 -> onDownloadStart
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda1 -> com.naveen.browser.e:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda10 -> com.naveen.browser.e:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$17.f$0 -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$17.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$17.onFocusChange(android.view.View,boolean):0:0 -> onFocusChange
+      # {"id":"com.android.tools.r8.synthesized"}
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda2 -> com.naveen.browser.g:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     android.webkit.WebView com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$0.f$0 -> a
@@ -51820,7 +51859,7 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda1 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:boolean com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$0.onEditorAction(android.widget.TextView,int,android.view.KeyEvent):0:0 -> onEditorAction
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda2 -> com.naveen.browser.f:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda3 -> com.naveen.browser.h:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$1.$r8$classId -> a
@@ -51832,7 +51871,7 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda2 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$1.onClick$bridge(android.view.View):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda3 -> com.naveen.browser.g:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda4 -> com.naveen.browser.i:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$3.$r8$classId -> a
@@ -51849,7 +51888,7 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda3 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/view/KeyEvent$Callback;Ld/k0;I)V"}
     1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$920adce6a7f53bcd495a4b39f6f74f8d7448a162c7eb6f90c5dbc4efb2c63280$3.onClick$bridge(android.view.View):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda4 -> com.naveen.browser.h:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda5 -> com.naveen.browser.j:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$a85e5f1d450ce5d2264821a266ebcc7f03e4d8aab3db5323b091886c62a37657$0.$r8$classId -> a
@@ -51868,7 +51907,7 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda4 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Lcom/naveen/browser/MainActivity;Ljava/lang/Object;Ld/k0;I)V"}
     1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$a85e5f1d450ce5d2264821a266ebcc7f03e4d8aab3db5323b091886c62a37657$0.onClick$bridge(android.view.View):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda5 -> com.naveen.browser.i:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda6 -> com.naveen.browser.k:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$ab4fc4ca3f5286329327b3e141e00884f22fd9769227fd16c7457c5364bea3ca$1.$r8$classId -> a
@@ -51882,7 +51921,7 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda5 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.residualsignature","signature":"(Ln1/h;I)V"}
     1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$ab4fc4ca3f5286329327b3e141e00884f22fd9769227fd16c7457c5364bea3ca$1.onClick$bridge(android.view.View):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda6 -> com.naveen.browser.j:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda7 -> com.naveen.browser.l:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$0.$r8$classId -> a
@@ -51894,30 +51933,21 @@ com.naveen.browser.MainActivity$$ExternalSyntheticLambda6 -> com.naveen.browser.
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$0.onClick$bridge(android.view.View):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda7 -> com.naveen.browser.k:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda8 -> com.naveen.browser.m:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$11.f$0 -> a
+    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$15.f$0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$11.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$15.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda8 -> com.naveen.browser.l:
+com.naveen.browser.MainActivity$$ExternalSyntheticLambda9 -> com.naveen.browser.n:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
-    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$12.f$0 -> a
+    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$16.f$0 -> a
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$12.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
+    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$16.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:boolean com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$12.onEditorAction(android.widget.TextView,int,android.view.KeyEvent):0:0 -> onEditorAction
-      # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.MainActivity$$ExternalSyntheticLambda9 -> com.naveen.browser.m:
-# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
-# {"id":"com.android.tools.r8.synthesized"}
-    com.naveen.browser.MainActivity com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$13.f$0 -> a
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$13.<init>(com.naveen.browser.MainActivity):0:0 -> <init>
-      # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$13.onFocusChange(android.view.View,boolean):0:0 -> onFocusChange
+    1:1:boolean com.naveen.browser.MainActivity$$InternalSyntheticLambda$1$fa6680ddd9a890bdf2d337649e0a12c560a0be96c2558dfcb2580cb9e326e110$16.onEditorAction(android.widget.TextView,int,android.view.KeyEvent):0:0 -> onEditorAction
       # {"id":"com.android.tools.r8.synthesized"}
 com.naveen.browser.MainActivity$1 -> com.naveen.browser.MainActivity$1:
 # {"id":"sourceFile","fileName":"MainActivity.java"}
@@ -51955,18 +51985,16 @@ com.naveen.browser.MainActivity$7 -> com.naveen.browser.MainActivity$7:
     67:76:void onReceivedSslError(android.webkit.WebView,android.webkit.SslErrorHandler,android.net.http.SslError):0 -> onReceivedSslError
     77:84:androidx.appcompat.app.AlertDialog androidx.appcompat.app.AlertDialog$Builder.show():0:0 -> onReceivedSslError
     77:84:void onReceivedSslError(android.webkit.WebView,android.webkit.SslErrorHandler,android.net.http.SslError):0 -> onReceivedSslError
-com.naveen.browser.MainActivity$7$$ExternalSyntheticLambda0 -> com.naveen.browser.n:
+com.naveen.browser.MainActivity$7$$ExternalSyntheticLambda0 -> com.naveen.browser.o:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.$r8$classId -> a
       # {"id":"com.android.tools.r8.synthesized"}
     android.webkit.SslErrorHandler com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.f$0 -> b
-      # {"id":"com.android.tools.r8.residualsignature","signature":"Ljava/lang/Object;"}
       # {"id":"com.android.tools.r8.synthesized"}
     1:8:void com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.<init>(android.webkit.SslErrorHandler):0:0 -> <init>
-    1:8:void com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.$r8$init$synthetic(java.lang.Object,int):0 -> <init>
+    1:8:void com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.$r8$init$synthetic(android.webkit.SslErrorHandler,int):0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
-      # {"id":"com.android.tools.r8.residualsignature","signature":"(ILjava/lang/Object;)V"}
     1:1:void com.naveen.browser.MainActivity$7$$InternalSyntheticLambda$1$dfda1d73c6147a024b7a62b32c51ba4afad9b1ef469af7fa140dec03ca03c794$0.onClick$bridge(android.content.DialogInterface,int):0:0 -> onClick
       # {"id":"com.android.tools.r8.synthesized"}
 com.naveen.browser.MainActivity$8 -> com.naveen.browser.MainActivity$8:
@@ -51987,7 +52015,7 @@ com.naveen.browser.OnboardingActivity -> com.naveen.browser.OnboardingActivity:
     94:107:void androidx.viewpager.widget.ViewPager.addOnPageChangeListener(androidx.viewpager.widget.ViewPager$OnPageChangeListener):0:0 -> onCreate
     94:107:void onCreate(android.os.Bundle):0 -> onCreate
     108:127:void onCreate(android.os.Bundle):0:0 -> onCreate
-com.naveen.browser.OnboardingActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.o:
+com.naveen.browser.OnboardingActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.p:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.OnboardingActivity$$InternalSyntheticLambda$1$d949f4e6c3ce849e12a9d5f5c6a0b40fdf081f0e1d13b0e898b4dd30f0820da9$0.$r8$classId -> a
@@ -52007,17 +52035,36 @@ com.naveen.browser.OnboardingActivity$OnboardingPagerAdapter -> com.naveen.brows
     2:2:void <init>(com.naveen.browser.OnboardingActivity,com.naveen.browser.OnboardingActivity$1):0:0 -> <init>
 com.naveen.browser.SettingsActivity -> com.naveen.browser.SettingsActivity:
 # {"id":"sourceFile","fileName":"SettingsActivity.java"}
-    1:1:void $r8$lambda$GpH4f83Z0iZEbubzVNtJcRYvMnA(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> e
+    11:14:androidx.appcompat.app.AlertDialog$Builder androidx.appcompat.app.AlertDialog$Builder.setTitle(java.lang.CharSequence):0:0 -> confirmClear
+    11:14:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0 -> confirmClear
+    15:16:androidx.appcompat.app.AlertDialog$Builder androidx.appcompat.app.AlertDialog$Builder.setMessage(java.lang.CharSequence):0:0 -> confirmClear
+    15:16:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0 -> confirmClear
+    17:24:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0:0 -> confirmClear
+    25:30:androidx.appcompat.app.AlertDialog$Builder androidx.appcompat.app.AlertDialog$Builder.setPositiveButton(java.lang.CharSequence,android.content.DialogInterface$OnClickListener):0:0 -> confirmClear
+    25:30:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0 -> confirmClear
+    31:35:androidx.appcompat.app.AlertDialog$Builder androidx.appcompat.app.AlertDialog$Builder.setNegativeButton(java.lang.CharSequence,android.content.DialogInterface$OnClickListener):0:0 -> confirmClear
+    31:35:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0 -> confirmClear
+    36:43:androidx.appcompat.app.AlertDialog androidx.appcompat.app.AlertDialog$Builder.show():0:0 -> confirmClear
+    36:43:void confirmClear(java.lang.String,java.lang.String,java.lang.Runnable):0 -> confirmClear
+    1:1:void $r8$lambda$BJpW5kHuJSzVMlmyvMVvaFgREmk(com.naveen.browser.SettingsActivity):0:0 -> e
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$N7EMG9f7jSmW_eUv0SzmZxa2lMw(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> f
+    1:1:void $r8$lambda$GpH4f83Z0iZEbubzVNtJcRYvMnA(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> f
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$UpikdWqhTEclHEhyEdi0Hvqrv2M(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> g
+    1:1:void $r8$lambda$N7EMG9f7jSmW_eUv0SzmZxa2lMw(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> g
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$h0G5klOmeG0qDHKLu60_rAil7tU(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> h
+    1:1:void $r8$lambda$NvV1g5Cq2bIpzoktCVezh8IFRFg(com.naveen.browser.SettingsActivity):0:0 -> h
       # {"id":"com.android.tools.r8.synthesized"}
-    1:1:void $r8$lambda$iUnJy87iv8s2k0zIiNRpxAXojxA(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> i
+    1:1:void $r8$lambda$ciQCSDueGJgUoo9wZQzVf1zn3PU(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> i
       # {"id":"com.android.tools.r8.synthesized"}
-com.naveen.browser.SettingsActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.p:
+    1:1:void $r8$lambda$h0G5klOmeG0qDHKLu60_rAil7tU(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> j
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$pnIY1nf71SRTBw_l7KTgd1dL6EI(java.lang.Runnable,android.content.DialogInterface,int):0:0 -> k
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$t_0dMOOGW21yvO3HsfTZfKLNjeU(com.naveen.browser.SettingsActivity):0:0 -> l
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void $r8$lambda$u3m2e034PMUNBB8XZ1tjEDdRbFY(com.naveen.browser.SettingsActivity,android.view.View):0:0 -> m
+      # {"id":"com.android.tools.r8.synthesized"}
+com.naveen.browser.SettingsActivity$$ExternalSyntheticLambda0 -> com.naveen.browser.q:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
     int com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$0.$r8$classId -> a
@@ -52028,6 +52075,18 @@ com.naveen.browser.SettingsActivity$$ExternalSyntheticLambda0 -> com.naveen.brow
     1:8:void com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$0.$r8$init$synthetic(com.naveen.browser.SettingsActivity,int):0 -> <init>
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:void com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$3a3c476a88f72c51beb014fbcad029dd3d3e0752220915f86f61ef4407b03345$0.onClick$bridge(android.view.View):0:0 -> onClick
+      # {"id":"com.android.tools.r8.synthesized"}
+com.naveen.browser.SettingsActivity$$ExternalSyntheticLambda1 -> com.naveen.browser.s:
+# {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
+# {"id":"com.android.tools.r8.synthesized"}
+    int com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8b0e78d99c9468237f7d92574d3a81ee7823cd07ac273a719119acc37ced242f$0.$r8$classId -> a
+      # {"id":"com.android.tools.r8.synthesized"}
+    com.naveen.browser.SettingsActivity com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8b0e78d99c9468237f7d92574d3a81ee7823cd07ac273a719119acc37ced242f$0.f$0 -> b
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:8:void com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8b0e78d99c9468237f7d92574d3a81ee7823cd07ac273a719119acc37ced242f$0.<init>(com.naveen.browser.SettingsActivity):0:0 -> <init>
+    1:8:void com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8b0e78d99c9468237f7d92574d3a81ee7823cd07ac273a719119acc37ced242f$0.$r8$init$synthetic(com.naveen.browser.SettingsActivity,int):0 -> <init>
+      # {"id":"com.android.tools.r8.synthesized"}
+    1:1:void com.naveen.browser.SettingsActivity$$InternalSyntheticLambda$1$8b0e78d99c9468237f7d92574d3a81ee7823cd07ac273a719119acc37ced242f$0.run$bridge():0:0 -> run
       # {"id":"com.android.tools.r8.synthesized"}
 com.naveen.browser.SplashActivity -> com.naveen.browser.SplashActivity:
 # {"id":"sourceFile","fileName":"SplashActivity.java"}
@@ -52189,6 +52248,126 @@ com.naveen.browser.utils.AdBlocker -> com.naveen.browser.utils.AdBlocker:
 # {"id":"sourceFile","fileName":"AdBlocker.java"}
 com.naveen.browser.utils.PreferenceManager -> com.naveen.browser.utils.PreferenceManager:
 # {"id":"sourceFile","fileName":"PreferenceManager.java"}
+    5:8:void setAdBlockEnabled(boolean):0:0 -> setAdBlockEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setAdBlockEnabled(boolean):0:0 -> setAdBlockEnabled
+    11:11:void setAdBlockEnabled(boolean):0:0 -> setAdBlockEnabled
+    14:14:void setAdBlockEnabled(boolean):0:0 -> setAdBlockEnabled
+    5:8:void setAskBeforeDownload(boolean):0:0 -> setAskBeforeDownload
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setAskBeforeDownload(boolean):0:0 -> setAskBeforeDownload
+    11:11:void setAskBeforeDownload(boolean):0:0 -> setAskBeforeDownload
+    14:14:void setAskBeforeDownload(boolean):0:0 -> setAskBeforeDownload
+    5:8:void setAutofillEnabled(boolean):0:0 -> setAutofillEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setAutofillEnabled(boolean):0:0 -> setAutofillEnabled
+    11:11:void setAutofillEnabled(boolean):0:0 -> setAutofillEnabled
+    14:14:void setAutofillEnabled(boolean):0:0 -> setAutofillEnabled
+    5:8:void setBlockPopups(boolean):0:0 -> setBlockPopups
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setBlockPopups(boolean):0:0 -> setBlockPopups
+    11:11:void setBlockPopups(boolean):0:0 -> setBlockPopups
+    14:14:void setBlockPopups(boolean):0:0 -> setBlockPopups
+    5:8:void setDataSaverMode(boolean):0:0 -> setDataSaverMode
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setDataSaverMode(boolean):0:0 -> setDataSaverMode
+    11:11:void setDataSaverMode(boolean):0:0 -> setDataSaverMode
+    14:14:void setDataSaverMode(boolean):0:0 -> setDataSaverMode
+    5:8:void setDesktopMode(boolean):0:0 -> setDesktopMode
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setDesktopMode(boolean):0:0 -> setDesktopMode
+    11:11:void setDesktopMode(boolean):0:0 -> setDesktopMode
+    14:14:void setDesktopMode(boolean):0:0 -> setDesktopMode
+    5:8:void setDoNotTrack(boolean):0:0 -> setDoNotTrack
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setDoNotTrack(boolean):0:0 -> setDoNotTrack
+    11:11:void setDoNotTrack(boolean):0:0 -> setDoNotTrack
+    14:14:void setDoNotTrack(boolean):0:0 -> setDoNotTrack
+    5:8:void setDownloadNotifications(boolean):0:0 -> setDownloadNotifications
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setDownloadNotifications(boolean):0:0 -> setDownloadNotifications
+    11:11:void setDownloadNotifications(boolean):0:0 -> setDownloadNotifications
+    14:14:void setDownloadNotifications(boolean):0:0 -> setDownloadNotifications
+    5:8:void setFirstLaunch(boolean):0:0 -> setFirstLaunch
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setFirstLaunch(boolean):0:0 -> setFirstLaunch
+    11:11:void setFirstLaunch(boolean):0:0 -> setFirstLaunch
+    14:14:void setFirstLaunch(boolean):0:0 -> setFirstLaunch
+    5:8:void setHardwareAccelEnabled(boolean):0:0 -> setHardwareAccelEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setHardwareAccelEnabled(boolean):0:0 -> setHardwareAccelEnabled
+    11:11:void setHardwareAccelEnabled(boolean):0:0 -> setHardwareAccelEnabled
+    14:14:void setHardwareAccelEnabled(boolean):0:0 -> setHardwareAccelEnabled
+    5:8:void setHttpsOnlyEnabled(boolean):0:0 -> setHttpsOnlyEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setHttpsOnlyEnabled(boolean):0:0 -> setHttpsOnlyEnabled
+    11:11:void setHttpsOnlyEnabled(boolean):0:0 -> setHttpsOnlyEnabled
+    14:14:void setHttpsOnlyEnabled(boolean):0:0 -> setHttpsOnlyEnabled
+    5:8:void setJavaScriptEnabled(boolean):0:0 -> setJavaScriptEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setJavaScriptEnabled(boolean):0:0 -> setJavaScriptEnabled
+    11:11:void setJavaScriptEnabled(boolean):0:0 -> setJavaScriptEnabled
+    14:14:void setJavaScriptEnabled(boolean):0:0 -> setJavaScriptEnabled
+    5:8:void setLocationEnabled(boolean):0:0 -> setLocationEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setLocationEnabled(boolean):0:0 -> setLocationEnabled
+    11:11:void setLocationEnabled(boolean):0:0 -> setLocationEnabled
+    14:14:void setLocationEnabled(boolean):0:0 -> setLocationEnabled
+    5:8:void setMediaAutoplay(boolean):0:0 -> setMediaAutoplay
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setMediaAutoplay(boolean):0:0 -> setMediaAutoplay
+    11:11:void setMediaAutoplay(boolean):0:0 -> setMediaAutoplay
+    14:14:void setMediaAutoplay(boolean):0:0 -> setMediaAutoplay
+    5:8:void setNightMode(boolean):0:0 -> setNightMode
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setNightMode(boolean):0:0 -> setNightMode
+    11:11:void setNightMode(boolean):0:0 -> setNightMode
+    14:14:void setNightMode(boolean):0:0 -> setNightMode
+    5:8:void setOpenLinksNewTab(boolean):0:0 -> setOpenLinksNewTab
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setOpenLinksNewTab(boolean):0:0 -> setOpenLinksNewTab
+    11:11:void setOpenLinksNewTab(boolean):0:0 -> setOpenLinksNewTab
+    14:14:void setOpenLinksNewTab(boolean):0:0 -> setOpenLinksNewTab
+    5:8:void setPreloadPages(boolean):0:0 -> setPreloadPages
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setPreloadPages(boolean):0:0 -> setPreloadPages
+    11:11:void setPreloadPages(boolean):0:0 -> setPreloadPages
+    14:14:void setPreloadPages(boolean):0:0 -> setPreloadPages
+    5:8:void setPullToRefresh(boolean):0:0 -> setPullToRefresh
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setPullToRefresh(boolean):0:0 -> setPullToRefresh
+    11:11:void setPullToRefresh(boolean):0:0 -> setPullToRefresh
+    14:14:void setPullToRefresh(boolean):0:0 -> setPullToRefresh
+    5:8:void setSafeBrowsingEnabled(boolean):0:0 -> setSafeBrowsingEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setSafeBrowsingEnabled(boolean):0:0 -> setSafeBrowsingEnabled
+    11:11:void setSafeBrowsingEnabled(boolean):0:0 -> setSafeBrowsingEnabled
+    14:14:void setSafeBrowsingEnabled(boolean):0:0 -> setSafeBrowsingEnabled
+    5:8:void setSessionRestoreEnabled(boolean):0:0 -> setSessionRestoreEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setSessionRestoreEnabled(boolean):0:0 -> setSessionRestoreEnabled
+    11:11:void setSessionRestoreEnabled(boolean):0:0 -> setSessionRestoreEnabled
+    14:14:void setSessionRestoreEnabled(boolean):0:0 -> setSessionRestoreEnabled
+    5:8:void setShowImages(boolean):0:0 -> setShowImages
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setShowImages(boolean):0:0 -> setShowImages
+    11:11:void setShowImages(boolean):0:0 -> setShowImages
+    14:14:void setShowImages(boolean):0:0 -> setShowImages
+    5:8:void setShowTabCount(boolean):0:0 -> setShowTabCount
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setShowTabCount(boolean):0:0 -> setShowTabCount
+    11:11:void setShowTabCount(boolean):0:0 -> setShowTabCount
+    14:14:void setShowTabCount(boolean):0:0 -> setShowTabCount
+    5:8:void setShowUrlScheme(boolean):0:0 -> setShowUrlScheme
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setShowUrlScheme(boolean):0:0 -> setShowUrlScheme
+    11:11:void setShowUrlScheme(boolean):0:0 -> setShowUrlScheme
+    14:14:void setShowUrlScheme(boolean):0:0 -> setShowUrlScheme
+    5:8:void setTrackerBlockEnabled(boolean):0:0 -> setTrackerBlockEnabled
+      # {"id":"com.android.tools.r8.outlineCallsite","positions":{"1":9,"5":11,"9":14},"outline":"Landroidx/fragment/app/g1;h(Landroid/content/SharedPreferences;Ljava/lang/String;Z)V"}
+    9:9:void setTrackerBlockEnabled(boolean):0:0 -> setTrackerBlockEnabled
+    11:11:void setTrackerBlockEnabled(boolean):0:0 -> setTrackerBlockEnabled
+    14:14:void setTrackerBlockEnabled(boolean):0:0 -> setTrackerBlockEnabled
 com.naveen.browser.utils.WebUtils -> com.naveen.browser.utils.WebUtils:
 # {"id":"sourceFile","fileName":"WebUtils.java"}
 com.naveen.browser.utils.WebUtils$$ExternalSyntheticApiModelOutline0 -> h2.a:
@@ -52202,6 +52381,7 @@ com.naveen.browser.utils.WebUtils$$ExternalSyntheticApiModelOutline0 -> h2.a:
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:android.content.pm.ShortcutInfo$Builder com.naveen.browser.utils.WebUtils$$InternalSyntheticApiModelOutline$1$e0e384f75043123c5f807584f7254b962c65dc5baa9b75256a9da513c6df2d11$3.m(android.content.pm.ShortcutInfo$Builder,java.lang.CharSequence):0:0 -> d
       # {"id":"com.android.tools.r8.synthesized"}
+      # {"id":"com.android.tools.r8.residualsignature","signature":"(Landroid/content/pm/ShortcutInfo$Builder;Ljava/lang/String;)Landroid/content/pm/ShortcutInfo$Builder;"}
     1:1:android.content.pm.ShortcutInfo com.naveen.browser.utils.WebUtils$$InternalSyntheticApiModelOutline$1$e0e384f75043123c5f807584f7254b962c65dc5baa9b75256a9da513c6df2d11$6.m(android.content.pm.ShortcutInfo$Builder):0:0 -> e
       # {"id":"com.android.tools.r8.synthesized"}
     1:1:android.content.pm.ShortcutManager com.naveen.browser.utils.WebUtils$$InternalSyntheticApiModelOutline$1$e0e384f75043123c5f807584f7254b962c65dc5baa9b75256a9da513c6df2d11$1.m(java.lang.Object):0:0 -> f

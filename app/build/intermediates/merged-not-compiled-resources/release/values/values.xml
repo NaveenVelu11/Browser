@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:ns1="http://schemas.android.com/tools" xmlns:ns2="urn:oasis:names:tc:xliff:document:1.2">
+    <string-array name="cookie_policy_names">
+        <item>Allow All Cookies</item>
+        <item>Block Third-Party Cookies</item>
+        <item>Block All Cookies</item>
+    </string-array>
     <string-array name="search_engine_names">
         <item>Google</item>
         <item>DuckDuckGo</item>
         <item>Bing</item>
-        <item>Brave</item>
+        <item>Brave Search</item>
         <item>Yahoo</item>
+        <item>Ecosia</item>
+        <item>Startpage</item>
+    </string-array>
+    <string-array name="text_size_names">
+        <item>Small (75%)</item>
+        <item>Normal (100%)</item>
+        <item>Large (125%)</item>
+        <item>Extra Large (150%)</item>
     </string-array>
     <string-array name="theme_names">
         <item>System Default</item>
         <item>Light Mode</item>
-        <item>Dark Mode</item>
+        <item>Dark Mode (AMOLED)</item>
     </string-array>
     <string-array name="user_agent_names">
-        <item>Android (Default)</item>
-        <item>Desktop (Chrome)</item>
+        <item>Android Mobile (Default)</item>
+        <item>Desktop Chrome (Windows)</item>
         <item>Tablet (iPad)</item>
         <item>Custom</item>
     </string-array>
@@ -652,7 +665,7 @@
     <color name="accent_material_light">@color/material_deep_teal_500</color>
     <color name="androidx_core_ripple_material_light">#1f000000</color>
     <color name="androidx_core_secondary_text_default_material_light">#8a000000</color>
-    <color name="backgroundDark">#F8FAFC</color>
+    <color name="backgroundDark">#F1F5F9</color>
     <color name="background_floating_material_dark">@color/material_grey_800</color>
     <color name="background_floating_material_light">@android:color/white</color>
     <color name="background_material_dark">@color/material_grey_850</color>
@@ -666,14 +679,22 @@
     <color name="button_material_dark">#ff5a595b</color>
     <color name="button_material_light">#ffd6d7d7</color>
     <color name="cardDark">#FFFFFF</color>
+    <color name="cardStroke">#E2E8F0</color>
     <color name="cardview_dark_background">#FF424242</color>
     <color name="cardview_light_background">#FFFFFFFF</color>
     <color name="cardview_shadow_end_color">#03000000</color>
     <color name="cardview_shadow_start_color">#37000000</color>
-    <color name="colorAccent">#4F46E5</color>
-    <color name="colorAccentLight">#6366F1</color>
-    <color name="colorPrimary">#4F46E5</color>
-    <color name="colorPrimaryDark">#F8FAFC</color>
+    <color name="colorAccent">#3B82F6</color>
+    <color name="colorAccentDark">#1E40AF</color>
+    <color name="colorAccentLight">#60A5FA</color>
+    <color name="colorError">#EF4444</color>
+    <color name="colorErrorLight">#FEE2E2</color>
+    <color name="colorPrimary">#2563EB</color>
+    <color name="colorPrimaryDark">#1D4ED8</color>
+    <color name="colorSuccess">#10B981</color>
+    <color name="colorSuccessLight">#D1FAE5</color>
+    <color name="colorWarning">#F59E0B</color>
+    <color name="colorWarningLight">#FEF3C7</color>
     <color name="design_bottom_navigation_shadow_color">#14000000</color>
     <color name="design_dark_default_color_background">#121212</color>
     <color name="design_dark_default_color_error">#CF6679</color>
@@ -714,15 +735,24 @@
     <color name="dim_foreground_material_dark">#ffbebebe</color>
     <color name="dim_foreground_material_light">#ff323232</color>
     <color name="dividerColor">#E2E8F0</color>
+    <color name="elevatedSurface">#FFFFFF</color>
     <color name="error_color_material_dark">#ff7043</color>
     <color name="error_color_material_light">#ff5722</color>
     <color name="foreground_material_dark">@android:color/white</color>
     <color name="foreground_material_light">@android:color/black</color>
+    <color name="glassStroke">#28000000</color>
+    <color name="glassSurface">#EEFFFFFF</color>
+    <color name="glassToolbar">#F2F8FAFC</color>
     <color name="highlighted_text_material_dark">#6680cbc4</color>
     <color name="highlighted_text_material_light">#66009688</color>
-    <color name="iconTint">#475569</color>
+    <color name="iconTint">#6B7280</color>
+    <color name="iconTintActive">#2563EB</color>
     <color name="incognitoBackground">#0F172A</color>
+    <color name="incognitoCard">#1E293B</color>
     <color name="incognitoSurface">#1E293B</color>
+    <color name="incognitoText">#E2E8F0</color>
+    <color name="incognitoTextSecondary">#94A3B8</color>
+    <color name="incognito_accent">#818CF8</color>
     <color name="m3_ref_palette_black">#ff000000</color>
     <color name="m3_ref_palette_error0">#ff000000</color>
     <color name="m3_ref_palette_error10">#ff410e0b</color>
@@ -962,6 +992,7 @@
     <color name="mtrl_textinput_hovered_box_stroke_color">#DE000000</color>
     <color name="notification_action_color_filter">#ffffffff</color>
     <color name="notification_icon_bg_color">#ff9e9e9e</color>
+    <color name="overlayLight">#0A000000</color>
     <color name="primary_dark_material_dark">@android:color/black</color>
     <color name="primary_dark_material_light">@color/material_grey_600</color>
     <color name="primary_material_dark">@color/material_grey_900</color>
@@ -970,10 +1001,12 @@
     <color name="primary_text_default_material_light">#de000000</color>
     <color name="primary_text_disabled_material_dark">#4Dffffff</color>
     <color name="primary_text_disabled_material_light">#39000000</color>
-    <color name="progressBarColor">#4F46E5</color>
+    <color name="progressBarColor">#2563EB</color>
+    <color name="rippleColor">#1A2563EB</color>
+    <color name="rippleDark">#1AFFFFFF</color>
     <color name="ripple_material_dark">#33ffffff</color>
     <color name="ripple_material_light">#1f000000</color>
-    <color name="searchBarBackground">#F1F5F9</color>
+    <color name="searchBarBackground">#F8FAFC</color>
     <color name="secondary_text_default_material_dark">#b3ffffff</color>
     <color name="secondary_text_default_material_light">#8a000000</color>
     <color name="secondary_text_disabled_material_dark">#36ffffff</color>
@@ -983,9 +1016,11 @@
     <color name="switch_thumb_disabled_material_light">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_dark">#ffbdbdbd</color>
     <color name="switch_thumb_normal_material_light">#fff1f1f1</color>
-    <color name="textHint">#94A3B8</color>
-    <color name="textPrimary">#0F172A</color>
-    <color name="textSecondary">#475569</color>
+    <color name="tabIndicator">#2563EB</color>
+    <color name="textHint">#9CA3AF</color>
+    <color name="textOnAccent">#FFFFFF</color>
+    <color name="textPrimary">#111827</color>
+    <color name="textSecondary">#6B7280</color>
     <color name="tooltip_background_dark">#e6616161</color>
     <color name="tooltip_background_light">#e6FFFFFF</color>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
@@ -2201,6 +2236,12 @@
     <string name="ua_tablet">Tablet</string>
     <string name="url_copied">URL copied to clipboard</string>
     <string name="user_agent_setting">User Agent</string>
+    <style name="ActivityTransition" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/slide_in_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/slide_in_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
@@ -2229,11 +2270,22 @@
   </style>
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/textOnAccent</item>
+        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondaryVariant">@color/colorAccentDark</item>
+        <item name="colorOnSecondary">@color/textOnAccent</item>
+        <item name="colorSurface">@color/surfaceDark</item>
+        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
         <item name="android:windowBackground">@color/backgroundDark</item>
-        <item name="android:statusBarColor">@color/colorPrimaryDark</item>
-        <item name="android:navigationBarColor">@color/colorPrimaryDark</item>
+        <item name="android:statusBarColor">@color/backgroundDark</item>
+        <item name="android:navigationBarColor">@color/backgroundDark</item>
+        
+        <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
+        
+        <item name="fontFamily">sans-serif</item>
     </style>
     <style name="Base.AlertDialog.AppCompat" parent="android:Widget">
         <item name="android:layout">@layout/abc_alert_dialog_material</item>
@@ -5614,13 +5666,23 @@
     <style name="CardView.Light">
         <item name="cardBackgroundColor">@color/cardview_light_background</item>
     </style>
-    <style name="IncognitoTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/incognitoBackground</item>
-        <item name="colorPrimaryDark">#0B1120</item>
-        <item name="colorAccent">#818CF8</item>
+    <style name="DangerButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">14sp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="strokeColor">@color/colorError</item>
+        <item name="android:textColor">@color/colorError</item>
+    </style>
+    <style name="IncognitoTheme" parent="Theme.MaterialComponents.NoActionBar">
+        <item name="colorPrimary">@color/incognito_accent</item>
+        <item name="colorPrimaryVariant">@color/incognitoBackground</item>
+        <item name="colorOnPrimary">@color/incognitoText</item>
+        <item name="colorSecondary">@color/incognito_accent</item>
+        <item name="colorSurface">@color/incognitoSurface</item>
+        <item name="colorOnSurface">@color/incognitoText</item>
+        <item name="colorError">@color/colorError</item>
         <item name="android:windowBackground">@color/incognitoBackground</item>
-        <item name="android:statusBarColor">#0B1120</item>
-        <item name="android:navigationBarColor">#0B1120</item>
+        <item name="android:statusBarColor">@color/incognitoBackground</item>
+        <item name="android:navigationBarColor">@color/incognitoBackground</item>
     </style>
     <style name="MaterialAlertDialog.Material3" parent="MaterialAlertDialog.MaterialComponents">
     <item name="backgroundTint">@macro/m3_comp_dialog_container_color</item>
@@ -5716,6 +5778,11 @@
     <item name="android:layout_gravity">center</item>
     <item name="android:textAlignment" ns1:ignore="NewApi">center</item>
   </style>
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textSize">15sp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="strokeColor">@color/colorAccent</item>
+    </style>
     <style name="Platform.AppCompat" parent="android:Theme.Holo">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
@@ -5880,6 +5947,14 @@
         <item name="android:dropDownItemStyle">@style/Widget.AppCompat.DropDownItem.Spinner</item>
     </style>
     <style name="Platform.Widget.AppCompat.Spinner" parent="android:Widget.Holo.Spinner"/>
+    <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textSize">15sp</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+        <item name="cornerRadius">14dp</item>
+        <item name="backgroundTint">@color/colorPrimary</item>
+    </style>
     <style name="RtlOverlay.DialogWindowTitle.AppCompat" parent="Base.DialogWindowTitle.AppCompat">
     </style>
     <style name="RtlOverlay.Widget.AppCompat.ActionBar.TitleItem" parent="android:Widget">
@@ -5934,6 +6009,22 @@
     <style name="RtlUnderlay.Widget.AppCompat.ActionButton.Overflow" parent="Base.Widget.AppCompat.ActionButton">
         <item name="android:paddingLeft">@dimen/abc_action_bar_overflow_padding_start_material</item>
         <item name="android:paddingRight">@dimen/abc_action_bar_overflow_padding_end_material</item>
+    </style>
+    <style name="SectionHeader">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.05</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+    <style name="SettingsRowStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
     </style>
     <style name="ShapeAppearance.M3.Comp.Badge.Large.Shape" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full"/>
     <style name="ShapeAppearance.M3.Comp.Badge.Shape" parent="ShapeAppearance.M3.Sys.Shape.Corner.Full"/>
@@ -6424,6 +6515,17 @@
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Subtitle" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
     </style>
     <style name="TextAppearance.Widget.AppCompat.Toolbar.Title" parent="Base.TextAppearance.Widget.AppCompat.Toolbar.Title">
+    </style>
+    <style name="TextSubtitle">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <style name="TextTitle">
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.01</item>
     </style>
     <style name="Theme.AppCompat" parent="Base.Theme.AppCompat"/>
     <style name="Theme.AppCompat.CompactMenu" parent="Base.Theme.AppCompat.CompactMenu"/>
