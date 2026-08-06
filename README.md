@@ -39,4 +39,6 @@ A complete, high-performance, modern Android Web Browser written in 100% Java us
 
 ## License
 
+
+
 MIT License. Free for commercial and non-commercial use.
