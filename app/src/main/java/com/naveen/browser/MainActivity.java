@@ -123,6 +123,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         String initialUrl = prefManager.getHomepage();
         if (intent != null && Intent.ACTION_VIEW.equals(intent.getAction()) && intent.getData() != null) {
             initialUrl = intent.getData().toString();
+        } else {
+            if (initialUrl == null || initialUrl.equals("https://www.google.com") || initialUrl.equals("about:blank")) {
+                initialUrl = "about:blank";
+            }
         }
 
         // Restore Session or Create Initial Tab
@@ -747,10 +751,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void checkHomeScreenVisibility(String url) {
-        String homepage = prefManager.getHomepage();
-        boolean isDefaultHome = homepage == null || homepage.equals("https://www.google.com") || homepage.equals("about:blank");
-        
-        if (url == null || url.trim().isEmpty() || url.equals("about:blank") || (isDefaultHome && url.equals(homepage))) {
+        if (url == null || url.trim().isEmpty() || url.equals("about:blank")) {
             homeScreenLayout.setVisibility(View.VISIBLE);
             topBarContainer.setVisibility(View.GONE);
             swipeRefresh.setVisibility(View.GONE);

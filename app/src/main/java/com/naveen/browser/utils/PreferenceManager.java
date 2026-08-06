@@ -23,7 +23,7 @@ public class PreferenceManager {
     private static final String KEY_FIRST_LAUNCH = "first_launch";
     private static final String KEY_THEME_MODE = "theme_mode";
 
-    public static final String DEFAULT_HOMEPAGE = "https://www.google.com";
+    public static final String DEFAULT_HOMEPAGE = "about:blank";
 
     private final SharedPreferences prefs;
 

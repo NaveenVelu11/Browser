@@ -1,0 +1,48 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="180dp"
+    android:height="180dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Background Accent Circle -->
+    <path
+        android:fillColor="#154F46E5"
+        android:pathData="M50,50m-40,0a40,40 0,1 1,80 0a40,40 0,1 1,-80 0" />
+
+    <!-- Rocket Jet Flame -->
+    <path
+        android:fillColor="#F59E0B"
+        android:pathData="M44,68 L50,88 L56,68 Z" />
+    <path
+        android:fillColor="#EF4444"
+        android:pathData="M47,68 L50,80 L53,68 Z" />
+
+    <!-- Rocket Fins -->
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M30,68 C35,68 38,62 38,55 L38,68 Z" />
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M70,68 C65,68 62,62 62,55 L62,68 Z" />
+
+    <!-- Rocket Main Body -->
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M50,15 C50,15 62,35 62,55 C62,65 58,68 50,68 C42,68 38,65 38,55 C38,35 50,15 50,15 Z" />
+
+    <!-- Rocket Window -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M50,45m-7,0a7,7 0,1 1,14 0a7,7 0,1 1,-14 0" />
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M50,45m-5,0a5,5 0,1 1,10 0a5,5 0,1 1,-10 0" />
+
+    <!-- Speed Lines -->
+    <path
+        android:strokeColor="#06B6D4"
+        android:strokeWidth="2"
+        android:strokeLineCap="round"
+        android:pathData="M20,30 L15,30 M18,45 L10,45 M25,60 L18,60 M80,25 L85,25 M82,40 L90,40 M78,55 L85,55" />
+
+</vector>

@@ -31,6 +31,9 @@ public class WebUtils {
         }
 
         String trimmed = input.trim();
+        if (trimmed.equalsIgnoreCase("about:blank")) {
+            return "about:blank";
+        }
 
         if (URLUtil.isValidUrl(trimmed) || WEB_URL_PATTERN.matcher(trimmed).matches()) {
             if (!trimmed.startsWith("http://") && !trimmed.startsWith("https://") && !trimmed.startsWith("file://")) {

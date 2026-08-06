@@ -1,0 +1,27 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="128dp"
+    android:height="128dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Outer Glow Circle -->
+    <path
+        android:fillColor="#154F46E5"
+        android:pathData="M50,50m-48,0a48,48 0,1 1,96 0a48,48 0,1 1,-96 0" />
+
+    <!-- Main Orbit Ring -->
+    <path
+        android:fillColor="#4F46E5"
+        android:pathData="M50,12 C29.01,12 12,29.01 12,50 C12,70.99 29.01,88 50,88 C70.99,88 88,70.99 88,50 C88,43.2 86.2,36.8 83,31.2 L72.5,41.7 C74.1,44.3 75,47.1 75,50 C75,63.8 63.8,75 50,75 C36.2,75 25,63.8 25,50 C25,36.2 36.2,25 50,25 C55.3,25 60.2,26.7 64.3,29.5 L74.8,19 C67.9,14.6 59.3,12 50,12 Z" />
+
+    <!-- Inner Core Planet -->
+    <path
+        android:fillColor="#06B6D4"
+        android:pathData="M50,50m-18,0a18,18 0,1 1,36 0a18,18 0,1 1,-36 0" />
+
+    <!-- Sleek Navigation Accent / Swoosh -->
+    <path
+        android:fillColor="#22D3EE"
+        android:pathData="M55,30 C65,30 75,35 80,45 C82,49 83,53 83,57 L71,57 C71,55 70.5,53 69.5,51 C67.5,47 62.5,44 55,44 C53,44 51,44.5 49,45.5 L43,34.5 C47,31.5 51,30 55,30 Z" />
+
+</vector>
