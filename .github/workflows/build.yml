@@ -69,6 +69,8 @@ jobs:
             - Fixed Twitter/X and modern web rendering compatibility.
           draft: false
           prerelease: false
+          make_latest: true
+          overwrite: true
           files: |
             output_apks/DeerOne-Browser-v1.0.0-Debug.apk
             output_apks/DeerOne-Browser-v1.0.0-Release.apk
