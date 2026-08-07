@@ -8,14 +8,15 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.naveen.browser.model.BookmarkItem;
 import com.naveen.browser.model.HistoryItem;
+import com.naveen.browser.model.ShortcutItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "browser_db.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "deerone_browser_db.db";
+    private static final int DATABASE_VERSION = 2;
 
     // Bookmarks Table
     private static final String TABLE_BOOKMARKS = "bookmarks";
@@ -30,6 +31,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_HIST_TITLE = "title";
     private static final String COLUMN_HIST_URL = "url";
     private static final String COLUMN_HIST_TIMESTAMP = "timestamp";
+
+    // Shortcuts Table
+    private static final String TABLE_SHORTCUTS = "shortcuts";
+    private static final String COLUMN_SC_ID = "id";
+    private static final String COLUMN_SC_TITLE = "title";
+    private static final String COLUMN_SC_URL = "url";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -49,14 +56,39 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_HIST_URL + " TEXT, " +
                 COLUMN_HIST_TIMESTAMP + " INTEGER)";
 
+        String createShortcutsTable = "CREATE TABLE " + TABLE_SHORTCUTS + " (" +
+                COLUMN_SC_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_SC_TITLE + " TEXT, " +
+                COLUMN_SC_URL + " TEXT UNIQUE)";
+
         db.execSQL(createBookmarksTable);
         db.execSQL(createHistoryTable);
+        db.execSQL(createShortcutsTable);
+
+        // Insert Clean Initial Shortcuts
+        insertInitialShortcuts(db);
+    }
+
+    private void insertInitialShortcuts(SQLiteDatabase db) {
+        String[][] initial = {
+                {"Google", "https://www.google.com"},
+                {"YouTube", "https://www.youtube.com"},
+                {"X / Twitter", "https://x.com"},
+                {"GitHub", "https://github.com"}
+        };
+        for (String[] sc : initial) {
+            ContentValues cv = new ContentValues();
+            cv.put(COLUMN_SC_TITLE, sc[0]);
+            cv.put(COLUMN_SC_URL, sc[1]);
+            db.insert(TABLE_SHORTCUTS, null, cv);
+        }
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_BOOKMARKS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_HISTORY);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SHORTCUTS);
         onCreate(db);
     }
 
@@ -77,7 +109,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<BookmarkItem> getAllBookmarks(String query) {
         List<BookmarkItem> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        
+
         String selection = null;
         String[] selectionArgs = null;
         if (query != null && !query.trim().isEmpty()) {
@@ -140,7 +172,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public List<HistoryItem> getAllHistory(String query) {
         List<HistoryItem> list = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();
-        
+
         String selection = null;
         String[] selectionArgs = null;
         if (query != null && !query.trim().isEmpty()) {
@@ -175,5 +207,42 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_HISTORY, null, null);
         db.close();
+    }
+
+    // --- Shortcuts Methods ---
+
+    public boolean addShortcut(ShortcutItem shortcut) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_SC_TITLE, shortcut.getTitle());
+        values.put(COLUMN_SC_URL, shortcut.getUrl());
+
+        long result = db.insertWithOnConflict(TABLE_SHORTCUTS, null, values, SQLiteDatabase.CONFLICT_REPLACE);
+        db.close();
+        return result != -1;
+    }
+
+    public List<ShortcutItem> getAllShortcuts() {
+        List<ShortcutItem> list = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_SHORTCUTS, null, null, null, null, null, COLUMN_SC_ID + " ASC");
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                long id = cursor.getLong(cursor.getColumnIndexOrThrow(COLUMN_SC_ID));
+                String title = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SC_TITLE));
+                String url = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_SC_URL));
+                list.add(new ShortcutItem(id, title, url));
+            } while (cursor.moveToNext());
+            cursor.close();
+        }
+        db.close();
+        return list;
+    }
+
+    public boolean deleteShortcut(long id) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        int rows = db.delete(TABLE_SHORTCUTS, COLUMN_SC_ID + "=?", new String[]{String.valueOf(id)});
+        db.close();
+        return rows > 0;
     }
 }

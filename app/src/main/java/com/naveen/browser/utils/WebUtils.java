@@ -168,4 +168,29 @@ public class WebUtils {
                 "document.body.style.backgroundColor='" + bg + "';" +
                 "})();";
     }
+
+    public static String getErrorHtml(String title, String message, String failedUrl) {
+        return "<!DOCTYPE html><html><head><meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">" +
+                "<style>" +
+                "body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; " +
+                "background-color: #0F172A; color: #F8FAFC; display: flex; flex-direction: column; " +
+                "align-items: center; justify-content: center; height: 100vh; margin: 0; padding: 24px; box-sizing: border-box; text-align: center; }" +
+                ".card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); " +
+                "border-radius: 24px; padding: 32px 24px; max-width: 400px; width: 100%; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }" +
+                "h2 { color: #3B82F6; margin-top: 16px; margin-bottom: 8px; font-size: 22px; }" +
+                "p { color: #94A3B8; font-size: 14px; line-height: 1.5; margin-bottom: 24px; }" +
+                ".btn { background: #2563EB; color: white; border: none; padding: 12px 28px; border-radius: 12px; " +
+                "font-size: 15px; font-weight: 600; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }" +
+                ".btn:active { background: #1D4ED8; }" +
+                ".url { font-size: 11px; color: #64748B; word-break: break-all; margin-top: 16px; }" +
+                "</style></head><body>" +
+                "<div class=\"card\">" +
+                "<svg width=\"64\" height=\"64\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"#3B82F6\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"10\"></circle><line x1=\"12\" y1=\"8\" x2=\"12\" y2=\"12\"></line><line x1=\"12\" y1=\"16\" x2=\"12.01\" y2=\"16\"></line></svg>" +
+                "<h2>" + title + "</h2>" +
+                "<p>" + message + "</p>" +
+                "<a class=\"btn\" onclick=\"location.reload()\">Retry Loading</a>" +
+                "<div class=\"url\">" + (failedUrl != null ? failedUrl : "") + "</div>" +
+                "</div>" +
+                "</body></html>";
+    }
 }

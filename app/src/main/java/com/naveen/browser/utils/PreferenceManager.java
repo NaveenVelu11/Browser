@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import androidx.appcompat.app.AppCompatDelegate;
 
 /**
- * Central preference store for Velocity Browser.
+ * Central preference store for DeerOne Browser.
  * All feature flags, settings, and persistent state live here.
  */
 public class PreferenceManager {

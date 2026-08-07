@@ -4,10 +4,6 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\menu\\main_overflow_menu.xml"
     },
     {
-        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser_logo.png.flat",
-        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser_logo.png"
-    },
-    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_clear.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_clear.xml"
     },
@@ -32,12 +28,20 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\bg_shortcut_icon.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_item_shortcut_grid.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/item_shortcut_grid.xml"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_add.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_add.xml"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_refresh.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_refresh.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-hdpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-hdpi/ic_deerone_logo.png"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_bg_icon_container_orange.xml.flat",
@@ -152,12 +156,24 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_bookmark.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-xxxhdpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-xxxhdpi/ic_deerone_logo.png"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-anydpi-v24_ic_deerone_logo.xml.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-anydpi-v24/ic_deerone_logo.xml"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_onboarding_privacy.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_onboarding_privacy.xml"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\layout_layout_home_screen.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\layout\\layout_home_screen.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-ldpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-ldpi/ic_deerone_logo.png"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\layout_dialog_find_in_page.xml.flat",
@@ -236,8 +252,8 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\bg_button_danger.xml"
     },
     {
-        "merged": "com.naveen.browser.app-merged_res-34:/drawable_ic_browser.png.flat",
-        "source": "com.naveen.browser.app-main-36:/drawable/ic_browser.png"
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_layout_home_screen.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/layout_home_screen.xml"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_delete.xml.flat",
@@ -284,6 +300,10 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\layout\\activity_onboarding.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-xxhdpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-xxhdpi/ic_deerone_logo.png"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_search_bar_bg.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\search_bar_bg.xml"
     },
@@ -292,8 +312,28 @@
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\layout\\item_download.xml"
     },
     {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-mdpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-mdpi/ic_deerone_logo.png"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/drawable-xhdpi_ic_deerone_logo.png.flat",
+        "source": "com.naveen.browser.app-pngs-30:/drawable-xhdpi/ic_deerone_logo.png"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_dialog_tabs.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/dialog_tabs.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_main.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_main.xml"
+    },
+    {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\layout_item_history.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\layout\\item_history.xml"
+    },
+    {
+        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_splash.xml.flat",
+        "source": "com.naveen.browser.app-main-36:/layout/activity_splash.xml"
     },
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_browser.png.flat",
@@ -314,9 +354,5 @@
     {
         "merged": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-merged_res-34:\\drawable_ic_translate.xml.flat",
         "source": "C:\\Users\\navin\\.gradle\\daemon\\8.2\\com.naveen.browser.app-main-36:\\drawable\\ic_translate.xml"
-    },
-    {
-        "merged": "com.naveen.browser.app-merged_res-34:/layout_activity_history.xml.flat",
-        "source": "com.naveen.browser.app-main-36:/layout/activity_history.xml"
     }
 ]

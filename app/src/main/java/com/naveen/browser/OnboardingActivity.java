@@ -37,7 +37,7 @@ public class OnboardingActivity extends AppCompatActivity {
 
     private final String[] descriptions = {
             "Browse the web with peace of mind. We block cookies, trackers, and clear data to prevent profiling.",
-            "Experience lightning fast page loads. Velocity is built for high speed and efficient rendering.",
+            "Experience lightning fast page loads. DeerOne is built for high speed and efficient rendering.",
             "Block intrusive ads and hidden trackers. Reduce mobile data usage and load pages cleaner.",
             "Manage unlimited tabs, download files easily, customize themes, and access shortcuts instantly."
     };

@@ -23,7 +23,9 @@
     <string-array name="theme_names">
         <item>System Default</item>
         <item>Light Mode</item>
-        <item>Dark Mode (AMOLED)</item>
+        <item>Dark Mode</item>
+        <item>AMOLED (Pitch Black)</item>
+        <item>Glass Dark</item>
     </string-array>
     <string-array name="user_agent_names">
         <item>Android Mobile (Default)</item>
@@ -70,7 +72,8 @@
     <color name="textPrimary">#111827</color>
     <color name="textSecondary">#6B7280</color>
     <string name="add_bookmark">Add Bookmark</string>
-    <string name="app_name">Browser</string>
+    <string name="add_shortcut">Add Shortcut</string>
+    <string name="app_name">DeerOne Browser</string>
     <string name="back">Back</string>
     <string name="bookmark_added">Bookmark saved</string>
     <string name="bookmark_removed">Bookmark deleted</string>
@@ -86,10 +89,11 @@
     <string name="confirm_clear_history">Are you sure you want to clear browsing history?</string>
     <string name="cookies_cleared">Cookies cleared</string>
     <string name="copy_url">Copy URL</string>
-    <string name="default_homepage">https://www.google.com</string>
+    <string name="default_homepage">about:blank</string>
     <string name="delete">Delete</string>
     <string name="desktop_site">Desktop Site</string>
     <string name="download_started">Downloading file...</string>
+    <string name="downloads">Downloads</string>
     <string name="engine_bing">Bing</string>
     <string name="engine_brave">Brave</string>
     <string name="engine_duckduckgo">DuckDuckGo</string>
@@ -105,14 +109,19 @@
     <string name="home">Home</string>
     <string name="homepage_setting">Homepage URL</string>
     <string name="incognito_mode">Incognito Mode</string>
+    <string name="media_detected">Download Media Detected</string>
     <string name="new_tab">New Tab</string>
     <string name="night_mode">Night Mode</string>
     <string name="no_bookmarks">No bookmarks saved yet.</string>
+    <string name="no_downloads">No downloads yet.</string>
     <string name="no_history">No browsing history available.</string>
     <string name="open_in_browser">Open in External Browser</string>
     <string name="permission_denied">Permission denied</string>
     <string name="proceed">Proceed</string>
+    <string name="quick_shortcuts">Quick Shortcuts</string>
     <string name="reader_mode">Reader Mode</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="recently_visited">Recently Visited</string>
     <string name="refresh">Refresh</string>
     <string name="save_page">Save Page</string>
     <string name="search">Search</string>

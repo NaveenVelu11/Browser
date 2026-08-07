@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingVertical="8dp"
+    android:paddingHorizontal="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="?attr/selectableItemBackground">
+
+    <LinearLayout
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@drawable/bg_site_icon"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/txt_shortcut_initial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="G"
+            android:textColor="@color/colorAccent"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_shortcut_title"
+        android:layout_width="64dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:text="Google"
+        android:textColor="@color/textSecondary"
+        android:textSize="11sp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:fontFamily="sans-serif" />
+</LinearLayout>

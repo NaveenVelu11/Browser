@@ -3053,6 +3053,7 @@ drawable ic_clear_black_24
 drawable ic_clock_black_24dp
 drawable ic_close
 drawable ic_copy
+drawable ic_deerone_logo
 drawable ic_delete
 drawable ic_desktop
 drawable ic_download
@@ -3259,13 +3260,12 @@ id beginning
 id bestChoice
 id blocking
 id bottom
-id bottom_bar_card
-id bottom_bar_container
 id bottom_container
 id bounce
 id bounceBoth
 id bounceEnd
 id bounceStart
+id btn_add_custom_shortcut
 id btn_back
 id btn_back_bookmarks
 id btn_back_downloads
@@ -3276,6 +3276,7 @@ id btn_clear_cookies
 id btn_clear_history
 id btn_clear_storage
 id btn_clear_url
+id btn_close_all_tabs
 id btn_close_dashboard
 id btn_close_item_tab
 id btn_delete_bookmark
@@ -3292,6 +3293,7 @@ id btn_forward
 id btn_go
 id btn_home
 id btn_home_voice
+id btn_new_incognito_tab
 id btn_next
 id btn_open_all_bookmarks
 id btn_overflow
@@ -3307,6 +3309,7 @@ id cache_measures
 id callMeasure
 id cancel_button
 id card_home_search
+id card_media_detected
 id carryVelocity
 id center
 id centerCrop
@@ -3452,20 +3455,13 @@ id layout
 id layout_certificate_info
 id layout_dots
 id layout_empty_downloads
+id layout_home_empty_state
 id left
 id leftToRight
 id legacy
 id line1
 id line3
 id linear
-id link_facebook
-id link_github
-id link_google
-id link_instagram
-id link_reddit
-id link_twitter
-id link_wikipedia
-id link_youtube
 id listMode
 id list_item
 id m3_side_sheet
@@ -3612,8 +3608,10 @@ id radio
 id ratio
 id rectangles
 id recycler_bookmarks
+id recycler_custom_shortcuts
 id recycler_downloads
 id recycler_history
+id recycler_recent_visited
 id recycler_tabs
 id report_drawn
 id reverseSawtooth
@@ -3643,6 +3641,7 @@ id search_mag_icon
 id search_plate
 id search_src_text
 id search_voice_btn
+id section_recent_visited
 id select_dialog_listview
 id selected
 id selection_type
@@ -3672,7 +3671,9 @@ id spinner_search_engine
 id spinner_text_size
 id spinner_theme
 id spinner_user_agent
+id splash_content
 id splash_logo
+id splash_progress
 id splash_subtitle
 id splash_title
 id spline
@@ -3786,9 +3787,13 @@ id txt_empty_history
 id txt_find_count
 id txt_history_title
 id txt_history_url
+id txt_media_detected
 id txt_security_desc
 id txt_security_title
+id txt_shortcut_initial
+id txt_shortcut_title
 id txt_tab_count
+id txt_tab_switcher_title
 id txt_tab_title
 id txt_tab_url
 id unchecked
@@ -3961,6 +3966,7 @@ layout item_bookmark
 layout item_download
 layout item_history
 layout item_onboarding_page
+layout item_shortcut_grid
 layout item_tab
 layout layout_home_screen
 layout m3_alert_dialog
@@ -4054,6 +4060,7 @@ string abc_shareactionprovider_share_with
 string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string add_bookmark
+string add_shortcut
 string androidx_startup
 string app_name
 string appbar_scrolling_view_behavior
@@ -4086,6 +4093,7 @@ string default_homepage
 string delete
 string desktop_site
 string download_started
+string downloads
 string engine_bing
 string engine_brave
 string engine_duckduckgo
@@ -4147,6 +4155,7 @@ string material_timepicker_minute
 string material_timepicker_pm
 string material_timepicker_select_time
 string material_timepicker_text_input_mode_description
+string media_detected
 string mtrl_badge_numberless_content_description
 string mtrl_checkbox_button_icon_path_checked
 string mtrl_checkbox_button_icon_path_group_name
@@ -4212,6 +4221,7 @@ string mtrl_timepicker_confirm
 string new_tab
 string night_mode
 string no_bookmarks
+string no_downloads
 string no_history
 string open_in_browser
 string password_toggle_content_description
@@ -4221,7 +4231,10 @@ string path_password_eye_mask_visible
 string path_password_strike_through
 string permission_denied
 string proceed
+string quick_shortcuts
 string reader_mode
+string recent_searches
+string recently_visited
 string refresh
 string save_page
 string search

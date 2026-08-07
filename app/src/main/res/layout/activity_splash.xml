@@ -6,6 +6,7 @@
     android:gravity="center">
 
     <LinearLayout
+        android:id="@+id/splash_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -13,38 +14,41 @@
 
         <ImageView
             android:id="@+id/splash_logo"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            android:src="@drawable/ic_browser_logo"
-            android:contentDescription="@string/app_name" />
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:src="@drawable/ic_deerone_logo"
+            android:contentDescription="@string/app_name"
+            android:elevation="8dp" />
 
         <TextView
             android:id="@+id/splash_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="Velocity"
+            android:layout_marginTop="20dp"
+            android:text="DeerOne Browser"
             android:textColor="@color/textPrimary"
-            android:textSize="32sp"
+            android:textSize="30sp"
             android:fontFamily="sans-serif-medium"
-            android:letterSpacing="0.05"
+            android:letterSpacing="0.03"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/splash_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Premium &amp; Private Browsing"
+            android:layout_marginTop="6dp"
+            android:text="Ultra-Fast, Private &amp; Modern Browsing"
             android:textColor="@color/textSecondary"
-            android:textSize="14sp"
+            android:textSize="13sp"
+            android:fontFamily="sans-serif"
             android:letterSpacing="0.02" />
 
     </LinearLayout>
 
     <ProgressBar
-        android:layout_width="24dp"
-        android:layout_height="24dp"
+        android:id="@+id/splash_progress"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="48dp"

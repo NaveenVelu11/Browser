@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:paddingStart="20dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="32dp">
+        android:paddingBottom="40dp">
 
         <!-- ================================================ -->
         <!--  LOGO + BRANDING                                  -->
@@ -23,36 +23,37 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="56dp"
             android:gravity="center"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:src="@drawable/ic_browser_logo"
-                android:contentDescription="@string/app_name" />
+                android:layout_width="72dp"
+                android:layout_height="72dp"
+                android:src="@drawable/ic_deerone_logo"
+                android:contentDescription="@string/app_name"
+                android:elevation="4dp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="Velocity"
+                android:layout_marginTop="12dp"
+                android:text="DeerOne"
                 android:textColor="@color/textPrimary"
                 android:textSize="28sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold"
-                android:letterSpacing="0.02" />
+                android:letterSpacing="0.03" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Fast. Private. Yours."
+                android:layout_marginTop="2dp"
+                android:text="Fast • Private • Minimalist"
                 android:textColor="@color/textSecondary"
-                android:textSize="13sp"
+                android:textSize="12sp"
                 android:fontFamily="sans-serif"
-                android:letterSpacing="0.03" />
+                android:letterSpacing="0.04" />
         </LinearLayout>
 
         <!-- ================================================ -->
@@ -76,7 +77,7 @@
                 android:layout_width="20dp"
                 android:layout_height="20dp"
                 android:src="@drawable/ic_search"
-                android:tint="@color/textHint"
+                android:tint="@color/colorAccent"
                 android:contentDescription="@string/search" />
 
             <TextView
@@ -101,12 +102,12 @@
         </LinearLayout>
 
         <!-- ================================================ -->
-        <!--  QUICK ACCESS SHORTCUTS                           -->
+        <!--  QUICK ACCESS BAR (Bookmarks, History, Downloads, Settings) -->
         <!-- ================================================ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             android:gravity="center">
 
@@ -124,13 +125,13 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_shortcut_icon"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/ic_bookmark"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/bookmarks" />
@@ -139,7 +140,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="Bookmarks"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp"
@@ -160,13 +161,13 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_shortcut_icon"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/ic_history"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/history" />
@@ -175,7 +176,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="History"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp"
@@ -196,13 +197,13 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_shortcut_icon"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/ic_download"
                         android:tint="@color/colorAccent"
                         android:contentDescription="Downloads" />
@@ -211,7 +212,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="Downloads"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp"
@@ -232,13 +233,13 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:background="@drawable/bg_shortcut_icon"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
                         android:src="@drawable/ic_settings"
                         android:tint="@color/colorAccent"
                         android:contentDescription="@string/settings" />
@@ -247,7 +248,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="6dp"
                     android:text="Settings"
                     android:textColor="@color/textSecondary"
                     android:textSize="11sp"
@@ -257,7 +258,7 @@
         </LinearLayout>
 
         <!-- ================================================ -->
-        <!--  POPULAR SITES SECTION HEADER                     -->
+        <!--  CUSTOMIZABLE QUICK SHORTCUTS SECTION             -->
         <!-- ================================================ -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -273,312 +274,107 @@
                 android:background="@color/colorAccent" />
 
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Quick Shortcuts"
+                android:textColor="@color/textPrimary"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/btn_add_custom_shortcut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Popular Sites"
+                android:text="+ Add"
+                android:textColor="@color/colorAccent"
+                android:textSize="12sp"
+                android:fontFamily="sans-serif-medium"
+                android:padding="6dp"
+                android:background="?attr/selectableItemBackgroundBorderless" />
+        </LinearLayout>
+
+        <!-- Dynamic Custom Shortcuts Grid / RecyclerView Container -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_custom_shortcuts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:nestedScrollingEnabled="false" />
+
+        <!-- ================================================ -->
+        <!--  RECENTLY VISITED PAGES SECTION                   -->
+        <!-- ================================================ -->
+        <LinearLayout
+            android:id="@+id/section_recent_visited"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="3dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="10dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Recently Visited"
                 android:textColor="@color/textPrimary"
                 android:textSize="14sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- ================================================ -->
-        <!--  POPULAR SITES GRID                               -->
-        <!-- ================================================ -->
-        <GridLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_recent_visited"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:columnCount="4"
-            android:rowCount="2">
+            android:layout_marginTop="10dp"
+            android:nestedScrollingEnabled="false" />
 
-            <!-- Google -->
-            <LinearLayout
-                android:id="@+id/link_google"
+        <!-- Premium Empty State -->
+        <LinearLayout
+            android:id="@+id/layout_home_empty_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="24dp"
+            android:background="@drawable/bg_card_rounded"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_shield"
+                android:tint="@color/colorAccent"
+                android:contentDescription="Clean web state" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="G"
-                        android:textColor="#4285F4"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Google"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp"
-                    android:fontFamily="sans-serif" />
-            </LinearLayout>
+                android:layout_marginTop="12dp"
+                android:text="Your Clean Web Space"
+                android:textColor="@color/textPrimary"
+                android:textSize="15sp"
+                android:fontFamily="sans-serif-medium"
+                android:textStyle="bold" />
 
-            <!-- YouTube -->
-            <LinearLayout
-                android:id="@+id/link_youtube"
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="▶"
-                        android:textColor="#FF0000"
-                        android:textSize="20sp" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="YouTube"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- Twitter / X -->
-            <LinearLayout
-                android:id="@+id/link_twitter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="𝕏"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Twitter"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- Instagram -->
-            <LinearLayout
-                android:id="@+id/link_instagram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon_instagram"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="in"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Instagram"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- Facebook -->
-            <LinearLayout
-                android:id="@+id/link_facebook"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="f"
-                        android:textColor="#1877F2"
-                        android:textSize="26sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Facebook"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- Reddit -->
-            <LinearLayout
-                android:id="@+id/link_reddit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="R"
-                        android:textColor="#FF4500"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Reddit"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- GitHub -->
-            <LinearLayout
-                android:id="@+id/link_github"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="GH"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="GitHub"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-            <!-- Wikipedia -->
-            <LinearLayout
-                android:id="@+id/link_wikipedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_columnWeight="1"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:paddingVertical="8dp"
-                android:paddingHorizontal="4dp"
-                android:clickable="true"
-                android:focusable="true"
-                android:background="?attr/selectableItemBackground">
-                <LinearLayout
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_site_icon"
-                    android:gravity="center">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="W"
-                        android:textColor="@color/textPrimary"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:fontFamily="sans-serif-medium" />
-                </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:text="Wikipedia"
-                    android:textColor="@color/textSecondary"
-                    android:textSize="11sp" />
-            </LinearLayout>
-
-        </GridLayout>
+                android:layout_marginTop="4dp"
+                android:text="Search or tap + Add to pin your favorite sites."
+                android:textColor="@color/textSecondary"
+                android:textSize="12sp"
+                android:gravity="center" />
+        </LinearLayout>
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

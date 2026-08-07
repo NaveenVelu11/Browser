@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Browser</string>
+    <string name="app_name">DeerOne Browser</string>
     <string name="search_or_type_url">Search or type URL</string>
     <string name="go">Go</string>
     <string name="back">Back</string>
@@ -25,30 +25,36 @@
     <string name="reader_mode">Reader Mode</string>
     <string name="save_page">Save Page</string>
     <string name="night_mode">Night Mode</string>
-    
+    <string name="downloads">Downloads</string>
+    <string name="media_detected">Download Media Detected</string>
+    <string name="add_shortcut">Add Shortcut</string>
+    <string name="recent_searches">Recent Searches</string>
+    <string name="recently_visited">Recently Visited</string>
+    <string name="quick_shortcuts">Quick Shortcuts</string>
+
     <!-- Settings Labels -->
     <string name="homepage_setting">Homepage URL</string>
-    <string name="default_homepage">https://www.google.com</string>
+    <string name="default_homepage">about:blank</string>
     <string name="search_engine_setting">Default Search Engine</string>
     <string name="user_agent_setting">User Agent</string>
     <string name="clear_data">Clear Browsing Data</string>
     <string name="clear_cache">Clear Cache</string>
     <string name="clear_cookies">Clear Cookies</string>
     <string name="clear_storage">Clear Local Storage</string>
-    
+
     <!-- Search Engines -->
     <string name="engine_google">Google</string>
     <string name="engine_duckduckgo">DuckDuckGo</string>
     <string name="engine_bing">Bing</string>
     <string name="engine_brave">Brave</string>
     <string name="engine_yahoo">Yahoo</string>
-    
+
     <!-- User Agents -->
     <string name="ua_android">Android (Default)</string>
     <string name="ua_desktop">Desktop</string>
     <string name="ua_tablet">Tablet</string>
     <string name="ua_custom">Custom</string>
-    
+
     <!-- Dialogs & Toast Messages -->
     <string name="url_copied">URL copied to clipboard</string>
     <string name="bookmark_added">Bookmark saved</string>
@@ -61,6 +67,7 @@
     <string name="download_started">Downloading file...</string>
     <string name="no_bookmarks">No bookmarks saved yet.</string>
     <string name="no_history">No browsing history available.</string>
+    <string name="no_downloads">No downloads yet.</string>
     <string name="search">Search</string>
     <string name="cancel">Cancel</string>
     <string name="delete">Delete</string>
@@ -71,3 +78,4 @@
     <string name="error_page_title">Failed to load page</string>
     <string name="error_page_msg">Please check your internet connection or URL and try again.</string>
 </resources>
+
