@@ -12,6 +12,10 @@ import com.naveen.browser.utils.PreferenceManager;
 
 public class SplashActivity extends AppCompatActivity {
 
+    static {
+        androidx.appcompat.app.AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager pm = new PreferenceManager(this);

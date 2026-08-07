@@ -6,31 +6,45 @@
     android:orientation="vertical"
     android:padding="24dp">
 
-    <ImageView
-        android:id="@+id/onboarding_image"
-        android:layout_width="180dp"
-        android:layout_height="180dp"
-        android:layout_marginBottom="32dp"
-        android:contentDescription="Illustration" />
-
-    <TextView
-        android:id="@+id/onboarding_title"
-        android:layout_width="wrap_content"
+    <!-- Glassmorphic Card Container -->
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_card_rounded"
+        android:elevation="6dp"
         android:gravity="center"
-        android:textColor="@color/textPrimary"
-        android:textSize="22sp"
-        android:fontFamily="sans-serif-medium"
-        android:textStyle="bold"
-        android:layout_marginBottom="12dp" />
+        android:orientation="vertical"
+        android:padding="32dp">
 
-    <TextView
-        android:id="@+id/onboarding_desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textColor="@color/textSecondary"
-        android:textSize="15sp"
-        android:lineSpacingExtra="4dp" />
+        <ImageView
+            android:id="@+id/onboarding_image"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginBottom="28dp"
+            android:contentDescription="Illustration" />
+
+        <TextView
+            android:id="@+id/onboarding_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:letterSpacing="0.01"
+            android:textColor="@color/textPrimary"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp" />
+
+        <TextView
+            android:id="@+id/onboarding_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:lineSpacingExtra="5dp"
+            android:textColor="@color/textSecondary"
+            android:textSize="14sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

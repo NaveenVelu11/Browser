@@ -85,6 +85,10 @@ import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
 
+    static {
+        androidx.appcompat.app.AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     private static final int REQUEST_PERMISSIONS = 101;
     private static final int REQUEST_FILE_CHOOSER = 102;
     private static final int REQUEST_BOOKMARKS = 103;

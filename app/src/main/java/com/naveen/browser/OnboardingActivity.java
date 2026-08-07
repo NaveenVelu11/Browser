@@ -19,6 +19,10 @@ import com.naveen.browser.utils.PreferenceManager;
 
 public class OnboardingActivity extends AppCompatActivity {
 
+    static {
+        androidx.appcompat.app.AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     private ViewPager viewPager;
     private LinearLayout layoutDots;
     private Button btnNext;
@@ -86,20 +90,22 @@ public class OnboardingActivity extends AppCompatActivity {
     }
 
     private void addBottomDots(int currentPage) {
-        dots = new TextView[titles.length];
         layoutDots.removeAllViews();
-
-        for (int i = 0; i < dots.length; i++) {
-            dots[i] = new TextView(this);
-            dots[i].setText("•");
-            dots[i].setTextSize(35);
-            dots[i].setTextColor(getResources().getColor(R.color.textHint));
-            layoutDots.addView(dots[i]);
+        for (int i = 0; i < titles.length; i++) {
+            View dot = new View(this);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    i == currentPage ? dpToPx(24) : dpToPx(8),
+                    dpToPx(8)
+            );
+            params.setMargins(dpToPx(4), 0, dpToPx(4), 0);
+            dot.setLayoutParams(params);
+            dot.setBackgroundResource(i == currentPage ? R.drawable.dot_active : R.drawable.dot_inactive);
+            layoutDots.addView(dot);
         }
+    }
 
-        if (dots.length > 0) {
-            dots[currentPage].setTextColor(getResources().getColor(R.color.colorAccent));
-        }
+    private int dpToPx(int dp) {
+        return (int) (dp * getResources().getDisplayMetrics().density);
     }
 
     private int getItem(int i) {

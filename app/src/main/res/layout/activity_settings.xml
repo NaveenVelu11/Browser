@@ -27,7 +27,7 @@
                 android:layout_height="44dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:src="@drawable/ic_back"
-                android:tint="@color/textPrimary"
+                app:tint="@color/textPrimary"
                 android:contentDescription="@string/back" />
             <TextView
                 android:layout_width="0dp"
@@ -867,7 +867,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_forward"
-                    android:tint="@color/textHint" />
+                    app:tint="@color/textHint" />
             </LinearLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginHorizontal="16dp" android:background="@color/dividerColor" />
@@ -892,7 +892,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_forward"
-                    android:tint="@color/textHint" />
+                    app:tint="@color/textHint" />
             </LinearLayout>
 
             <View android:layout_width="match_parent" android:layout_height="1dp" android:layout_marginHorizontal="16dp" android:background="@color/dividerColor" />
@@ -918,7 +918,7 @@
                     android:layout_width="16dp"
                     android:layout_height="16dp"
                     android:src="@drawable/ic_forward"
-                    android:tint="@color/colorError" />
+                    app:tint="@color/colorError" />
             </LinearLayout>
         </LinearLayout>
 

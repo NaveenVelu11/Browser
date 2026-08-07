@@ -32,7 +32,7 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_add"
-            android:tint="@color/colorAccent"
+            app:tint="@color/colorAccent"
             android:contentDescription="@string/new_tab" />
 
         <ImageButton
@@ -41,7 +41,7 @@
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/ic_close"
-            android:tint="@color/textPrimary"
+            app:tint="@color/textPrimary"
             android:contentDescription="@string/close_tab" />
     </LinearLayout>
 
@@ -93,7 +93,7 @@
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:src="@drawable/ic_incognito"
-                android:tint="@color/incognito_accent"
+                app:tint="@color/incognito_accent"
                 android:contentDescription="Incognito" />
 
             <TextView
