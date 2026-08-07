@@ -38,7 +38,7 @@ public class WebUtils {
             "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 
     private static final Pattern WEB_URL_PATTERN = Pattern.compile(
-            "^(https?://)?([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,}(:\\d+)?(/.*)?$"
+            "^(https?://)?(([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,}|localhost|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:\\d+)?(/.*)?$"
     );
 
     public static String processUrlOrQuery(String input, int searchEngineIndex) {

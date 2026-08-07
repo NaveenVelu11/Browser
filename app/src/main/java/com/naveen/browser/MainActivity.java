@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     // Media Sniffer
     private View cardMediaDetected;
     private TextView txtMediaDetected;
-    private final List<MediaItem> detectedMediaList = new ArrayList<>();
+    private final List<MediaItem> detectedMediaList = new java.util.concurrent.CopyOnWriteArrayList<>();
 
     // Shortcuts & Recent Visited
     private RecyclerView recyclerCustomShortcuts;
@@ -643,27 +643,63 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             @Nullable
             @Override
             public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
-                String url = request.getUrl().toString();
-
-                // Ad/Tracker blocking
-                if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
-                    if (AdBlocker.isAdOrTracker(url)) {
-                        WebTab currentTab = getCurrentTab();
-                        if (currentTab != null) currentTab.incrementBlockedCount();
-                        prefManager.incrementLifetimeBlockedAds(1);
-                        return AdBlocker.createEmptyResource();
+                try {
+                    if (request != null && request.getUrl() != null) {
+                        String url = request.getUrl().toString();
+                        if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
+                            if (AdBlocker.isAdOrTracker(url)) {
+                                runOnUiThread(() -> {
+                                    try {
+                                        WebTab currentTab = getCurrentTab();
+                                        if (currentTab != null) currentTab.incrementBlockedCount();
+                                        prefManager.incrementLifetimeBlockedAds(1);
+                                    } catch (Exception ignored) {}
+                                });
+                                return AdBlocker.createEmptyResource();
+                            }
+                        }
+                        checkMediaResource(url, null);
                     }
-                }
-
-                // Media Sniffer resource detection
-                checkMediaResource(url, view.getTitle());
-
+                } catch (Throwable ignored) {}
                 return super.shouldInterceptRequest(view, request);
+            }
+
+            @Nullable
+            @Override
+            public WebResourceResponse shouldInterceptRequest(WebView view, String url) {
+                try {
+                    if (url != null) {
+                        if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
+                            if (AdBlocker.isAdOrTracker(url)) {
+                                runOnUiThread(() -> {
+                                    try {
+                                        WebTab currentTab = getCurrentTab();
+                                        if (currentTab != null) currentTab.incrementBlockedCount();
+                                        prefManager.incrementLifetimeBlockedAds(1);
+                                    } catch (Exception ignored) {}
+                                });
+                                return AdBlocker.createEmptyResource();
+                            }
+                        }
+                        checkMediaResource(url, null);
+                    }
+                } catch (Throwable ignored) {}
+                return super.shouldInterceptRequest(view, url);
             }
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                if (request == null || request.getUrl() == null) return false;
                 String url = request.getUrl().toString();
+                if (prefManager.isHttpsOnlyEnabled()) {
+                    url = WebUtils.upgradeToHttps(url);
+                }
+                return WebUtils.handleSpecialIntents(MainActivity.this, url);
+            }
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                if (url == null) return false;
                 if (prefManager.isHttpsOnlyEnabled()) {
                     url = WebUtils.upgradeToHttps(url);
                 }
@@ -999,15 +1035,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void checkHomeScreenVisibility(String url) {
+        topBarContainer.setVisibility(View.VISIBLE);
         if (url == null || url.trim().isEmpty() || url.equals("about:blank")) {
             homeScreenLayout.setVisibility(View.VISIBLE);
-            topBarContainer.setVisibility(View.GONE);
             swipeRefresh.setVisibility(View.GONE);
             loadShortcutsData();
             loadRecentVisitedData();
         } else {
             homeScreenLayout.setVisibility(View.GONE);
-            topBarContainer.setVisibility(View.VISIBLE);
             swipeRefresh.setVisibility(View.VISIBLE);
         }
     }
