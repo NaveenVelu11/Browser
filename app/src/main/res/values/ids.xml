@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="btn_go" type="id" />
+    <item name="btn_back" type="id" />
+    <item name="btn_forward" type="id" />
+    <item name="btn_refresh" type="id" />
+    <item name="btn_home" type="id" />
+    <item name="btn_tabs_layout" type="id" />
+    <item name="btn_clear_url" type="id" />
+    <item name="txt_tab_count" type="id" />
+    <item name="btn_collapse_header" type="id" />
+    <item name="btn_floating_header_trigger" type="id" />
+    <item name="btn_floating_download_badge" type="id" />
+    <item name="switch_javascript" type="id" />
+    <item name="switch_images" type="id" />
+    <item name="switch_autofill" type="id" />
+    <item name="switch_session_restore" type="id" />
+    <item name="switch_location" type="id" />
+    <item name="switch_media_autoplay" type="id" />
+    <item name="switch_open_new_tab" type="id" />
+    <item name="switch_pull_refresh" type="id" />
+    <item name="switch_data_saver" type="id" />
+    <item name="switch_preload" type="id" />
+    <item name="switch_hardware" type="id" />
+    <item name="switch_ask_download" type="id" />
+    <item name="switch_dl_notify" type="id" />
+    <item name="switch_show_tab_count" type="id" />
+    <item name="switch_show_scheme" type="id" />
+</resources>

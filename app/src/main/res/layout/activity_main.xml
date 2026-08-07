@@ -4,7 +4,7 @@
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundDark">
+    android:background="?attr/colorSurfaceBackground">
 
     <!-- =========================================================== -->
     <!--  MAIN CONTENT AREA — WebView + Home Screen                  -->
@@ -35,40 +35,48 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <!-- Floating Media Download Detection Sniffer Bar -->
-        <LinearLayout
-            android:id="@+id/card_media_detected"
+        <!-- Floating Download Pill Action Badge [↓ Download Media] (Bottom Right) -->
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_floating_download_badge"
             android:layout_width="wrap_content"
-            android:layout_height="44dp"
-            android:layout_gravity="bottom|center_horizontal"
+            android:layout_height="46dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
-            android:background="@drawable/bg_toolbar_pill"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="14dp"
-            android:paddingEnd="14dp"
-            android:elevation="6dp"
+            app:cardCornerRadius="23dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="?attr/colorCardBackground"
             android:visibility="gone"
             android:clickable="true"
-            android:focusable="true">
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground">
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/ic_download"
-                app:tint="@color/colorAccent"
-                android:contentDescription="Media detected" />
-
-            <TextView
-                android:id="@+id/txt_media_detected"
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Downloadable Media Detected"
-                android:textColor="@color/textPrimary"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif-medium" />
-        </LinearLayout>
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingStart="16dp"
+                android:paddingEnd="18dp">
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/ic_download"
+                    app:tint="?attr/colorAccentiOS"
+                    android:contentDescription="Download Media" />
+
+                <TextView
+                    android:id="@+id/txt_media_detected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="Download Media"
+                    android:textColor="?attr/colorTextPrimary"
+                    android:textSize="13sp"
+                    android:fontFamily="sans-serif-medium" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
     </FrameLayout>
 
@@ -83,7 +91,7 @@
         android:visibility="gone" />
 
     <!-- =========================================================== -->
-    <!--  UNIFIED FLOATING TOP NAVIGATION BAR (All Controls)         -->
+    <!--  UNCLUTTERED iOS HIG TOP ADDRESS BAR CONTAINER               -->
     <!-- =========================================================== -->
     <LinearLayout
         android:id="@+id/top_bar_container"
@@ -93,174 +101,10 @@
         android:orientation="vertical"
         android:elevation="8dp">
 
-        <!-- Master Integrated Control Toolbar -->
-        <LinearLayout
-            android:id="@+id/top_bar_card"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="2dp"
-            android:background="@drawable/bg_toolbar_pill"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingStart="4dp"
-            android:paddingEnd="4dp"
-            android:elevation="4dp">
-
-            <!-- Home Button -->
-            <ImageButton
-                android:id="@+id/btn_home"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_home"
-                app:tint="@color/iconTint"
-                android:contentDescription="@string/home"
-                android:padding="6dp" />
-
-            <!-- Back Navigation Button -->
-            <ImageButton
-                android:id="@+id/btn_back"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_back"
-                app:tint="@color/iconTint"
-                android:contentDescription="@string/back"
-                android:padding="6dp" />
-
-            <!-- Forward Navigation Button -->
-            <ImageButton
-                android:id="@+id/btn_forward"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_forward"
-                app:tint="@color/iconTint"
-                android:contentDescription="@string/forward"
-                android:padding="6dp" />
-
-            <!-- Pill Address Bar Area -->
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="38dp"
-                android:layout_weight="1"
-                android:layout_marginStart="4dp"
-                android:layout_marginEnd="4dp"
-                android:background="@drawable/bg_home_search"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="4dp"
-                android:paddingEnd="4dp">
-
-                <!-- SSL Lock / Security Status -->
-                <ImageView
-                    android:id="@+id/btn_ssl_lock"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_lock"
-                    app:tint="@color/colorAccent"
-                    android:contentDescription="Security Status"
-                    android:background="?attr/selectableItemBackgroundBorderless" />
-
-                <!-- Address Input -->
-                <EditText
-                    android:id="@+id/edit_url"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@null"
-                    android:hint="@string/search_or_type_url"
-                    android:imeOptions="actionGo|flagNoExtractUi"
-                    android:inputType="textUri|textNoSuggestions"
-                    android:maxLines="1"
-                    android:textColor="@color/textPrimary"
-                    android:textColorHint="@color/textHint"
-                    android:textSize="13sp"
-                    android:fontFamily="sans-serif"
-                    android:ellipsize="end"
-                    android:selectAllOnFocus="true" />
-
-                <!-- Clear Text Button -->
-                <ImageView
-                    android:id="@+id/btn_clear_url"
-                    android:layout_width="26dp"
-                    android:layout_height="26dp"
-                    android:padding="5dp"
-                    android:src="@drawable/ic_clear"
-                    app:tint="@color/textHint"
-                    android:visibility="gone"
-                    android:contentDescription="Clear"
-                    android:background="?attr/selectableItemBackgroundBorderless" />
-
-                <!-- Go / Search Button -->
-                <ImageButton
-                    android:id="@+id/btn_go"
-                    android:layout_width="28dp"
-                    android:layout_height="28dp"
-                    android:background="?attr/selectableItemBackgroundBorderless"
-                    android:src="@drawable/ic_search"
-                    app:tint="@color/colorAccent"
-                    android:contentDescription="@string/go"
-                    android:padding="5dp" />
-            </LinearLayout>
-
-            <!-- Refresh Button -->
-            <ImageButton
-                android:id="@+id/btn_refresh"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_refresh"
-                app:tint="@color/iconTint"
-                android:contentDescription="@string/refresh"
-                android:padding="6dp" />
-
-            <!-- Tabs Button with Count Badge -->
-            <FrameLayout
-                android:id="@+id/btn_tabs_layout"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:clickable="true"
-                android:focusable="true">
-
-                <ImageView
-                    android:layout_width="22dp"
-                    android:layout_height="22dp"
-                    android:layout_gravity="center"
-                    android:src="@drawable/ic_tabs"
-                    app:tint="@color/iconTint"
-                    android:contentDescription="@string/tabs" />
-
-                <!-- Tab Count Badge -->
-                <TextView
-                    android:id="@+id/txt_tab_count"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="center"
-                    android:text="1"
-                    android:textColor="@color/iconTint"
-                    android:textSize="9sp"
-                    android:textStyle="bold"
-                    android:gravity="center" />
-            </FrameLayout>
-
-            <!-- Overflow / Menu Button -->
-            <ImageButton
-                android:id="@+id/btn_overflow"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:src="@drawable/ic_menu"
-                app:tint="@color/iconTint"
-                android:contentDescription="@string/settings"
-                android:padding="6dp" />
-
-        </LinearLayout>
+        <!-- iOS Address Bar Layout -->
+        <include
+            android:id="@+id/toolbar_address_bar"
+            layout="@layout/toolbar_address_bar" />
 
         <!-- Slim Page Loading Progress Bar -->
         <ProgressBar
@@ -268,13 +112,39 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="3dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
             android:indeterminate="false"
             android:max="100"
             android:progressDrawable="@drawable/progress_bar_drawable"
             android:visibility="gone" />
 
     </LinearLayout>
+
+    <!-- =========================================================== -->
+    <!--  FLOATING CIRCULAR HEADER TRIGGER BUTTON (<)                -->
+    <!-- =========================================================== -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_floating_header_trigger"
+        android:layout_width="44dp"
+        android:layout_height="44dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        app:cardCornerRadius="22dp"
+        app:cardElevation="8dp"
+        app:cardBackgroundColor="?attr/colorCardBackground"
+        android:visibility="gone"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_chevron_left"
+            app:tint="?attr/colorAccentiOS"
+            android:contentDescription="Expand Header Bar" />
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

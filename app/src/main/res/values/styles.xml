@@ -1,24 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- ============================= -->
-    <!--  PRIMARY APP THEME (Light)    -->
-    <!-- ============================= -->
+    <!-- ============================================= -->
+    <!--  PRIMARY APP THEME (DayNight iOS HIG Tokens)  -->
+    <!-- ============================================= -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Brand Colors -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
         <item name="colorOnPrimary">@color/textOnAccent</item>
-        <item name="colorSecondary">@color/colorAccent</item>
+        <item name="colorSecondary">@color/colorAccentiOS</item>
         <item name="colorSecondaryVariant">@color/colorAccentDark</item>
         <item name="colorOnSecondary">@color/textOnAccent</item>
-        <item name="colorSurface">@color/surfaceDark</item>
-        <item name="colorOnSurface">@color/textPrimary</item>
+        <item name="colorSurface">?attr/colorCardBackground</item>
+        <item name="colorOnSurface">?attr/colorTextPrimary</item>
         <item name="colorError">@color/colorError</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
-        <item name="android:windowBackground">@color/backgroundDark</item>
-        <item name="android:statusBarColor">@color/backgroundDark</item>
-        <item name="android:navigationBarColor">@color/backgroundDark</item>
+
+        <!-- Window & Background -->
+        <item name="android:windowBackground">?attr/colorSurfaceBackground</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceBackground</item>
+        <item name="android:navigationBarColor">?attr/colorSurfaceBackground</item>
+
+        <!-- Custom iOS Theme Tokens (Default Light) -->
+        <item name="colorSurfaceBackground">@color/ios_surface_light</item>
+        <item name="colorCardBackground">@color/ios_card_light</item>
+        <item name="colorTextPrimary">@color/ios_text_primary_light</item>
+        <item name="colorTextSecondary">@color/ios_text_secondary_light</item>
+        <item name="colorAccentiOS">@color/ios_accent_light</item>
+        <item name="colorDivider">@color/ios_divider_light</item>
+
         <!-- Smooth Activity Transitions -->
         <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
+
         <!-- Typography -->
         <item name="fontFamily">sans-serif</item>
     </style>
@@ -34,6 +47,14 @@
         <item name="colorSurface">@color/incognitoSurface</item>
         <item name="colorOnSurface">@color/incognitoText</item>
         <item name="colorError">@color/colorError</item>
+
+        <item name="colorSurfaceBackground">@color/ios_surface_dark</item>
+        <item name="colorCardBackground">@color/ios_card_dark</item>
+        <item name="colorTextPrimary">@color/ios_text_primary_dark</item>
+        <item name="colorTextSecondary">@color/ios_text_secondary_dark</item>
+        <item name="colorAccentiOS">@color/ios_accent_dark</item>
+        <item name="colorDivider">@color/ios_divider_dark</item>
+
         <item name="android:windowBackground">@color/incognitoBackground</item>
         <item name="android:statusBarColor">@color/incognitoBackground</item>
         <item name="android:navigationBarColor">@color/incognitoBackground</item>
@@ -54,35 +75,35 @@
     <!-- ============================= -->
     <style name="SettingsRowStyle">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">64dp</item>
+        <item name="android:layout_height">56dp</item>
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
-        <item name="android:paddingStart">20dp</item>
-        <item name="android:paddingEnd">20dp</item>
+        <item name="android:paddingStart">16dp</item>
+        <item name="android:paddingEnd">16dp</item>
     </style>
 
     <!-- ============================= -->
     <!--  TYPOGRAPHY STYLES            -->
     <!-- ============================= -->
     <style name="TextTitle">
-        <item name="android:textSize">17sp</item>
-        <item name="android:textColor">@color/textPrimary</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">?attr/colorTextPrimary</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.01</item>
+        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="TextSubtitle">
         <item name="android:textSize">13sp</item>
-        <item name="android:textColor">@color/textSecondary</item>
+        <item name="android:textColor">?attr/colorTextSecondary</item>
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
     <style name="SectionHeader">
         <item name="android:textSize">12sp</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColor">?attr/colorTextSecondary</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.05</item>
+        <item name="android:letterSpacing">0.03</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
@@ -91,17 +112,18 @@
     <!-- ============================= -->
     <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">15sp</item>
-        <item name="android:letterSpacing">0.02</item>
+        <item name="android:letterSpacing">0.01</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="cornerRadius">14dp</item>
-        <item name="backgroundTint">@color/colorPrimary</item>
+        <item name="backgroundTint">?attr/colorAccentiOS</item>
     </style>
 
     <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="android:textSize">15sp</item>
         <item name="cornerRadius">14dp</item>
-        <item name="strokeColor">@color/colorAccent</item>
+        <item name="strokeColor">?attr/colorAccentiOS</item>
+        <item name="android:textColor">?attr/colorAccentiOS</item>
     </style>
 
     <style name="DangerButton" parent="Widget.MaterialComponents.Button.OutlinedButton">

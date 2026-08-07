@@ -1,58 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- === Primary Brand Colors (Brave-inspired, Original Design) === -->
-    <color name="colorPrimary">#2563EB</color>
-    <color name="colorPrimaryDark">#1D4ED8</color>
-    <color name="colorAccent">#3B82F6</color>
-    <color name="colorAccentLight">#60A5FA</color>
-    <color name="colorAccentDark">#1E40AF</color>
+    <!-- === Primary Brand & iOS Accent Colors === -->
+    <color name="colorPrimary">#0052D4</color>
+    <color name="colorPrimaryDark">#4364F7</color>
+    <color name="colorAccent">#007AFF</color>
+    <color name="colorAccentLight">#64D2FF</color>
+    <color name="colorAccentDark">#0056B3</color>
+    <color name="colorAccentiOS">#007AFF</color>
+    <color name="colorAccentiOSDark">#0A84FF</color>
+    <color name="ios_accent_light">#007AFF</color>
+    <color name="ios_accent_dark">#0A84FF</color>
 
-    <!-- === Light Mode Surfaces === -->
-    <color name="backgroundDark">#F1F5F9</color>
+    <!-- === Light Theme Token Values === -->
+    <color name="ios_surface_light">#F2F2F7</color>
+    <color name="ios_card_light">#FFFFFF</color>
+    <color name="ios_text_primary_light">#000000</color>
+    <color name="ios_text_secondary_light">#8E8E93</color>
+    <color name="ios_divider_light">#3C3C4333</color>
+
+    <!-- === Dark Theme Token Values === -->
+    <color name="ios_surface_dark">#000000</color>
+    <color name="ios_card_dark">#1C1C1E</color>
+    <color name="ios_text_primary_dark">#FFFFFF</color>
+    <color name="ios_text_secondary_dark">#98989D</color>
+    <color name="ios_divider_dark">#54545866</color>
+
+    <!-- === Legacy Base Color Aliases === -->
+    <color name="backgroundDark">#F2F2F7</color>
     <color name="surfaceDark">#FFFFFF</color>
     <color name="cardDark">#FFFFFF</color>
-    <color name="searchBarBackground">#F8FAFC</color>
+    <color name="searchBarBackground">#E3E3E8</color>
     <color name="elevatedSurface">#FFFFFF</color>
-    <color name="dividerColor">#E2E8F0</color>
+    <color name="dividerColor">#3C3C4333</color>
 
     <!-- === Text Colors === -->
-    <color name="textPrimary">#111827</color>
-    <color name="textSecondary">#6B7280</color>
-    <color name="textHint">#9CA3AF</color>
+    <color name="textPrimary">#000000</color>
+    <color name="textSecondary">#8E8E93</color>
+    <color name="textHint">#AEAEB2</color>
     <color name="textOnAccent">#FFFFFF</color>
 
     <!-- === Icon & UI Element Colors === -->
-    <color name="iconTint">#6B7280</color>
-    <color name="iconTintActive">#2563EB</color>
-    <color name="progressBarColor">#2563EB</color>
+    <color name="iconTint">#8E8E93</color>
+    <color name="iconTintActive">#007AFF</color>
+    <color name="progressBarColor">#007AFF</color>
 
     <!-- === Semantic Colors === -->
-    <color name="colorSuccess">#10B981</color>
-    <color name="colorWarning">#F59E0B</color>
-    <color name="colorError">#EF4444</color>
+    <color name="colorSuccess">#34C759</color>
+    <color name="colorWarning">#FF9500</color>
+    <color name="colorError">#FF3B30</color>
     <color name="colorSuccessLight">#D1FAE5</color>
     <color name="colorWarningLight">#FEF3C7</color>
     <color name="colorErrorLight">#FEE2E2</color>
 
     <!-- === Incognito / Dark Mode Surfaces === -->
-    <color name="incognitoBackground">#0F172A</color>
-    <color name="incognitoSurface">#1E293B</color>
-    <color name="incognitoCard">#1E293B</color>
-    <color name="incognitoText">#E2E8F0</color>
-    <color name="incognitoTextSecondary">#94A3B8</color>
-    <color name="incognito_accent">#818CF8</color>
+    <color name="incognitoBackground">#000000</color>
+    <color name="incognitoSurface">#1C1C1E</color>
+    <color name="incognitoCard">#1C1C1E</color>
+    <color name="incognitoText">#FFFFFF</color>
+    <color name="incognitoTextSecondary">#98989D</color>
+    <color name="incognito_accent">#0A84FF</color>
 
     <!-- === Ripple & Overlay Colors === -->
-    <color name="rippleColor">#1A2563EB</color>
+    <color name="rippleColor">#1F007AFF</color>
     <color name="rippleDark">#1AFFFFFF</color>
     <color name="overlayLight">#0A000000</color>
-    <color name="cardStroke">#E2E8F0</color>
+    <color name="cardStroke">#3C3C431A</color>
 
     <!-- === Tab indicator === -->
-    <color name="tabIndicator">#2563EB</color>
+    <color name="tabIndicator">#007AFF</color>
 
-    <!-- === Glass UI elements (semi-transparent for toolbar/nav) === -->
-    <color name="glassToolbar">#F2F8FAFC</color>
-    <color name="glassSurface">#EEFFFFFF</color>
-    <color name="glassStroke">#28000000</color>
+    <!-- === iOS Switch Tints === -->
+    <color name="ios_switch_track_on">#34C759</color>
+    <color name="ios_switch_track_off">#78788033</color>
 </resources>

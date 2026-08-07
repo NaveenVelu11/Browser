@@ -70,9 +70,16 @@ import com.naveen.browser.model.HistoryItem;
 import com.naveen.browser.model.MediaItem;
 import com.naveen.browser.model.ShortcutItem;
 import com.naveen.browser.model.WebTab;
+import com.naveen.browser.dialog.BottomSheetContextMenuDialog;
+import com.naveen.browser.dialog.FormatPickerBottomSheetDialog;
 import com.naveen.browser.utils.AdBlocker;
+import com.naveen.browser.utils.MediaSnifferEngine;
 import com.naveen.browser.utils.PreferenceManager;
+import com.naveen.browser.utils.WebEdgeGestureListener;
 import com.naveen.browser.utils.WebUtils;
+import com.naveen.browser.utils.YtDlpExtractor;
+import android.os.Handler;
+import android.os.Looper;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,10 +111,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private TextView txtTabCount;
     private View homeScreenLayout;
     private View topBarContainer;
+    private View btnFloatingHeaderTrigger;
+    private View btnFloatingDownloadBadge;
+    private View btnCollapseHeader;
+    private final Handler headerAutoHideHandler = new Handler(Looper.getMainLooper());
+    private final Runnable hideHeaderRunnable = this::hideTopHeaderBar;
+    private final MediaSnifferEngine mediaSnifferEngine = new MediaSnifferEngine();
     private boolean isBarsHidden = false;
 
     // Media Sniffer
-    private View cardMediaDetected;
     private TextView txtMediaDetected;
     private final List<MediaItem> detectedMediaList = new java.util.concurrent.CopyOnWriteArrayList<>();
 
@@ -173,9 +185,26 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         homeScreenLayout = findViewById(R.id.home_screen_layout);
         topBarContainer = findViewById(R.id.top_bar_container);
 
-        cardMediaDetected = findViewById(R.id.card_media_detected);
+        btnFloatingHeaderTrigger = findViewById(R.id.btn_floating_header_trigger);
+        btnFloatingDownloadBadge = findViewById(R.id.btn_floating_download_badge);
+        btnCollapseHeader = findViewById(R.id.btn_collapse_header);
         txtMediaDetected = findViewById(R.id.txt_media_detected);
-        cardMediaDetected.setOnClickListener(v -> showMediaDownloadChooser());
+
+        if (btnFloatingHeaderTrigger != null) {
+            btnFloatingHeaderTrigger.setOnClickListener(v -> showTopHeaderBar());
+        }
+        if (btnCollapseHeader != null) {
+            btnCollapseHeader.setOnClickListener(v -> hideTopHeaderBar());
+        }
+        if (btnFloatingDownloadBadge != null) {
+            btnFloatingDownloadBadge.setOnClickListener(v -> handleDownloadBadgeClick());
+        }
+
+        mediaSnifferEngine.setOnMediaDetectedListener(item -> runOnUiThread(() -> {
+            if (btnFloatingDownloadBadge != null) {
+                btnFloatingDownloadBadge.setVisibility(View.VISIBLE);
+            }
+        }));
 
         ImageButton btnGo = findViewById(R.id.btn_go);
         ImageButton btnOverflow = findViewById(R.id.btn_overflow);
@@ -211,46 +240,58 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             return false;
         });
 
-        editUrl.setOnFocusChangeListener((v, hasFocus) -> {
-            if (hasFocus) {
-                btnClearUrl.setVisibility(View.VISIBLE);
-            } else {
-                btnClearUrl.setVisibility(View.GONE);
-            }
-        });
-
-        btnClearUrl.setOnClickListener(v -> editUrl.setText(""));
-        btnGo.setOnClickListener(v -> loadEnteredUrl());
-        btnOverflow.setOnClickListener(this::showOverflowMenu);
-
-        btnBack.setOnClickListener(v -> {
-            WebView web = getCurrentWebView();
-            if (web != null && web.canGoBack()) web.goBack();
-        });
-
-        btnForward.setOnClickListener(v -> {
-            WebView web = getCurrentWebView();
-            if (web != null && web.canGoForward()) web.goForward();
-        });
-
-        btnRefresh.setOnClickListener(v -> {
-            WebView web = getCurrentWebView();
-            if (web != null) web.reload();
-        });
-
-        btnHome.setOnClickListener(v -> {
-            WebView web = getCurrentWebView();
-            if (web != null) {
-                String home = prefManager.getHomepage();
-                if (home == null || home.equals("https://www.google.com") || home.equals("about:blank")) {
-                    web.loadUrl("about:blank");
+        if (btnClearUrl != null) {
+            editUrl.setOnFocusChangeListener((v, hasFocus) -> {
+                if (hasFocus) {
+                    btnClearUrl.setVisibility(View.VISIBLE);
                 } else {
-                    web.loadUrl(home);
+                    btnClearUrl.setVisibility(View.GONE);
                 }
-            }
-        });
+            });
+            btnClearUrl.setOnClickListener(v -> editUrl.setText(""));
+        }
 
-        btnTabsLayout.setOnClickListener(v -> showTabsManagerDialog());
+        if (btnGo != null) btnGo.setOnClickListener(v -> loadEnteredUrl());
+        if (btnOverflow != null) btnOverflow.setOnClickListener(this::showOverflowMenu);
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> {
+                WebView web = getCurrentWebView();
+                if (web != null && web.canGoBack()) web.goBack();
+            });
+        }
+
+        if (btnForward != null) {
+            btnForward.setOnClickListener(v -> {
+                WebView web = getCurrentWebView();
+                if (web != null && web.canGoForward()) web.goForward();
+            });
+        }
+
+        if (btnRefresh != null) {
+            btnRefresh.setOnClickListener(v -> {
+                WebView web = getCurrentWebView();
+                if (web != null) web.reload();
+            });
+        }
+
+        if (btnHome != null) {
+            btnHome.setOnClickListener(v -> {
+                WebView web = getCurrentWebView();
+                if (web != null) {
+                    String home = prefManager.getHomepage();
+                    if (home == null || home.equals("https://www.google.com") || home.equals("about:blank")) {
+                        web.loadUrl("about:blank");
+                    } else {
+                        web.loadUrl(home);
+                    }
+                }
+            });
+        }
+
+        if (btnTabsLayout != null) {
+            btnTabsLayout.setOnClickListener(v -> showTabsManagerDialog());
+        }
     }
 
     private void setupHomeScreenContent() {
@@ -514,9 +555,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             webView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
                 if (scrollY > oldScrollY + 12) {
-                    hideSystemBars();
+                    hideTopHeaderBar();
                 } else if (scrollY < oldScrollY - 12) {
-                    showSystemBars();
+                    showTopHeaderBar();
                 }
             });
         }
@@ -524,21 +565,28 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         final android.view.GestureDetector gestureDetector = new android.view.GestureDetector(this, new android.view.GestureDetector.SimpleOnGestureListener() {
             @Override
             public boolean onSingleTapConfirmed(android.view.MotionEvent e) {
-                if (isBarsHidden) showSystemBars();
+                showTopHeaderBar();
                 return false;
             }
         });
 
+        final WebEdgeGestureListener edgeGestureListener = new com.naveen.browser.utils.WebEdgeGestureListener(this, webView);
         webView.setOnTouchListener((v, event) -> {
-            gestureDetector.onTouchEvent(event);
-            return false;
+            boolean handled = edgeGestureListener.onTouch(v, event);
+            if (!handled) {
+                gestureDetector.onTouchEvent(event);
+            }
+            return handled;
         });
 
         webView.setOnLongClickListener(v -> {
             WebView.HitTestResult result = webView.getHitTestResult();
-            if (result.getType() != WebView.HitTestResult.UNKNOWN_TYPE) {
-                showContextMenuBottomSheet(result);
-                return true;
+            if (result != null && result.getType() != WebView.HitTestResult.UNKNOWN_TYPE) {
+                String extra = result.getExtra();
+                if (extra != null && !extra.trim().isEmpty()) {
+                    showContextMenuBottomSheet(result.getType(), extra);
+                    return true;
+                }
             }
             return false;
         });
@@ -710,7 +758,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 if (view == getCurrentWebView()) {
                     detectedMediaList.clear();
-                    cardMediaDetected.setVisibility(View.GONE);
+                    mediaSnifferEngine.clearDetectedMedia();
+                    if (btnFloatingDownloadBadge != null) btnFloatingDownloadBadge.setVisibility(View.GONE);
+                    showTopHeaderBar();
                     checkHomeScreenVisibility(url);
                     if (!editUrl.hasFocus()) {
                         editUrl.setText(url != null && url.equals("about:blank") ? "" : url);
@@ -723,6 +773,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             public void onPageFinished(WebView view, String url) {
                 if (view == getCurrentWebView()) {
                     updateSslIcon(url);
+                    if (url != null && !url.equalsIgnoreCase("about:blank")) {
+                        scheduleHeaderAutoHide();
+                        mediaSnifferEngine.inspectUrl(url);
+                    }
                     WebTab currentTab = getCurrentTab();
                     if (currentTab != null && !currentTab.isIncognito() && url != null && !url.equals("about:blank")) {
                         dbHelper.addHistory(new HistoryItem(view.getTitle(), url, System.currentTimeMillis()));
@@ -775,9 +829,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             String title = pageTitle != null ? pageTitle : URLUtil.guessFileName(url, null, null);
             detectedMediaList.add(new MediaItem(url, title, getMimeFromUrl(lower)));
             runOnUiThread(() -> {
-                if (cardMediaDetected != null) {
-                    txtMediaDetected.setText("Downloadable Media (" + detectedMediaList.size() + ")");
-                    cardMediaDetected.setVisibility(View.VISIBLE);
+                if (btnFloatingDownloadBadge != null) {
+                    if (txtMediaDetected != null) {
+                        txtMediaDetected.setText("Download Media (" + detectedMediaList.size() + ")");
+                    }
+                    btnFloatingDownloadBadge.setVisibility(View.VISIBLE);
                 }
             });
         }
@@ -925,6 +981,127 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
+    private void hideTopHeaderBar() {
+        if (topBarContainer != null && topBarContainer.getVisibility() == View.VISIBLE) {
+            topBarContainer.animate()
+                    .translationY(-topBarContainer.getHeight())
+                    .setDuration(250)
+                    .withEndAction(() -> {
+                        topBarContainer.setVisibility(View.GONE);
+                        topBarContainer.setTranslationY(0);
+                        if (btnFloatingHeaderTrigger != null) {
+                            btnFloatingHeaderTrigger.setVisibility(View.VISIBLE);
+                        }
+                    })
+                    .start();
+        }
+    }
+
+    private void showTopHeaderBar() {
+        if (topBarContainer != null) {
+            topBarContainer.setVisibility(View.VISIBLE);
+            if (btnFloatingHeaderTrigger != null) {
+                btnFloatingHeaderTrigger.setVisibility(View.GONE);
+            }
+            scheduleHeaderAutoHide();
+        }
+    }
+
+    private void scheduleHeaderAutoHide() {
+        headerAutoHideHandler.removeCallbacks(hideHeaderRunnable);
+        headerAutoHideHandler.postDelayed(hideHeaderRunnable, 4000);
+    }
+
+    private void showContextMenuBottomSheet(int type, String extraUrl) {
+        if (extraUrl == null || extraUrl.trim().isEmpty()) return;
+
+        String title = "Media Link";
+        if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
+            title = "Image Element";
+        } else if (type == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
+            title = "Hyperlink";
+        }
+
+        BottomSheetContextMenuDialog dialog = BottomSheetContextMenuDialog.newInstance(title, extraUrl);
+        dialog.setOnContextMenuActionListener(new BottomSheetContextMenuDialog.OnContextMenuActionListener() {
+            @Override
+            public void onOpenInNewTab(String url) {
+                createNewTab(url, true);
+            }
+
+            @Override
+            public void onCopyLink(String url) {
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                if (clipboard != null) {
+                    ClipData clip = ClipData.newPlainText("URL", url);
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(MainActivity.this, "URL copied to clipboard ✓", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onDownloadMedia(String url) {
+                if (YtDlpExtractor.isYouTubeUrl(url)) {
+                    WebView web = getCurrentWebView();
+                    String pageTitle = web != null ? web.getTitle() : "YouTube Media";
+                    YtDlpExtractor.VideoDetails details = YtDlpExtractor.extractDetails(url, pageTitle);
+                    FormatPickerBottomSheetDialog picker = FormatPickerBottomSheetDialog.newInstance(details);
+                    picker.show(getSupportFragmentManager(), "FormatPicker");
+                } else {
+                    enqueueDirectDownload(url);
+                }
+            }
+
+            @Override
+            public void onShareMedia(String url) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.setType("text/plain");
+                intent.putExtra(Intent.EXTRA_TEXT, url);
+                startActivity(Intent.createChooser(intent, "Share Link"));
+            }
+        });
+        dialog.show(getSupportFragmentManager(), "ContextMenu");
+    }
+
+    private void handleDownloadBadgeClick() {
+        WebView currentWeb = getCurrentWebView();
+        String currentUrl = currentWeb != null ? currentWeb.getUrl() : "";
+        if (YtDlpExtractor.isYouTubeUrl(currentUrl)) {
+            String pageTitle = currentWeb != null ? currentWeb.getTitle() : "YouTube Video";
+            YtDlpExtractor.VideoDetails details = YtDlpExtractor.extractDetails(currentUrl, pageTitle);
+            FormatPickerBottomSheetDialog picker = FormatPickerBottomSheetDialog.newInstance(details);
+            picker.show(getSupportFragmentManager(), "FormatPicker");
+        } else {
+            List<MediaItem> mediaList = mediaSnifferEngine.getDetectedMediaList();
+            if (!mediaList.isEmpty()) {
+                MediaItem first = mediaList.get(0);
+                enqueueDirectDownload(first.getUrl());
+            } else if (currentUrl != null && !currentUrl.isEmpty()) {
+                enqueueDirectDownload(currentUrl);
+            }
+        }
+    }
+
+    private void enqueueDirectDownload(String url) {
+        try {
+            DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            if (downloadManager != null) {
+                DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+                request.setTitle("DeerOne Download");
+                request.setDescription(url);
+                request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+
+                String fileName = "DeerOne_Media_" + System.currentTimeMillis() + ".mp4";
+                request.setDestinationInExternalPublicDir(Environment.DIRECTORY_MOVIES, "DeerOne/" + fileName);
+
+                downloadManager.enqueue(request);
+                Toast.makeText(this, "Download started ✓", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Download error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
     private void switchToTab(int position) {
         if (position < 0 || position >= tabList.size()) return;
 
@@ -964,14 +1141,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void updateTabCount() {
-        txtTabCount.setText(String.valueOf(tabList.size()));
+        if (txtTabCount != null) {
+            txtTabCount.setText(String.valueOf(tabList.size()));
+        }
     }
 
     private void updateSslIcon(String url) {
-        if (url != null && url.startsWith("https://")) {
-            btnSslLock.setImageResource(R.drawable.ic_lock);
-        } else {
-            btnSslLock.setImageResource(R.drawable.ic_warning);
+        if (btnSslLock != null) {
+            if (url != null && url.startsWith("https://")) {
+                btnSslLock.setImageResource(R.drawable.ic_lock);
+            } else {
+                btnSslLock.setImageResource(R.drawable.ic_warning);
+            }
         }
     }
 

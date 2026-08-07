@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.webkit.CookieManager;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
+import android.view.View;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -41,8 +42,18 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        // Back
-        findViewById(R.id.btn_back_settings).setOnClickListener(v -> finish());
+        // Header Navigation Arrows (iOS / Chrome Sheet Style)
+        ImageButton btnBack = findViewById(R.id.btn_back_settings);
+        ImageButton btnForward = findViewById(R.id.btn_header_forward);
+
+        if (btnBack != null) {
+            btnBack.setOnClickListener(v -> finish());
+        }
+
+        if (btnForward != null) {
+            btnForward.setEnabled(false);
+            btnForward.setAlpha(0.35f);
+        }
 
         // Stats card
         updateStatsCard();
@@ -74,51 +85,42 @@ public class SettingsActivity extends AppCompatActivity {
         swPopups       = sw(R.id.switch_block_popups,  pref.isBlockPopups());
         swSafeBrowsing = sw(R.id.switch_safe_browsing, pref.isSafeBrowsingEnabled());
 
-        // --- BROWSING ---
-        swJavascript = sw(R.id.switch_javascript,   pref.isJavaScriptEnabled());
-        swImages     = sw(R.id.switch_images,       pref.isShowImages());
-        swAutofill   = sw(R.id.switch_autofill,     pref.isAutofillEnabled());
-        swSession    = sw(R.id.switch_session_restore, pref.isSessionRestoreEnabled());
-        swLocation   = sw(R.id.switch_location,     pref.isLocationEnabled());
-        swAutoplay   = sw(R.id.switch_media_autoplay, pref.isMediaAutoplay());
-        swNewTab     = sw(R.id.switch_open_new_tab,  pref.isOpenLinksNewTab());
-        swPullRefresh= sw(R.id.switch_pull_refresh,  pref.isPullToRefresh());
-
-        // --- PERFORMANCE ---
-        swDataSaver = sw(R.id.switch_data_saver, pref.isDataSaverMode());
-        swPreload   = sw(R.id.switch_preload,    pref.isPreloadPages());
-        swHardware  = sw(R.id.switch_hardware,   pref.isHardwareAccelEnabled());
-
-        // --- DOWNLOADS ---
-        swAskDownload = sw(R.id.switch_ask_download, pref.isAskBeforeDownload());
-        swDlNotify    = sw(R.id.switch_dl_notify,    pref.isDownloadNotifications());
-
-        // --- APPEARANCE ---
-        swShowTabCount = sw(R.id.switch_show_tab_count, pref.isShowTabCount());
-        swShowScheme   = sw(R.id.switch_show_scheme,    pref.isShowUrlScheme());
-
         // --- CLEAR DATA ---
-        findViewById(R.id.btn_clear_cache).setOnClickListener(v -> confirmClear("Clear Cache?",
-                "Remove temporary files", () -> {
-                    WebView tmp = new WebView(this); tmp.clearCache(true); tmp.destroy();
-                    toast("Cache cleared");
-                }));
-        findViewById(R.id.btn_clear_cookies).setOnClickListener(v -> confirmClear("Clear Cookies?",
-                "You will be signed out of all sites", () -> {
-                    CookieManager.getInstance().removeAllCookies(null);
-                    CookieManager.getInstance().flush();
-                    toast("Cookies cleared");
-                }));
-        findViewById(R.id.btn_clear_storage).setOnClickListener(v -> confirmClear("Clear All Data?",
-                "This removes cookies, storage and sessions", () -> {
-                    CookieManager.getInstance().removeAllCookies(null);
-                    WebStorage.getInstance().deleteAllData();
-                    pref.clearAllData();
-                    toast("All data cleared");
-                }));
+        View btnClearCache = findViewById(R.id.btn_clear_cache);
+        if (btnClearCache != null) {
+            btnClearCache.setOnClickListener(v -> confirmClear("Clear Cache?",
+                    "Remove temporary files", () -> {
+                        WebView tmp = new WebView(this); tmp.clearCache(true); tmp.destroy();
+                        toast("Cache cleared");
+                    }));
+        }
+
+        View btnClearCookies = findViewById(R.id.btn_clear_cookies);
+        if (btnClearCookies != null) {
+            btnClearCookies.setOnClickListener(v -> confirmClear("Clear Cookies?",
+                    "You will be signed out of all sites", () -> {
+                        CookieManager.getInstance().removeAllCookies(null);
+                        CookieManager.getInstance().flush();
+                        toast("Cookies cleared");
+                    }));
+        }
+
+        View btnClearStorage = findViewById(R.id.btn_clear_storage);
+        if (btnClearStorage != null) {
+            btnClearStorage.setOnClickListener(v -> confirmClear("Clear All Data?",
+                    "This removes cookies, storage and sessions", () -> {
+                        CookieManager.getInstance().removeAllCookies(null);
+                        WebStorage.getInstance().deleteAllData();
+                        pref.clearAllData();
+                        toast("All data cleared");
+                    }));
+        }
 
         // --- SAVE ---
-        findViewById(R.id.btn_save_settings).setOnClickListener(v -> save());
+        View btnSave = findViewById(R.id.btn_save_settings);
+        if (btnSave != null) {
+            btnSave.setOnClickListener(v -> save());
+        }
     }
 
     private void updateStatsCard() {
@@ -137,6 +139,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     private void setSpinner(Spinner s, int arrayRes, int selection) {
+        if (s == null) return;
         ArrayAdapter<CharSequence> a = ArrayAdapter.createFromResource(this, arrayRes,
                 android.R.layout.simple_spinner_item);
         a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -154,39 +157,43 @@ public class SettingsActivity extends AppCompatActivity {
     private void toast(String msg) { Toast.makeText(this, msg, Toast.LENGTH_SHORT).show(); }
 
     private void save() {
-        String hp = editHomepage.getText().toString().trim();
-        pref.setHomepage(hp.isEmpty() ? PreferenceManager.DEFAULT_HOMEPAGE : hp);
-        pref.setSearchEngineIndex(spinnerSearch.getSelectedItemPosition());
-        pref.setUserAgentIndex(spinnerUA.getSelectedItemPosition());
-        pref.setTextSizeIndex(spinnerTextSize.getSelectedItemPosition());
-        pref.setCookiePolicy(spinnerCookies.getSelectedItemPosition());
+        if (editHomepage != null) {
+            String hp = editHomepage.getText().toString().trim();
+            pref.setHomepage(hp.isEmpty() ? PreferenceManager.DEFAULT_HOMEPAGE : hp);
+        }
+        if (spinnerSearch != null) pref.setSearchEngineIndex(spinnerSearch.getSelectedItemPosition());
+        if (spinnerUA != null) pref.setUserAgentIndex(spinnerUA.getSelectedItemPosition());
+        if (spinnerTextSize != null) pref.setTextSizeIndex(spinnerTextSize.getSelectedItemPosition());
+        if (spinnerCookies != null) pref.setCookiePolicy(spinnerCookies.getSelectedItemPosition());
 
-        int oldTheme = pref.getThemeMode();
-        int newTheme = spinnerTheme.getSelectedItemPosition();
-        pref.setThemeMode(newTheme);
-        if (oldTheme != newTheme) pref.applyTheme();
+        if (spinnerTheme != null) {
+            int oldTheme = pref.getThemeMode();
+            int newTheme = spinnerTheme.getSelectedItemPosition();
+            pref.setThemeMode(newTheme);
+            if (oldTheme != newTheme) pref.applyTheme();
+        }
 
-        pref.setAdBlockEnabled(swAdBlock.isChecked());
-        pref.setTrackerBlockEnabled(swTrackers.isChecked());
-        pref.setHttpsOnlyEnabled(swHttps.isChecked());
-        pref.setDoNotTrack(swDNT.isChecked());
-        pref.setBlockPopups(swPopups.isChecked());
-        pref.setSafeBrowsingEnabled(swSafeBrowsing.isChecked());
-        pref.setJavaScriptEnabled(swJavascript.isChecked());
-        pref.setShowImages(swImages.isChecked());
-        pref.setAutofillEnabled(swAutofill.isChecked());
-        pref.setSessionRestoreEnabled(swSession.isChecked());
-        pref.setLocationEnabled(swLocation.isChecked());
-        pref.setMediaAutoplay(swAutoplay.isChecked());
-        pref.setOpenLinksNewTab(swNewTab.isChecked());
-        pref.setPullToRefresh(swPullRefresh.isChecked());
-        pref.setDataSaverMode(swDataSaver.isChecked());
-        pref.setPreloadPages(swPreload.isChecked());
-        pref.setHardwareAccelEnabled(swHardware.isChecked());
-        pref.setAskBeforeDownload(swAskDownload.isChecked());
-        pref.setDownloadNotifications(swDlNotify.isChecked());
-        pref.setShowTabCount(swShowTabCount.isChecked());
-        pref.setShowUrlScheme(swShowScheme.isChecked());
+        if (swAdBlock != null) pref.setAdBlockEnabled(swAdBlock.isChecked());
+        if (swTrackers != null) pref.setTrackerBlockEnabled(swTrackers.isChecked());
+        if (swHttps != null) pref.setHttpsOnlyEnabled(swHttps.isChecked());
+        if (swDNT != null) pref.setDoNotTrack(swDNT.isChecked());
+        if (swPopups != null) pref.setBlockPopups(swPopups.isChecked());
+        if (swSafeBrowsing != null) pref.setSafeBrowsingEnabled(swSafeBrowsing.isChecked());
+        if (swJavascript != null) pref.setJavaScriptEnabled(swJavascript.isChecked());
+        if (swImages != null) pref.setShowImages(swImages.isChecked());
+        if (swAutofill != null) pref.setAutofillEnabled(swAutofill.isChecked());
+        if (swSession != null) pref.setSessionRestoreEnabled(swSession.isChecked());
+        if (swLocation != null) pref.setLocationEnabled(swLocation.isChecked());
+        if (swAutoplay != null) pref.setMediaAutoplay(swAutoplay.isChecked());
+        if (swNewTab != null) pref.setOpenLinksNewTab(swNewTab.isChecked());
+        if (swPullRefresh != null) pref.setPullToRefresh(swPullRefresh.isChecked());
+        if (swDataSaver != null) pref.setDataSaverMode(swDataSaver.isChecked());
+        if (swPreload != null) pref.setPreloadPages(swPreload.isChecked());
+        if (swHardware != null) pref.setHardwareAccelEnabled(swHardware.isChecked());
+        if (swAskDownload != null) pref.setAskBeforeDownload(swAskDownload.isChecked());
+        if (swDlNotify != null) pref.setDownloadNotifications(swDlNotify.isChecked());
+        if (swShowTabCount != null) pref.setShowTabCount(swShowTabCount.isChecked());
+        if (swShowScheme != null) pref.setShowUrlScheme(swShowScheme.isChecked());
 
         toast("Settings saved ✓");
         finish();

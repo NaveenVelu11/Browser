@@ -5,6 +5,7 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
+    <!-- Apple Squircle Background with Deep Cobalt to Royal Electric Gradient -->
     <path
         android:pathData="M24,0 L84,0 C98,0 108,10 108,24 L108,84 C108,98 98,108 84,108 L24,108 C10,108 0,98 0,84 L0,24 C0,10 10,0 24,0 Z">
         <aapt:attr name="android:fillColor">
@@ -16,6 +17,8 @@
         </aapt:attr>
     </path>
 
+    <!-- Minimalist SF Symbols Aesthetic Deer Emblem -->
+    <!-- Left Antler -->
     <path
         android:fillColor="#00000000"
         android:pathData="M38,26 C36,36 44,48 50,56"
@@ -36,6 +39,7 @@
         android:strokeWidth="3"
         android:strokeLineCap="round" />
 
+    <!-- Right Antler -->
     <path
         android:fillColor="#00000000"
         android:pathData="M70,26 C72,36 64,48 58,56"
@@ -56,6 +60,7 @@
         android:strokeWidth="3"
         android:strokeLineCap="round" />
 
+    <!-- Deer Head & Muzzle Outline -->
     <path
         android:fillColor="#00000000"
         android:pathData="M44,52 C44,52 38,62 38,72 C38,82 46,90 54,90 C62,90 70,82 70,72 C70,62 64,52 64,52"
@@ -64,6 +69,7 @@
         android:strokeLineCap="round"
         android:strokeLineJoin="round" />
 
+    <!-- Sleek Minimal Eyes -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M45,66 A2.5,2.5 0 1,0 45,61 A2.5,2.5 0 1,0 45,66 Z" />
@@ -71,6 +77,7 @@
         android:fillColor="#FFFFFF"
         android:pathData="M63,66 A2.5,2.5 0 1,0 63,61 A2.5,2.5 0 1,0 63,66 Z" />
 
+    <!-- Minimal Nose Tip -->
     <path
         android:fillColor="#FFFFFF"
         android:pathData="M54,82 L51,77 C52,76 56,76 57,77 Z" />

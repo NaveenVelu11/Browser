@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Brand Colors -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
+        <item name="colorOnPrimary">@color/textOnAccent</item>
+        <item name="colorSecondary">@color/colorAccentiOSDark</item>
+        <item name="colorSecondaryVariant">@color/colorAccentDark</item>
+        <item name="colorOnSecondary">@color/textOnAccent</item>
+        <item name="colorSurface">?attr/colorCardBackground</item>
+        <item name="colorOnSurface">?attr/colorTextPrimary</item>
+        <item name="colorError">@color/colorError</item>
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+
+        <!-- Window & Background -->
+        <item name="android:windowBackground">?attr/colorSurfaceBackground</item>
+        <item name="android:statusBarColor">?attr/colorSurfaceBackground</item>
+        <item name="android:navigationBarColor">?attr/colorSurfaceBackground</item>
+
+        <!-- Custom iOS Theme Tokens (Dark Mode) -->
+        <item name="colorSurfaceBackground">@color/ios_surface_dark</item>
+        <item name="colorCardBackground">@color/ios_card_dark</item>
+        <item name="colorTextPrimary">@color/ios_text_primary_dark</item>
+        <item name="colorTextSecondary">@color/ios_text_secondary_dark</item>
+        <item name="colorAccentiOS">@color/ios_accent_dark</item>
+        <item name="colorDivider">@color/ios_divider_dark</item>
+
+        <!-- Smooth Activity Transitions -->
+        <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
+
+        <!-- Typography -->
+        <item name="fontFamily">sans-serif</item>
+    </style>
+</resources>

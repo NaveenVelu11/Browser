@@ -1,43 +1,77 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="128dp"
-    android:height="128dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
 
-    <!-- Outer Rounded Glass Badge Base -->
     <path
-        android:pathData="M20,10 L80,10 A10,10 0 0,1 90,20 L90,80 A10,10 0 0,1 80,90 L20,90 A10,10 0 0,1 10,80 L10,20 A10,10 0 0,1 20,10 Z"
-        android:fillColor="#2563EB" />
+        android:pathData="M24,0 L84,0 C98,0 108,10 108,24 L108,84 C108,98 98,108 84,108 L24,108 C10,108 0,98 0,84 L0,24 C0,10 10,0 24,0 Z">
+        <aapt:attr name="android:fillColor">
+            <gradient
+                android:angle="135"
+                android:endColor="#4364F7"
+                android:startColor="#0052D4"
+                android:type="linear" />
+        </aapt:attr>
+    </path>
 
-    <!-- Inner Modern Accent Ring -->
     <path
-        android:pathData="M22,12 L78,12 A8,8 0 0,1 86,20 L86,78 A8,8 0 0,1 78,86 L22,86 A8,8 0 0,1 14,78 L14,20 A8,8 0 0,1 22,12 Z"
-        android:strokeColor="#60A5FA"
-        android:strokeWidth="1.5" />
-
-    <!-- Deer Antlers Left -->
+        android:fillColor="#00000000"
+        android:pathData="M38,26 C36,36 44,48 50,56"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
     <path
-        android:pathData="M 38,45 C 32,38 25,32 24,25 C 28,28 32,32 36,38 C 34,30 30,22 28,18 C 34,24 38,32 40,40 Z"
-        android:fillColor="#FFFFFF" />
-
-    <!-- Deer Antlers Right -->
+        android:fillColor="#00000000"
+        android:pathData="M38,26 C30,28 26,34 24,40"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
     <path
-        android:pathData="M 62,45 C 68,38 75,32 76,25 C 72,28 68,32 64,38 C 66,30 70,22 72,18 C 66,24 62,32 60,40 Z"
-        android:fillColor="#FFFFFF" />
+        android:fillColor="#00000000"
+        android:pathData="M42,34 C34,36 32,42 32,46"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
 
-    <!-- Deer Face & Crown -->
     <path
-        android:pathData="M 50,75 L 36,46 C 34,42 42,44 50,47 C 58,44 66,42 64,46 Z"
-        android:fillColor="#FFFFFF" />
-
-    <!-- Crown Accent -->
+        android:fillColor="#00000000"
+        android:pathData="M70,26 C72,36 64,48 58,56"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
     <path
-        android:pathData="M 50,30 L 53,38 L 47,38 Z"
-        android:fillColor="#60A5FA" />
-
-    <!-- Nose Highlight -->
+        android:fillColor="#00000000"
+        android:pathData="M70,26 C78,28 82,34 84,40"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
     <path
-        android:pathData="M 50,72 A 2,2 0 1,1 50,76 A 2,2 0 1,1 50,72 Z"
-        android:fillColor="#1D4ED8" />
+        android:fillColor="#00000000"
+        android:pathData="M66,34 C74,36 76,42 76,46"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3"
+        android:strokeLineCap="round" />
 
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M44,52 C44,52 38,62 38,72 C38,82 46,90 54,90 C62,90 70,82 70,72 C70,62 64,52 64,52"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="3.5"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M45,66 A2.5,2.5 0 1,0 45,61 A2.5,2.5 0 1,0 45,66 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M63,66 A2.5,2.5 0 1,0 63,61 A2.5,2.5 0 1,0 63,66 Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,82 L51,77 C52,76 56,76 57,77 Z" />
 </vector>
