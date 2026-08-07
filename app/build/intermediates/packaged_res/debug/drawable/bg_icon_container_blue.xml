@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Blue icon container — adapts automatically via DayNight theme -->
-<shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/cardDark" />
-    <corners android:radius="12dp" />
-</shape>

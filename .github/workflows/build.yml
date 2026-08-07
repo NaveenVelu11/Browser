@@ -1,4 +1,4 @@
-name: Build Android Application
+name: Build & Publish DeerOne Browser
 
 on:
   push:
@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ main, master ]
   workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   build:
@@ -29,27 +32,45 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew assembleDebug --stacktrace --info
+      - name: Clean & Build APKs
+        run: ./gradlew clean assembleDebug assembleRelease -x lint --stacktrace
 
-      - name: Build Release APK
-        run: ./gradlew assembleRelease --stacktrace --info
+      - name: Organize APK Artifacts
+        run: |
+          mkdir -p output_apks
+          cp app/build/outputs/apk/debug/*.apk output_apks/DeerOne-Browser-v1.0.0-Debug.apk || true
+          cp app/build/outputs/apk/release/*.apk output_apks/DeerOne-Browser-v1.0.0-Release.apk || true
 
-      - name: Upload Debug APK
-        if: success()
+      - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Browser-Debug
-          path: app/build/outputs/apk/debug/*.apk
+          name: DeerOne-Browser-Debug
+          path: output_apks/DeerOne-Browser-v1.0.0-Debug.apk
 
-      - name: Upload Release APK
-        if: success()
+      - name: Upload Release APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: Browser-Release
-          path: app/build/outputs/apk/release/*.apk
+          name: DeerOne-Browser-Release
+          path: output_apks/DeerOne-Browser-v1.0.0-Release.apk
 
-          
+      - name: Publish GitHub Release
+        if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v1.0.0
+          name: DeerOne Browser v1.0.0 Release
+          body: |
+            ## 🚀 DeerOne Browser v1.0.0 Official Release
 
-
-          
+            - **Ultra-Fast & Modern Android Browsing**
+            - Complete UI redesign with Top Floating Toolbar and Glassmorphism accents.
+            - Built-in Ad & Tracker Shields, Media Sniffer Engine, SSL Inspector.
+            - Integrated 5 Themes: Light, Dark, AMOLED (Pitch Black), System Default, Glass Dark.
+            - Fixed Twitter/X and modern web rendering compatibility.
+          draft: false
+          prerelease: false
+          files: |
+            output_apks/DeerOne-Browser-v1.0.0-Debug.apk
+            output_apks/DeerOne-Browser-v1.0.0-Release.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
