@@ -180,7 +180,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         editUrl = findViewById(R.id.edit_url);
         btnClearUrl = findViewById(R.id.btn_clear_url);
         btnSslLock = findViewById(R.id.btn_ssl_lock);
-        btnSslLock.setOnClickListener(v -> showPrivacyDashboard());
+        if (btnSslLock != null) {
+            btnSslLock.setOnClickListener(v -> showPrivacyDashboard());
+        }
         txtTabCount = findViewById(R.id.txt_tab_count);
         homeScreenLayout = findViewById(R.id.home_screen_layout);
         topBarContainer = findViewById(R.id.top_bar_container);
@@ -295,6 +297,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void setupHomeScreenContent() {
+        if (homeScreenLayout == null) return;
         View cardHomeSearch = homeScreenLayout.findViewById(R.id.card_home_search);
         if (cardHomeSearch != null) cardHomeSearch.setOnClickListener(v -> showSearchInput());
 
@@ -700,7 +703,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                                     try {
                                         WebTab currentTab = getCurrentTab();
                                         if (currentTab != null) currentTab.incrementBlockedCount();
-                                        prefManager.incrementLifetimeBlockedAds(1);
                                     } catch (Exception ignored) {}
                                 });
                                 return AdBlocker.createEmptyResource();
@@ -723,7 +725,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                                     try {
                                         WebTab currentTab = getCurrentTab();
                                         if (currentTab != null) currentTab.incrementBlockedCount();
-                                        prefManager.incrementLifetimeBlockedAds(1);
                                     } catch (Exception ignored) {}
                                 });
                                 return AdBlocker.createEmptyResource();
@@ -1156,14 +1157,14 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
-    private WebView getCurrentWebView() {
+    private synchronized WebView getCurrentWebView() {
         if (currentTabPosition >= 0 && currentTabPosition < tabList.size()) {
             return tabList.get(currentTabPosition).getWebView();
         }
         return null;
     }
 
-    private WebTab getCurrentTab() {
+    private synchronized WebTab getCurrentTab() {
         if (currentTabPosition >= 0 && currentTabPosition < tabList.size()) {
             return tabList.get(currentTabPosition);
         }
@@ -1556,8 +1557,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     public void onBackPressed() {
         if (customView != null) {
-            WebChromeClient chromeClient = new WebChromeClient();
-            chromeClient.onHideCustomView();
+            if (customViewCallback != null) {
+                customViewCallback.onCustomViewHidden();
+            }
+            if (customViewContainer != null && customView != null) {
+                customViewContainer.removeView(customView);
+                customViewContainer.setVisibility(View.GONE);
+            }
+            if (webViewContainer != null) {
+                webViewContainer.setVisibility(View.VISIBLE);
+            }
+            customView = null;
+            customViewCallback = null;
             return;
         }
 
