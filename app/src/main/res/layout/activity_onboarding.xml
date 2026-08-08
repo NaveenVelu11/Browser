@@ -47,7 +47,8 @@
         android:layout_width="match_parent"
         android:layout_height="80dp"
         android:layout_alignParentBottom="true"
-        android:paddingHorizontal="24dp">
+        android:paddingStart="24dp"
+        android:paddingEnd="24dp">
 
         <!-- Skip Button -->
         <TextView
@@ -62,7 +63,8 @@
             android:fontFamily="sans-serif-medium"
             android:clickable="true"
             android:focusable="true"
-            android:paddingHorizontal="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:background="?attr/selectableItemBackgroundBorderless" />
 
         <!-- Dots Indicator Container -->

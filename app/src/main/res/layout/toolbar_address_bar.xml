@@ -9,7 +9,8 @@
     android:elevation="4dp"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
-    android:paddingVertical="10dp">
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp">
 
     <!-- Translucent Capsule Container (Domain & Search Display) -->
     <androidx.constraintlayout.widget.ConstraintLayout

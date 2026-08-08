@@ -6,15 +6,8 @@
     android:viewportHeight="108">
 
     <path
-        android:pathData="M24,0 L84,0 C98,0 108,10 108,24 L108,84 C108,98 98,108 84,108 L24,108 C10,108 0,98 0,84 L0,24 C0,10 10,0 24,0 Z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:angle="135"
-                android:endColor="#4364F7"
-                android:startColor="#0052D4"
-                android:type="linear" />
-        </aapt:attr>
-    </path>
+        android:fillColor="#0052D4"
+        android:pathData="M24,0 L84,0 C98,0 108,10 108,24 L108,84 C108,98 98,108 84,108 L24,108 C10,108 0,98 0,84 L0,24 C0,10 10,0 24,0 Z" />
 
     <path
         android:fillColor="#00000000"

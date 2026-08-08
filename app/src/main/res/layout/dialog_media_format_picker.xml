@@ -90,8 +90,10 @@
                             android:textColor="?attr/colorAccentiOS"
                             android:textSize="11sp"
                             android:fontFamily="sans-serif-medium"
-                            android:paddingHorizontal="6dp"
-                            android:paddingVertical="2dp"
+                            android:paddingStart="6dp"
+                            android:paddingEnd="6dp"
+                            android:paddingTop="2dp"
+                            android:paddingBottom="2dp"
                             android:background="@drawable/shape_address_bar_bg" />
                     </LinearLayout>
                 </LinearLayout>

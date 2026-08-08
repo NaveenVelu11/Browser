@@ -12,7 +12,8 @@
         android:layout_height="56dp"
         android:background="@color/surfaceDark"
         android:gravity="center_vertical"
-        android:paddingHorizontal="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:elevation="4dp">
 
         <TextView
@@ -60,7 +61,8 @@
         android:background="@color/surfaceDark"
         android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="16dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:elevation="4dp">
 
         <TextView
@@ -85,7 +87,8 @@
             android:layout_height="38dp"
             android:background="@drawable/bg_home_search"
             android:gravity="center"
-            android:paddingHorizontal="12dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
             android:clickable="true"
             android:focusable="true">
 

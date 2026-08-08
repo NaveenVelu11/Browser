@@ -30,7 +30,8 @@
         android:background="@drawable/search_bar_bg"
         android:hint="Scanned URL or Code"
         android:inputType="textUri"
-        android:paddingHorizontal="12dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:textColor="@color/textPrimary"
         android:textColorHint="@color/textHint"
         android:textSize="14sp" />
