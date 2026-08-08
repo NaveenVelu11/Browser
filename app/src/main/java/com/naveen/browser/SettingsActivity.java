@@ -37,9 +37,8 @@ public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        pref = new PreferenceManager(this);
-        pref.applyTheme();
         super.onCreate(savedInstanceState);
+        pref = new PreferenceManager(this);
         setContentView(R.layout.activity_settings);
 
         // Header Navigation Arrows (iOS / Chrome Sheet Style)

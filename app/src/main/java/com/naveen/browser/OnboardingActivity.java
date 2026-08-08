@@ -55,9 +55,8 @@ public class OnboardingActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prefManager = new PreferenceManager(this);
-        prefManager.applyTheme();
         super.onCreate(savedInstanceState);
+        prefManager = new PreferenceManager(this);
 
         if (!prefManager.isFirstLaunch()) {
             launchHomeScreen();

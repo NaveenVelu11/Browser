@@ -18,9 +18,8 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        PreferenceManager pm = new PreferenceManager(this);
-        pm.applyTheme();
         super.onCreate(savedInstanceState);
+        PreferenceManager pm = new PreferenceManager(this);
         setContentView(R.layout.activity_splash);
 
         View splashContent = findViewById(R.id.splash_content);

@@ -145,9 +145,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        prefManager = new PreferenceManager(this);
-        prefManager.applyTheme();
         super.onCreate(savedInstanceState);
+        prefManager = new PreferenceManager(this);
         setContentView(R.layout.activity_main);
         dbHelper = new DatabaseHelper(this);
 

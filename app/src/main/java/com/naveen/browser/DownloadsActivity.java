@@ -41,8 +41,6 @@ public class DownloadsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        com.naveen.browser.utils.PreferenceManager pm = new com.naveen.browser.utils.PreferenceManager(this);
-        pm.applyTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_downloads);
 
