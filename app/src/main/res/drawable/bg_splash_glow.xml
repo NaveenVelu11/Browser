@@ -1,12 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="oval">
-    <!-- Use fixed px value for gradientRadius — percentage can fail on some API 21 devices -->
-    <gradient
-        android:type="radial"
-        android:gradientRadius="200dp"
-        android:centerX="0.5"
-        android:centerY="0.5"
-        android:startColor="#280052D4"
-        android:endColor="#00007AFF" />
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <solid android:color="@android:color/transparent" />
 </shape>
