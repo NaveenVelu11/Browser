@@ -58,10 +58,10 @@
                 android:paddingStart="16dp"
                 android:paddingEnd="18dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:src="@drawable/ic_download"
+                    app:srcCompat="@drawable/ic_download"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Download Media" />
 
@@ -136,11 +136,11 @@
         android:clickable="true"
         android:focusable="true">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_gravity="center"
-            android:src="@drawable/ic_chevron_left"
+            app:srcCompat="@drawable/ic_chevron_left"
             app:tint="?attr/colorAccentiOS"
             android:contentDescription="Expand Header Bar" />
     </androidx.cardview.widget.CardView>

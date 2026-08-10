@@ -214,30 +214,34 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         // Native Home Screen Integration
         setupHomeScreenContent();
 
-        swipeRefresh.setOnRefreshListener(() -> {
-            WebView currentWeb = getCurrentWebView();
-            if (currentWeb != null) {
-                currentWeb.reload();
-            } else {
-                swipeRefresh.setRefreshing(false);
-            }
-        });
-        swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
+        if (swipeRefresh != null) {
+            swipeRefresh.setOnRefreshListener(() -> {
+                WebView currentWeb = getCurrentWebView();
+                if (currentWeb != null) {
+                    currentWeb.reload();
+                } else {
+                    swipeRefresh.setRefreshing(false);
+                }
+            });
+            swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
 
-        swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
-            WebView currentWeb = getCurrentWebView();
-            return currentWeb != null && currentWeb.canScrollVertically(-1);
-        });
+            swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
+                WebView currentWeb = getCurrentWebView();
+                return currentWeb != null && currentWeb.canScrollVertically(-1);
+            });
+        }
 
-        editUrl.setOnEditorActionListener((v, actionId, event) -> {
-            if (actionId == EditorInfo.IME_ACTION_GO || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
-                loadEnteredUrl();
-                return true;
-            }
-            return false;
-        });
+        if (editUrl != null) {
+            editUrl.setOnEditorActionListener((v, actionId, event) -> {
+                if (actionId == EditorInfo.IME_ACTION_GO || (event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    loadEnteredUrl();
+                    return true;
+                }
+                return false;
+            });
+        }
 
-        if (btnClearUrl != null) {
+        if (btnClearUrl != null && editUrl != null) {
             editUrl.setOnFocusChangeListener((v, hasFocus) -> {
                 if (hasFocus) {
                     btnClearUrl.setVisibility(View.VISIBLE);
@@ -489,10 +493,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         settings.setLoadsImagesAutomatically(loadImages);
         settings.setBlockNetworkImage(!loadImages);
 
-        // Mixed Content Mode (Twitter/X Fix)
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
-        }
+        // Mixed Content Mode — API 21+, always true with minSdk 21
+        settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             settings.setSafeBrowsingEnabled(prefManager.isSafeBrowsingEnabled());
@@ -543,9 +546,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 cookieManager.setAcceptCookie(false);
             } else {
                 cookieManager.setAcceptCookie(true);
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    cookieManager.setAcceptThirdPartyCookies(webView, cookiePolicy == 0);
-                }
+                // setAcceptThirdPartyCookies is API 21+ — always available with minSdk 21
+                cookieManager.setAcceptThirdPartyCookies(webView, cookiePolicy == 0);
             }
         }
 
@@ -1103,16 +1105,24 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         if (currentTabPosition >= 0 && currentTabPosition < tabList.size()) {
             WebView oldWeb = tabList.get(currentTabPosition).getWebView();
-            webViewContainer.removeView(oldWeb);
+            if (webViewContainer != null && oldWeb != null) {
+                webViewContainer.removeView(oldWeb);
+            }
         }
 
         currentTabPosition = position;
         WebTab currentTab = tabList.get(position);
         WebView currentWeb = currentTab.getWebView();
 
-        webViewContainer.addView(currentWeb);
-        String currentUrl = currentWeb.getUrl();
-        editUrl.setText(currentUrl == null || currentUrl.equals("about:blank") ? "" : currentUrl);
+        if (webViewContainer != null && currentWeb != null) {
+            if (currentWeb.getParent() == null) {
+                webViewContainer.addView(currentWeb);
+            }
+        }
+        String currentUrl = currentWeb != null ? currentWeb.getUrl() : "";
+        if (editUrl != null) {
+            editUrl.setText(currentUrl == null || currentUrl.equals("about:blank") ? "" : currentUrl);
+        }
         updateTabCount();
         updateSslIcon(currentUrl);
         checkHomeScreenVisibility(currentUrl);
@@ -1123,8 +1133,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         WebTab tab = tabList.get(position);
         WebView webView = tab.getWebView();
-        webViewContainer.removeView(webView);
-        webView.destroy();
+        if (webViewContainer != null && webView != null) {
+            webViewContainer.removeView(webView);
+            webView.destroy();
+        }
 
         tabList.remove(position);
 
@@ -1167,6 +1179,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void loadEnteredUrl() {
+        if (editUrl == null) return;
         String input = editUrl.getText().toString().trim();
         loadUrl(input);
     }
@@ -1177,11 +1190,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             targetUrl = WebUtils.upgradeToHttps(targetUrl);
         }
 
-        homeScreenLayout.setVisibility(View.GONE);
-        topBarContainer.setVisibility(View.VISIBLE);
-        swipeRefresh.setVisibility(View.VISIBLE);
+        if (homeScreenLayout != null) homeScreenLayout.setVisibility(View.GONE);
+        if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
+        if (swipeRefresh != null) swipeRefresh.setVisibility(View.VISIBLE);
 
-        editUrl.setText(targetUrl.equals("about:blank") ? "" : targetUrl);
+        if (editUrl != null) {
+            editUrl.setText(targetUrl.equals("about:blank") ? "" : targetUrl);
+        }
 
         WebView currentWeb = getCurrentWebView();
         if (currentWeb != null) {
@@ -1194,33 +1209,37 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
 
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.hideSoftInputFromWindow(editUrl.getWindowToken(), 0);
+        if (editUrl != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.hideSoftInputFromWindow(editUrl.getWindowToken(), 0);
+            }
         }
     }
 
     private void showSearchInput() {
-        homeScreenLayout.setVisibility(View.GONE);
-        topBarContainer.setVisibility(View.VISIBLE);
-        swipeRefresh.setVisibility(View.VISIBLE);
-        editUrl.requestFocus();
-        InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        if (imm != null) {
-            imm.showSoftInput(editUrl, InputMethodManager.SHOW_IMPLICIT);
+        if (homeScreenLayout != null) homeScreenLayout.setVisibility(View.GONE);
+        if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
+        if (swipeRefresh != null) swipeRefresh.setVisibility(View.VISIBLE);
+        if (editUrl != null) {
+            editUrl.requestFocus();
+            InputMethodManager imm = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (imm != null) {
+                imm.showSoftInput(editUrl, InputMethodManager.SHOW_IMPLICIT);
+            }
         }
     }
 
     private void checkHomeScreenVisibility(String url) {
-        topBarContainer.setVisibility(View.VISIBLE);
+        if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
         if (url == null || url.trim().isEmpty() || url.equals("about:blank")) {
-            homeScreenLayout.setVisibility(View.VISIBLE);
-            swipeRefresh.setVisibility(View.GONE);
+            if (homeScreenLayout != null) homeScreenLayout.setVisibility(View.VISIBLE);
+            if (swipeRefresh != null) swipeRefresh.setVisibility(View.GONE);
             loadShortcutsData();
             loadRecentVisitedData();
         } else {
-            homeScreenLayout.setVisibility(View.GONE);
-            swipeRefresh.setVisibility(View.VISIBLE);
+            if (homeScreenLayout != null) homeScreenLayout.setVisibility(View.GONE);
+            if (swipeRefresh != null) swipeRefresh.setVisibility(View.VISIBLE);
         }
     }
 

@@ -33,12 +33,12 @@
                 android:gravity="center"
                 android:elevation="6dp">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/img_home_logo"
                     android:layout_width="52dp"
                     android:layout_height="52dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_deerone_logo"
+                    app:srcCompat="@drawable/ic_deerone_logo"
                     android:contentDescription="@string/app_name" />
             </LinearLayout>
 
@@ -51,8 +51,7 @@
                 android:textColor="?attr/colorTextPrimary"
                 android:textSize="30sp"
                 android:fontFamily="sans-serif-medium"
-                android:textStyle="bold"
-                android:letterSpacing="-0.02" />
+                android:textStyle="bold" />
 
             <!-- Subtext -->
             <TextView
@@ -62,8 +61,7 @@
                 android:text="Fast · Private · Minimalist"
                 android:textColor="?attr/colorTextSecondary"
                 android:textSize="13sp"
-                android:fontFamily="sans-serif"
-                android:letterSpacing="0.01" />
+                android:fontFamily="sans-serif" />
 
         </LinearLayout>
 
@@ -95,10 +93,10 @@
                     android:layout_height="36dp"
                     android:background="@drawable/bg_search_icon"
                     android:gravity="center">
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="18dp"
                         android:layout_height="18dp"
-                        android:src="@drawable/ic_search"
+                        app:srcCompat="@drawable/ic_search"
                         app:tint="#FFFFFF"
                         android:contentDescription="@string/search" />
                 </LinearLayout>
@@ -115,12 +113,12 @@
                     android:fontFamily="sans-serif" />
 
                 <!-- Mic button -->
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/btn_home_voice"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:padding="10dp"
-                    android:src="@drawable/ic_reader"
+                    app:srcCompat="@drawable/ic_reader"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Voice Search"
                     android:background="?attr/selectableItemBackgroundBorderless" />
@@ -156,10 +154,10 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_shortcut_blue"
                     android:gravity="center">
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_bookmark"
+                        app:srcCompat="@drawable/ic_bookmark"
                         app:tint="#FFFFFF"
                         android:contentDescription="@string/bookmarks" />
                 </LinearLayout>
@@ -193,10 +191,10 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_shortcut_orange"
                     android:gravity="center">
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_history"
+                        app:srcCompat="@drawable/ic_history"
                         app:tint="#FFFFFF"
                         android:contentDescription="@string/history" />
                 </LinearLayout>
@@ -230,10 +228,10 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_shortcut_green"
                     android:gravity="center">
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_download"
+                        app:srcCompat="@drawable/ic_download"
                         app:tint="#FFFFFF"
                         android:contentDescription="Downloads" />
                 </LinearLayout>
@@ -267,10 +265,10 @@
                     android:layout_height="56dp"
                     android:background="@drawable/bg_shortcut_gray"
                     android:gravity="center">
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:layout_width="26dp"
                         android:layout_height="26dp"
-                        android:src="@drawable/ic_settings"
+                        app:srcCompat="@drawable/ic_settings"
                         app:tint="#FFFFFF"
                         android:contentDescription="@string/settings" />
                 </LinearLayout>
@@ -398,10 +396,10 @@
                 android:layout_height="64dp"
                 android:background="@drawable/bg_shortcut_blue"
                 android:gravity="center">
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="30dp"
                     android:layout_height="30dp"
-                    android:src="@drawable/ic_shield"
+                    app:srcCompat="@drawable/ic_shield"
                     app:tint="#FFFFFF"
                     android:contentDescription="Clean web state" />
             </LinearLayout>

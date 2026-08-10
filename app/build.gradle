@@ -8,12 +8,15 @@ android {
 
     defaultConfig {
         applicationId "com.naveen.browser"
-        minSdk 23
+        minSdk 21
         targetSdk 34
         versionCode 1
         versionName "1.0.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // Required for Java 8 desugaring on API < 26
+        multiDexEnabled true
     }
 
     lintOptions {
@@ -35,6 +38,8 @@ android {
     }
 
     compileOptions {
+        // Enable Java 8 desugaring for API 21+ (lambdas, streams, etc.)
+        coreLibraryDesugaringEnabled true
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
@@ -45,7 +50,12 @@ android {
 }
 
 dependencies {
+    // Core desugaring – enables Java 8+ APIs (streams, lambdas) on API 21+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:2.0.4'
+
+    // AndroidX & Material
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'

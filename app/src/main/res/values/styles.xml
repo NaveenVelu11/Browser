@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ============================================= -->
-    <!--  PRIMARY APP THEME (DayNight iOS HIG Tokens)  -->
+    <!--  PRIMARY APP THEME (API 21+ compatible)       -->
     <!-- ============================================= -->
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Brand Colors -->
@@ -11,15 +11,16 @@
         <item name="colorSecondary">@color/colorAccentiOS</item>
         <item name="colorSecondaryVariant">@color/colorAccentDark</item>
         <item name="colorOnSecondary">@color/textOnAccent</item>
-        <item name="colorSurface">?attr/colorCardBackground</item>
-        <item name="colorOnSurface">?attr/colorTextPrimary</item>
+        <!-- Direct color refs — safe on API 21 before custom attrs resolve -->
+        <item name="colorSurface">@color/ios_card_light</item>
+        <item name="colorOnSurface">@color/ios_text_primary_light</item>
         <item name="colorError">@color/colorError</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
 
-        <!-- Window & Background -->
+        <!-- Window Background (plain color — no ?attr on API 21) -->
         <item name="android:windowBackground">@color/ios_surface_light</item>
 
-        <!-- Custom iOS Theme Tokens (Default Light) -->
+        <!-- Custom Theme Tokens (Light Mode defaults) -->
         <item name="colorSurfaceBackground">@color/ios_surface_light</item>
         <item name="colorCardBackground">@color/ios_card_light</item>
         <item name="colorTextPrimary">@color/ios_text_primary_light</item>
@@ -54,6 +55,7 @@
         <item name="colorDivider">@color/ios_divider_dark</item>
 
         <item name="android:windowBackground">@color/incognitoBackground</item>
+        <!-- statusBarColor is API 21+, safe here -->
         <item name="android:statusBarColor">@color/incognitoBackground</item>
         <item name="android:navigationBarColor">@color/incognitoBackground</item>
     </style>
@@ -88,7 +90,6 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">?attr/colorTextPrimary</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">-0.01</item>
     </style>
 
     <style name="TextSubtitle">
@@ -101,7 +102,6 @@
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">?attr/colorTextSecondary</item>
         <item name="android:fontFamily">sans-serif-medium</item>
-        <item name="android:letterSpacing">0.03</item>
         <item name="android:textAllCaps">true</item>
     </style>
 
@@ -110,7 +110,6 @@
     <!-- ============================= -->
     <style name="PrimaryButton" parent="Widget.MaterialComponents.Button">
         <item name="android:textSize">15sp</item>
-        <item name="android:letterSpacing">0.01</item>
         <item name="android:paddingTop">12dp</item>
         <item name="android:paddingBottom">12dp</item>
         <item name="cornerRadius">14dp</item>
