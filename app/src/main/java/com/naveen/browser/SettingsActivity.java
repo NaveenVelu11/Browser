@@ -19,21 +19,8 @@ public class SettingsActivity extends AppCompatActivity {
     private EditText editHomepage;
     private Spinner spinnerSearch, spinnerUA, spinnerTheme, spinnerTextSize, spinnerCookies;
 
-    // Privacy
+    // Privacy Switches
     private SwitchMaterial swAdBlock, swTrackers, swHttps, swDNT, swPopups, swSafeBrowsing;
-
-    // Browsing
-    private SwitchMaterial swJavascript, swImages, swAutofill, swSession, swLocation,
-            swAutoplay, swNewTab, swPullRefresh;
-
-    // Performance
-    private SwitchMaterial swDataSaver, swPreload, swHardware;
-
-    // Downloads
-    private SwitchMaterial swAskDownload, swDlNotify;
-
-    // Appearance
-    private SwitchMaterial swShowTabCount, swShowScheme;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -178,21 +165,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (swDNT != null) pref.setDoNotTrack(swDNT.isChecked());
         if (swPopups != null) pref.setBlockPopups(swPopups.isChecked());
         if (swSafeBrowsing != null) pref.setSafeBrowsingEnabled(swSafeBrowsing.isChecked());
-        if (swJavascript != null) pref.setJavaScriptEnabled(swJavascript.isChecked());
-        if (swImages != null) pref.setShowImages(swImages.isChecked());
-        if (swAutofill != null) pref.setAutofillEnabled(swAutofill.isChecked());
-        if (swSession != null) pref.setSessionRestoreEnabled(swSession.isChecked());
-        if (swLocation != null) pref.setLocationEnabled(swLocation.isChecked());
-        if (swAutoplay != null) pref.setMediaAutoplay(swAutoplay.isChecked());
-        if (swNewTab != null) pref.setOpenLinksNewTab(swNewTab.isChecked());
-        if (swPullRefresh != null) pref.setPullToRefresh(swPullRefresh.isChecked());
-        if (swDataSaver != null) pref.setDataSaverMode(swDataSaver.isChecked());
-        if (swPreload != null) pref.setPreloadPages(swPreload.isChecked());
-        if (swHardware != null) pref.setHardwareAccelEnabled(swHardware.isChecked());
-        if (swAskDownload != null) pref.setAskBeforeDownload(swAskDownload.isChecked());
-        if (swDlNotify != null) pref.setDownloadNotifications(swDlNotify.isChecked());
-        if (swShowTabCount != null) pref.setShowTabCount(swShowTabCount.isChecked());
-        if (swShowScheme != null) pref.setShowUrlScheme(swShowScheme.isChecked());
 
         toast("Settings saved ✓");
         finish();

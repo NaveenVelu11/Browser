@@ -88,44 +88,56 @@ public class DownloadsActivity extends AppCompatActivity {
         handler.removeCallbacks(refreshRunnable);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(refreshRunnable);
+    }
+
     private void loadDownloads() {
         if (downloadManager == null) return;
 
-        DownloadManager.Query query = new DownloadManager.Query();
-        Cursor cursor = downloadManager.query(query);
-
         List<DownloadItem> list = new ArrayList<>();
-        if (cursor != null) {
-            int idCol = cursor.getColumnIndex(DownloadManager.COLUMN_ID);
-            int titleCol = cursor.getColumnIndex(DownloadManager.COLUMN_TITLE);
-            int totalCol = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
-            int currentCol = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
-            int statusCol = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
-            int localUriCol = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
+        try {
+            DownloadManager.Query query = new DownloadManager.Query();
+            Cursor cursor = downloadManager.query(query);
 
-            while (cursor.moveToNext()) {
-                long id = cursor.getLong(idCol);
-                String title = cursor.getString(titleCol);
-                long total = cursor.getLong(totalCol);
-                long current = cursor.getLong(currentCol);
-                int status = cursor.getInt(statusCol);
-                String localUri = cursor.getString(localUriCol);
+            if (cursor != null) {
+                int idCol = cursor.getColumnIndex(DownloadManager.COLUMN_ID);
+                int titleCol = cursor.getColumnIndex(DownloadManager.COLUMN_TITLE);
+                int totalCol = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                int currentCol = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+                int statusCol = cursor.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                int localUriCol = cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI);
 
-                int progress = 0;
-                if (total > 0) {
-                    progress = (int) ((current * 100) / total);
+                while (cursor.moveToNext()) {
+                    long id = idCol >= 0 ? cursor.getLong(idCol) : 0;
+                    String title = titleCol >= 0 ? cursor.getString(titleCol) : "Download";
+                    long total = totalCol >= 0 ? cursor.getLong(totalCol) : 0;
+                    long current = currentCol >= 0 ? cursor.getLong(currentCol) : 0;
+                    int status = statusCol >= 0 ? cursor.getInt(statusCol) : 0;
+                    String localUri = localUriCol >= 0 ? cursor.getString(localUriCol) : null;
+
+                    int progress = 0;
+                    if (total > 0) {
+                        progress = (int) ((current * 100) / total);
+                    }
+
+                    list.add(new DownloadItem(id, title, progress, total, current, status, localUri));
                 }
-
-                list.add(new DownloadItem(id, title, progress, total, current, status, localUri));
+                cursor.close();
             }
-            cursor.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         adapter.updateData(list);
-        if (list.isEmpty()) {
-            layoutEmpty.setVisibility(View.VISIBLE);
-        } else {
-            layoutEmpty.setVisibility(View.GONE);
+        if (layoutEmpty != null) {
+            if (list.isEmpty()) {
+                layoutEmpty.setVisibility(View.VISIBLE);
+            } else {
+                layoutEmpty.setVisibility(View.GONE);
+            }
         }
     }
 

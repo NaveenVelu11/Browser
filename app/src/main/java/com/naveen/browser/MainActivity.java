@@ -593,14 +593,37 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         webView.setWebChromeClient(new WebChromeClient() {
             @Override
+            public boolean onCreateWindow(WebView view, boolean isDialog, boolean isUserGesture, android.os.Message resultMsg) {
+                if (prefManager.isBlockPopups()) return false;
+                try {
+                    WebView newWebView = createConfiguredWebView(isIncognito, false);
+                    WebTab tab = new WebTab(UUID.randomUUID().toString(), "Popup", "about:blank", newWebView, isIncognito);
+                    tabList.add(tab);
+                    switchToTab(tabList.size() - 1);
+
+                    WebView.WebViewTransport transport = (WebView.WebViewTransport) resultMsg.obj;
+                    if (transport != null) {
+                        transport.setWebView(newWebView);
+                        resultMsg.sendToTarget();
+                        return true;
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+
+            @Override
             public void onProgressChanged(WebView view, int newProgress) {
                 if (view == getCurrentWebView()) {
                     if (newProgress == 100) {
-                        progressBar.setVisibility(View.GONE);
-                        swipeRefresh.setRefreshing(false);
+                        if (progressBar != null) progressBar.setVisibility(View.GONE);
+                        if (swipeRefresh != null) swipeRefresh.setRefreshing(false);
                     } else {
-                        progressBar.setVisibility(View.VISIBLE);
-                        progressBar.setProgress(newProgress);
+                        if (progressBar != null) {
+                            progressBar.setVisibility(View.VISIBLE);
+                            progressBar.setProgress(newProgress);
+                        }
                     }
                 }
             }
@@ -610,7 +633,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 if (view == getCurrentWebView()) {
                     WebTab currentTab = getCurrentTab();
                     if (currentTab != null) currentTab.setTitle(title);
-                    if (!editUrl.hasFocus()) {
+                    if (editUrl != null && !editUrl.hasFocus()) {
                         editUrl.setText(view.getUrl());
                     }
                 }
@@ -623,7 +646,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             @Override
             public void onPermissionRequest(PermissionRequest request) {
-                request.grant(request.getResources());
+                if (request != null) request.grant(request.getResources());
             }
 
             @Override
@@ -633,34 +656,45 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 }
                 MainActivity.this.filePathCallback = filePathCallback;
 
-                Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                File photoFile = null;
                 try {
-                    String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
-                    File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-                    photoFile = File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
-                    cameraPhotoPath = photoFile.getAbsolutePath();
-                } catch (IOException ex) {
-                    cameraPhotoPath = null;
+                    Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    File photoFile = null;
+                    try {
+                        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault()).format(new Date());
+                        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+                        if (storageDir != null) {
+                            photoFile = File.createTempFile("JPEG_" + timeStamp + "_", ".jpg", storageDir);
+                            cameraPhotoPath = photoFile.getAbsolutePath();
+                        }
+                    } catch (IOException ex) {
+                        cameraPhotoPath = null;
+                    }
+
+                    if (photoFile != null) {
+                        Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "com.naveen.browser.fileprovider", photoFile);
+                        takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                    }
+
+                    Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
+                    contentSelectionIntent.setType("*/*");
+
+                    Intent[] intentArray = photoFile != null ? new Intent[]{takePictureIntent} : new Intent[0];
+                    Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
+                    chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
+                    chooserIntent.putExtra(Intent.EXTRA_TITLE, "Select File or Camera");
+                    chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
+
+                    startActivityForResult(chooserIntent, REQUEST_FILE_CHOOSER);
+                    return true;
+                } catch (Exception e) {
+                    if (MainActivity.this.filePathCallback != null) {
+                        MainActivity.this.filePathCallback.onReceiveValue(null);
+                        MainActivity.this.filePathCallback = null;
+                    }
+                    Toast.makeText(MainActivity.this, "Cannot open file picker", Toast.LENGTH_SHORT).show();
+                    return false;
                 }
-
-                if (photoFile != null) {
-                    Uri photoURI = FileProvider.getUriForFile(MainActivity.this, "com.naveen.browser.fileprovider", photoFile);
-                    takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                }
-
-                Intent contentSelectionIntent = new Intent(Intent.ACTION_GET_CONTENT);
-                contentSelectionIntent.addCategory(Intent.CATEGORY_OPENABLE);
-                contentSelectionIntent.setType("*/*");
-
-                Intent[] intentArray = takePictureIntent != null ? new Intent[]{takePictureIntent} : new Intent[0];
-                Intent chooserIntent = new Intent(Intent.ACTION_CHOOSER);
-                chooserIntent.putExtra(Intent.EXTRA_INTENT, contentSelectionIntent);
-                chooserIntent.putExtra(Intent.EXTRA_TITLE, "Select File or Camera");
-                chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, intentArray);
-
-                startActivityForResult(chooserIntent, REQUEST_FILE_CHOOSER);
-                return true;
             }
 
             @Override
@@ -671,19 +705,24 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 }
                 customView = view;
                 customViewCallback = callback;
-                customViewContainer.addView(view);
-                customViewContainer.setVisibility(View.VISIBLE);
-                webViewContainer.setVisibility(View.GONE);
+                if (customViewContainer != null) {
+                    customViewContainer.addView(view);
+                    customViewContainer.setVisibility(View.VISIBLE);
+                }
+                if (webViewContainer != null) webViewContainer.setVisibility(View.GONE);
             }
 
             @Override
             public void onHideCustomView() {
                 if (customView == null) return;
-                customViewContainer.removeView(customView);
-                customViewContainer.setVisibility(View.GONE);
-                webViewContainer.setVisibility(View.VISIBLE);
+                if (customViewContainer != null) {
+                    customViewContainer.removeView(customView);
+                    customViewContainer.setVisibility(View.GONE);
+                }
+                if (webViewContainer != null) webViewContainer.setVisibility(View.VISIBLE);
                 if (customViewCallback != null) customViewCallback.onCustomViewHidden();
                 customView = null;
+                customViewCallback = null;
             }
         });
 
@@ -760,7 +799,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     if (btnFloatingDownloadBadge != null) btnFloatingDownloadBadge.setVisibility(View.GONE);
                     showTopHeaderBar();
                     checkHomeScreenVisibility(url);
-                    if (!editUrl.hasFocus()) {
+                    if (editUrl != null && !editUrl.hasFocus()) {
                         editUrl.setText(url != null && url.equals("about:blank") ? "" : url);
                     }
                     updateSslIcon(url);
@@ -788,6 +827,17 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
 
             @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, android.webkit.WebResourceError error) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && request != null && request.isForMainFrame()) {
+                    String failingUrl = request.getUrl() != null ? request.getUrl().toString() : "";
+                    String description = error != null ? error.getDescription().toString() : "Unknown Error";
+                    String errorTitle = "Page Load Error";
+                    String errorMsg = "DeerOne Browser could not load this webpage (" + description + ").";
+                    view.loadDataWithBaseURL(failingUrl, WebUtils.getErrorHtml(errorTitle, errorMsg, failingUrl), "text/html", "UTF-8", failingUrl);
+                }
+            }
+
+            @Override
             public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
                 String errorTitle = "Page Load Error";
                 String errorMsg = "DeerOne Browser could not load this webpage (" + description + "). Please verify your network connection.";
@@ -800,11 +850,22 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             @Override
             public void onReceivedSslError(WebView view, SslErrorHandler handler, SslError error) {
+                if (isFinishing() || isDestroyed()) {
+                    if (handler != null) handler.cancel();
+                    return;
+                }
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle(R.string.ssl_error_title)
                         .setMessage(R.string.ssl_error_msg)
-                        .setPositiveButton(R.string.proceed, (dialog, which) -> handler.proceed())
-                        .setNegativeButton(R.string.cancel, (dialog, which) -> handler.cancel())
+                        .setPositiveButton(R.string.proceed, (dialog, which) -> {
+                            if (handler != null) handler.proceed();
+                        })
+                        .setNegativeButton(R.string.cancel, (dialog, which) -> {
+                            if (handler != null) handler.cancel();
+                        })
+                        .setOnCancelListener(dialog -> {
+                            if (handler != null) handler.cancel();
+                        })
                         .show();
             }
         });
@@ -846,6 +907,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showMediaDownloadChooser() {
+        if (isFinishing() || isDestroyed()) return;
         if (detectedMediaList.isEmpty()) return;
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
@@ -1244,6 +1306,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showOverflowMenu(View v) {
+        if (isFinishing() || isDestroyed()) return;
         PopupMenu popup = new PopupMenu(this, v);
         popup.getMenuInflater().inflate(R.menu.main_overflow_menu, popup.getMenu());
         popup.setOnMenuItemClickListener(this);
@@ -1375,6 +1438,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showQrScannerDialog() {
+        if (isFinishing() || isDestroyed()) return;
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_qr_scanner, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -1400,6 +1464,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showFindInPageDialog() {
+        if (isFinishing() || isDestroyed()) return;
         View dialogView = getLayoutInflater().inflate(R.layout.dialog_find_in_page, null);
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setView(dialogView)
@@ -1456,6 +1521,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showTabsManagerDialog() {
+        if (isFinishing() || isDestroyed()) return;
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_tabs, null);
         dialog.setContentView(view);
@@ -1516,11 +1582,54 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        WebView currentWeb = getCurrentWebView();
+        if (currentWeb != null) {
+            currentWeb.onResume();
+            currentWeb.resumeTimers();
+        }
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
+        WebView currentWeb = getCurrentWebView();
+        if (currentWeb != null) {
+            currentWeb.onPause();
+            currentWeb.pauseTimers();
+        }
         if (prefManager.isSessionRestoreEnabled()) {
             saveSession();
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        if (headerAutoHideHandler != null && hideHeaderRunnable != null) {
+            headerAutoHideHandler.removeCallbacks(hideHeaderRunnable);
+        }
+        if (filePathCallback != null) {
+            filePathCallback.onReceiveValue(null);
+            filePathCallback = null;
+        }
+        if (webViewContainer != null) {
+            webViewContainer.removeAllViews();
+        }
+        for (WebTab tab : tabList) {
+            if (tab != null && tab.getWebView() != null) {
+                try {
+                    WebView web = tab.getWebView();
+                    web.setWebChromeClient(null);
+                    web.setWebViewClient(null);
+                    web.stopLoading();
+                    web.loadUrl("about:blank");
+                    web.destroy();
+                } catch (Exception ignored) {}
+            }
+        }
+        tabList.clear();
+        super.onDestroy();
     }
 
     @Override
@@ -1597,6 +1706,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void showPrivacyDashboard() {
+        if (isFinishing() || isDestroyed()) return;
         BottomSheetDialog dialog = new BottomSheetDialog(this);
         View view = getLayoutInflater().inflate(R.layout.dialog_privacy_dashboard, null);
         dialog.setContentView(view);
