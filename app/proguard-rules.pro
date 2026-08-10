@@ -1,18 +1,32 @@
-# ProGuard rules for Browser application
+# Keep all Browser classes
 -keep class com.naveen.browser.** { *; }
 
-# Preserve WebView Javascript interfaces
--keepclassmembers class * {
-    @android.webkit.JavascriptInterface <methods>;
+# Keep AndroidX classes
+-keep class androidx.** { *; }
+-keepclassmembers class androidx.** { *; }
+
+# Keep WebView
+-keep class android.webkit.** { *; }
+-keepclassmembers class android.webkit.** { *; }
+
+# Keep all native methods
+-keepclasseswithmembernames class * {
+    native <methods>;
 }
 
--keepattributes JavascriptInterface
--keepclassmembers class * extends android.webkit.WebViewClient {
-    public void *(...);
-}
--keepclassmembers class * extends android.webkit.WebChromeClient {
-    public void *(...);
+# Keep enums
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
 }
 
-# AndroidX Keep Rules
--keep class androidx.webkit.** { *; }
+# Keep custom application classes
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.ContentProvider
+-keep public class * extends android.content.BroadcastReceiver
+
+# Reduce build size
+-dontwarn javax.**
+-dontwarn sun.misc.**
+-dontwarn org.apache.**

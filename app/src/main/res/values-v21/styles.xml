@@ -10,17 +10,6 @@
         <item name="colorAccentiOS">@color/colorAccent</item>
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textColorPrimary">@android:color/black</item>
-    </style>
-
-    <style name="AppTheme.Dark" parent="Theme.AppCompat">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccentiOS</item>
-        <item name="colorSurfaceBackground">@color/incognitoBackground</item>
-        <item name="colorCardBackground">@color/incognitoSurface</item>
-        <item name="colorTextPrimary">@color/incognitoText</item>
-        <item name="colorAccentiOS">@color/incognito_accent</item>
-        <item name="android:windowBackground">@color/incognitoBackground</item>
-        <item name="android:textColorPrimary">@color/incognitoText</item>
+        <item name="android:elevation">4dp</item>
     </style>
 </resources>
