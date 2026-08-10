@@ -8,15 +8,15 @@
         <item name="colorSecondary">@color/colorAccentiOS</item>
         <item name="colorSecondaryVariant">@color/colorAccentDark</item>
         <item name="colorOnSecondary">@color/textOnAccent</item>
-        <item name="colorSurface">?attr/colorCardBackground</item>
-        <item name="colorOnSurface">?attr/colorTextPrimary</item>
+        <item name="colorSurface">@color/ios_card_light</item>
+        <item name="colorOnSurface">@color/ios_text_primary_light</item>
         <item name="colorError">@color/colorError</item>
         <item name="android:colorPrimary">@color/colorPrimary</item>
 
-        <!-- Window & Background -->
-        <item name="android:windowBackground">?attr/colorSurfaceBackground</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceBackground</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceBackground</item>
+        <!-- Window & Background (API 23+: safe to use statusBarColor here) -->
+        <item name="android:windowBackground">@color/ios_surface_light</item>
+        <item name="android:statusBarColor">@color/ios_surface_light</item>
+        <item name="android:navigationBarColor">@color/ios_surface_light</item>
         <item name="android:windowLightStatusBar">true</item>
 
         <!-- Custom iOS Theme Tokens (Default Light) -->

@@ -72,4 +72,9 @@
     <!-- === iOS Switch Tints === -->
     <color name="ios_switch_track_on">#34C759</color>
     <color name="ios_switch_track_off">#78788033</color>
+
+    <!-- === Splash Screen === -->
+    <color name="splash_bg">#F2F2F7</color>
+    <color name="splash_text_primary">#1C1C1E</color>
+    <color name="splash_text_secondary">#6E6E73</color>
 </resources>

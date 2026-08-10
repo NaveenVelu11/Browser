@@ -12,31 +12,28 @@ import com.naveen.browser.utils.PreferenceManager;
 
 public class SplashActivity extends AppCompatActivity {
 
-    static {
-        androidx.appcompat.app.AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PreferenceManager pm = new PreferenceManager(this);
         setContentView(R.layout.activity_splash);
+
+        final PreferenceManager pm = new PreferenceManager(this);
 
         View splashContent = findViewById(R.id.splash_content);
         if (splashContent != null) {
             splashContent.setAlpha(0f);
-            splashContent.setScaleX(0.85f);
-            splashContent.setScaleY(0.85f);
+            splashContent.setScaleX(0.88f);
+            splashContent.setScaleY(0.88f);
             splashContent.animate()
                     .alpha(1f)
                     .scaleX(1f)
                     .scaleY(1f)
-                    .setDuration(450)
+                    .setDuration(480)
                     .setInterpolator(new AccelerateDecelerateInterpolator())
                     .start();
         }
 
-        // Sub-second startup target (650ms max before navigation)
+        // Navigate after 700ms — fast startup, clean transition
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
             Intent intent;
             if (pm.isFirstLaunch()) {
@@ -47,6 +44,6 @@ public class SplashActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        }, 650);
+        }, 700);
     }
 }

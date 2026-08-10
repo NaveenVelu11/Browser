@@ -10,94 +10,100 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal"
         android:orientation="vertical"
         android:paddingStart="20dp"
-        android:paddingTop="76dp"
+        android:paddingTop="80dp"
         android:paddingEnd="20dp"
-        android:paddingBottom="40dp">
+        android:paddingBottom="48dp">
 
         <!-- ================================================ -->
-        <!--  LOGO + BRANDING (Centered iOS Squircle Logo)     -->
+        <!--  HERO LOGO + GREETING SECTION                    -->
         <!-- ================================================ -->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
             android:gravity="center"
             android:orientation="vertical">
 
-            <androidx.cardview.widget.CardView
-                android:layout_width="84dp"
-                android:layout_height="84dp"
-                android:layout_gravity="center_horizontal"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="@android:color/transparent">
+            <!-- App Icon with gradient background -->
+            <LinearLayout
+                android:layout_width="88dp"
+                android:layout_height="88dp"
+                android:background="@drawable/bg_splash_logo"
+                android:gravity="center"
+                android:elevation="6dp">
 
                 <ImageView
                     android:id="@+id/img_home_logo"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_width="52dp"
+                    android:layout_height="52dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_app_logo"
+                    android:src="@drawable/ic_deerone_logo"
                     android:contentDescription="@string/app_name" />
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
+            <!-- Brand name -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="18dp"
                 android:text="DeerOne"
                 android:textColor="?attr/colorTextPrimary"
-                android:textSize="32sp"
+                android:textSize="30sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold"
                 android:letterSpacing="-0.02" />
 
+            <!-- Subtext -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="4dp"
-                android:text="Fast • Private • Minimalist"
+                android:text="Fast · Private · Minimalist"
                 android:textColor="?attr/colorTextSecondary"
                 android:textSize="13sp"
                 android:fontFamily="sans-serif"
-                android:letterSpacing="-0.01" />
+                android:letterSpacing="0.01" />
+
         </LinearLayout>
 
         <!-- ================================================ -->
-        <!--  FLOATING SEARCH PILL BAR                         -->
+        <!--  FLOATING SEARCH PILL (Main CTA)                 -->
         <!-- ================================================ -->
         <androidx.cardview.widget.CardView
             android:id="@+id/card_home_search"
             android:layout_width="match_parent"
-            android:layout_height="54dp"
-            android:layout_marginTop="32dp"
-            app:cardCornerRadius="27dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="?attr/colorCardBackground"
+            android:layout_height="56dp"
+            android:layout_marginTop="28dp"
             android:clickable="true"
             android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground">
+            app:cardCornerRadius="28dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="?attr/colorCardBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
-                android:paddingStart="18dp"
-                android:paddingEnd="14dp">
+                android:paddingStart="20dp"
+                android:paddingEnd="16dp">
 
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_search"
-                    app:tint="?attr/colorAccentiOS"
-                    android:contentDescription="@string/search" />
+                <!-- Search icon -->
+                <LinearLayout
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:background="@drawable/bg_search_icon"
+                    android:gravity="center">
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_search"
+                        app:tint="#FFFFFF"
+                        android:contentDescription="@string/search" />
+                </LinearLayout>
 
+                <!-- Hint text -->
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -108,11 +114,12 @@
                     android:textSize="15sp"
                     android:fontFamily="sans-serif" />
 
+                <!-- Mic button -->
                 <ImageView
                     android:id="@+id/btn_home_voice"
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:padding="8dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
                     android:src="@drawable/ic_reader"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Voice Search"
@@ -121,16 +128,16 @@
         </androidx.cardview.widget.CardView>
 
         <!-- ================================================ -->
-        <!--  QUICK ACCESS NAVIGATION BAR                       -->
+        <!--  QUICK ACCESS ROW (4 icon shortcut pills)        -->
         <!-- ================================================ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             android:gravity="center">
 
-            <!-- Bookmarks -->
+            <!-- Bookmarks shortcut -->
             <LinearLayout
                 android:id="@+id/shortcut_bookmarks"
                 android:layout_width="0dp"
@@ -145,29 +152,29 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:background="@drawable/shape_address_bar_bg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_shortcut_blue"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/ic_bookmark"
-                        app:tint="?attr/colorAccentiOS"
+                        app:tint="#FFFFFF"
                         android:contentDescription="@string/bookmarks" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="7dp"
                     android:text="Bookmarks"
                     android:textColor="?attr/colorTextSecondary"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
-            <!-- History -->
+            <!-- History shortcut -->
             <LinearLayout
                 android:id="@+id/shortcut_history"
                 android:layout_width="0dp"
@@ -182,29 +189,29 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:background="@drawable/shape_address_bar_bg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_shortcut_orange"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/ic_history"
-                        app:tint="?attr/colorAccentiOS"
+                        app:tint="#FFFFFF"
                         android:contentDescription="@string/history" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="7dp"
                     android:text="History"
                     android:textColor="?attr/colorTextSecondary"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
-            <!-- Downloads -->
+            <!-- Downloads shortcut -->
             <LinearLayout
                 android:id="@+id/shortcut_downloads"
                 android:layout_width="0dp"
@@ -219,29 +226,29 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:background="@drawable/shape_address_bar_bg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_shortcut_green"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/ic_download"
-                        app:tint="?attr/colorAccentiOS"
+                        app:tint="#FFFFFF"
                         android:contentDescription="Downloads" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="7dp"
                     android:text="Downloads"
                     android:textColor="?attr/colorTextSecondary"
                     android:textSize="11sp"
                     android:fontFamily="sans-serif-medium" />
             </LinearLayout>
 
-            <!-- Settings -->
+            <!-- Settings shortcut -->
             <LinearLayout
                 android:id="@+id/shortcut_settings"
                 android:layout_width="0dp"
@@ -256,22 +263,22 @@
                 android:background="?attr/selectableItemBackground">
 
                 <LinearLayout
-                    android:layout_width="52dp"
-                    android:layout_height="52dp"
-                    android:background="@drawable/shape_address_bar_bg"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_shortcut_gray"
                     android:gravity="center">
                     <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
+                        android:layout_width="26dp"
+                        android:layout_height="26dp"
                         android:src="@drawable/ic_settings"
-                        app:tint="?attr/colorAccentiOS"
+                        app:tint="#FFFFFF"
                         android:contentDescription="@string/settings" />
                 </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
+                    android:layout_marginTop="7dp"
                     android:text="Settings"
                     android:textColor="?attr/colorTextSecondary"
                     android:textSize="11sp"
@@ -281,20 +288,21 @@
         </LinearLayout>
 
         <!-- ================================================ -->
-        <!--  QUICK SHORTCUTS SECTION (4x2 Grid)               -->
+        <!--  QUICK SHORTCUTS SECTION HEADER                  -->
         <!-- ================================================ -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="0dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
             <View
-                android:layout_width="3dp"
-                android:layout_height="16dp"
+                android:layout_width="4dp"
+                android:layout_height="18dp"
                 android:layout_marginEnd="10dp"
-                android:background="?attr/colorAccentiOS" />
+                android:background="@drawable/bg_section_accent" />
 
             <TextView
                 android:layout_width="0dp"
@@ -314,20 +322,20 @@
                 android:textColor="?attr/colorAccentiOS"
                 android:textSize="13sp"
                 android:fontFamily="sans-serif-medium"
-                android:padding="6dp"
+                android:padding="8dp"
                 android:background="?attr/selectableItemBackgroundBorderless" />
         </LinearLayout>
 
-        <!-- Dynamic Custom Shortcuts Grid (60x60 Squircle Cards) -->
+        <!-- Custom Shortcuts Grid -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_custom_shortcuts"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             android:nestedScrollingEnabled="false" />
 
         <!-- ================================================ -->
-        <!--  RECENTLY VISITED PAGES SECTION                   -->
+        <!--  RECENTLY VISITED SECTION HEADER                 -->
         <!-- ================================================ -->
         <LinearLayout
             android:id="@+id/section_recent_visited"
@@ -338,10 +346,10 @@
             android:orientation="horizontal">
 
             <View
-                android:layout_width="3dp"
-                android:layout_height="16dp"
+                android:layout_width="4dp"
+                android:layout_height="18dp"
                 android:layout_marginEnd="10dp"
-                android:background="?attr/colorAccentiOS" />
+                android:background="@drawable/bg_section_accent" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -353,11 +361,11 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Inset Grouped Recent Items -->
+        <!-- Recent history card list -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="10dp"
             app:cardCornerRadius="16dp"
             app:cardElevation="0dp"
             app:cardBackgroundColor="?attr/colorCardBackground">
@@ -370,42 +378,51 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Premium Empty State -->
+        <!-- Empty state (clean start) -->
         <LinearLayout
             android:id="@+id/layout_home_empty_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="32dp"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="24dp"
-            android:background="@drawable/shape_address_bar_bg"
+            android:paddingTop="32dp"
+            android:paddingBottom="32dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:background="@drawable/bg_empty_state"
             android:visibility="gone">
 
-            <ImageView
-                android:layout_width="44dp"
-                android:layout_height="44dp"
-                android:src="@drawable/ic_shield"
-                app:tint="?attr/colorAccentiOS"
-                android:contentDescription="Clean web state" />
+            <LinearLayout
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:background="@drawable/bg_shortcut_blue"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/ic_shield"
+                    app:tint="#FFFFFF"
+                    android:contentDescription="Clean web state" />
+            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="16dp"
                 android:text="Your Clean Web Space"
                 android:textColor="?attr/colorTextPrimary"
-                android:textSize="15sp"
+                android:textSize="16sp"
                 android:fontFamily="sans-serif-medium"
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Search or tap + Add to pin your favorite sites."
+                android:layout_marginTop="6dp"
+                android:text="Type a URL above or add shortcuts to get started."
                 android:textColor="?attr/colorTextSecondary"
-                android:textSize="12sp"
+                android:textSize="13sp"
                 android:gravity="center" />
         </LinearLayout>
 

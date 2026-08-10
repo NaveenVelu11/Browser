@@ -17,9 +17,7 @@
         <item name="android:colorPrimary">@color/colorPrimary</item>
 
         <!-- Window & Background -->
-        <item name="android:windowBackground">?attr/colorSurfaceBackground</item>
-        <item name="android:statusBarColor">?attr/colorSurfaceBackground</item>
-        <item name="android:navigationBarColor">?attr/colorSurfaceBackground</item>
+        <item name="android:windowBackground">@color/ios_surface_light</item>
 
         <!-- Custom iOS Theme Tokens (Default Light) -->
         <item name="colorSurfaceBackground">@color/ios_surface_light</item>

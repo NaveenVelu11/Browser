@@ -19,10 +19,6 @@ import com.naveen.browser.utils.PreferenceManager;
 
 public class OnboardingActivity extends AppCompatActivity {
 
-    static {
-        androidx.appcompat.app.AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
-    }
-
     private ViewPager viewPager;
     private LinearLayout layoutDots;
     private Button btnNext;
