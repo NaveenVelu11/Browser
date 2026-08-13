@@ -37,6 +37,20 @@ public class WebUtils {
             "Mozilla/5.0 (Linux; Android 10; Tablet) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 
+    public static void setDesktopMode(android.webkit.WebView webView, boolean enable) {
+        if (webView == null) return;
+        android.webkit.WebSettings settings = webView.getSettings();
+        if (enable) {
+            settings.setUserAgentString(DESKTOP_USER_AGENT);
+            settings.setUseWideViewPort(true);
+            settings.setLoadWithOverviewMode(true);
+        } else {
+            settings.setUserAgentString(MOBILE_USER_AGENT);
+            settings.setUseWideViewPort(false);
+            settings.setLoadWithOverviewMode(false);
+        }
+    }
+
     private static final Pattern WEB_URL_PATTERN = Pattern.compile(
             "^(https?://)?(([a-zA-Z0-9\\-]+\\.)+[a-zA-Z]{2,}|localhost|\\d{1,3}\\.\\d{1,3}\\.\\d{1,3}\\.\\d{1,3})(:\\d+)?(/.*)?$"
     );

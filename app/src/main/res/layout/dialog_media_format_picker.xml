@@ -35,12 +35,12 @@
                     app:cardElevation="0dp"
                     app:cardBackgroundColor="?attr/colorSurfaceBackground">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/img_video_thumbnail"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scaleType="centerCrop"
-                        android:src="@drawable/ic_app_logo"
+                        app:srcCompat="@drawable/ic_app_logo"
                         android:contentDescription="Video Thumbnail" />
                 </androidx.cardview.widget.CardView>
 

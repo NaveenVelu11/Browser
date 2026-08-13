@@ -31,7 +31,7 @@ public class BookmarksActivity extends AppCompatActivity implements BookmarksAda
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookmarks);
 
-        dbHelper = new DatabaseHelper(this);
+        dbHelper = DatabaseHelper.getInstance(this);
 
         ImageButton btnBack = findViewById(R.id.btn_back_bookmarks);
         EditText editSearch = findViewById(R.id.edit_search_bookmarks);

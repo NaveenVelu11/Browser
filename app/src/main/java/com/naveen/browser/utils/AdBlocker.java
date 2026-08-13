@@ -47,6 +47,21 @@ public class AdBlocker {
     }
 
     public static WebResourceResponse createEmptyResource() {
-        return new WebResourceResponse("text/plain", "utf-8", new ByteArrayInputStream("".getBytes()));
+        return createEmptyResource(null);
+    }
+
+    public static WebResourceResponse createEmptyResource(String url) {
+        String mime = "text/plain";
+        if (url != null) {
+            String lower = url.toLowerCase();
+            if (lower.endsWith(".js") || lower.contains(".js?")) {
+                mime = "application/javascript";
+            } else if (lower.endsWith(".css") || lower.contains(".css?")) {
+                mime = "text/css";
+            } else if (lower.endsWith(".png") || lower.endsWith(".jpg") || lower.endsWith(".gif") || lower.endsWith(".ico") || lower.endsWith(".webp")) {
+                mime = "image/png";
+            }
+        }
+        return new WebResourceResponse(mime, "utf-8", new ByteArrayInputStream(new byte[0]));
     }
 }

@@ -38,8 +38,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_SC_TITLE = "title";
     private static final String COLUMN_SC_URL = "url";
 
+    private static DatabaseHelper instance;
+
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return instance;
+    }
+
     public DatabaseHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        super(context.getApplicationContext(), DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override

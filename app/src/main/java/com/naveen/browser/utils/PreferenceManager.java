@@ -156,21 +156,26 @@ public class PreferenceManager {
     public void applyTheme() {
         try {
             int themeMode = getThemeMode();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                switch (themeMode) {
-                    case 1: 
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO); 
-                        break;
-                    case 2: 
-                        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); 
-                        break;
-                    default: 
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
-                        } else {
-                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_AUTO);
-                        }
-                }
+            int targetNightMode;
+            switch (themeMode) {
+                case 1:
+                    targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
+                    break;
+                case 2:
+                    targetNightMode = AppCompatDelegate.MODE_NIGHT_YES;
+                    break;
+                default:
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        targetNightMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        targetNightMode = AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY;
+                    } else {
+                        targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
+                    }
+                    break;
+            }
+            if (AppCompatDelegate.getDefaultNightMode() != targetNightMode) {
+                AppCompatDelegate.setDefaultNightMode(targetNightMode);
             }
         } catch (Exception e) {
             Log.w(TAG, "Error applying theme", e);

@@ -32,7 +32,7 @@ public class HistoryActivity extends AppCompatActivity implements HistoryAdapter
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
-        dbHelper = new DatabaseHelper(this);
+        dbHelper = DatabaseHelper.getInstance(this);
 
         ImageButton btnBack = findViewById(R.id.btn_back_history);
         ImageButton btnClear = findViewById(R.id.btn_clear_history);

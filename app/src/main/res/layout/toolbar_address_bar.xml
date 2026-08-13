@@ -3,78 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/address_bar_root"
     android:layout_width="match_parent"
-    android:layout_height="56dp"
+    android:layout_height="52dp"
     android:background="?attr/colorSurfaceBackground"
-    android:elevation="4dp"
+    android:elevation="2dp"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="8dp"
+    android:paddingStart="12dp"
     android:paddingEnd="8dp">
 
-    <!-- SSL Lock / Security Status Icon -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_ssl_lock"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Security Status"
-        android:padding="10dp"
-        app:srcCompat="@drawable/ic_lock"
-        app:tint="?attr/colorAccentiOS" />
-
-    <!-- URL Edit Text — takes all remaining horizontal space -->
-    <EditText
-        android:id="@+id/edit_url"
+    <!-- Pill Container -->
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="38dp"
         android:layout_weight="1"
-        android:layout_marginStart="2dp"
-        android:layout_marginEnd="2dp"
         android:background="@drawable/shape_address_bar_bg"
-        android:ellipsize="end"
-        android:fontFamily="sans-serif"
-        android:hint="@string/search_or_type_url"
-        android:imeOptions="actionGo|flagNoExtractUi"
-        android:inputType="textUri|textNoSuggestions"
-        android:maxLines="1"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
-        android:selectAllOnFocus="true"
-        android:textColor="?attr/colorTextPrimary"
-        android:textColorHint="?attr/colorTextSecondary"
-        android:textSize="14sp" />
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="6dp"
+        android:paddingEnd="6dp">
 
-    <!-- Clear URL Button -->
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/btn_clear_url"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Clear Text"
-        android:padding="10dp"
-        android:visibility="gone"
-        app:srcCompat="@drawable/ic_clear"
-        app:tint="?attr/colorTextSecondary" />
+        <!-- SSL Lock / Security Status Icon (Hidden for Ultra Minimal Header) -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_ssl_lock"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
 
-    <!-- Collapse / Hide Header -->
+        <!-- URL Edit Text -->
+        <EditText
+            android:id="@+id/edit_url"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:ellipsize="end"
+            android:fontFamily="sans-serif"
+            android:gravity="center_vertical"
+            android:hint="@string/search_or_type_url"
+            android:imeOptions="actionGo|flagNoExtractUi"
+            android:inputType="textUri|textNoSuggestions"
+            android:maxLines="1"
+            android:paddingStart="12dp"
+            android:paddingEnd="6dp"
+            android:selectAllOnFocus="true"
+            android:textColor="?attr/colorTextPrimary"
+            android:textColorHint="?attr/colorTextSecondary"
+            android:textSize="14sp" />
+
+        <!-- Clear URL Button -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_clear_url"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Clear Text"
+            android:padding="6dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_clear"
+            app:tint="?attr/colorTextSecondary" />
+
+        <!-- Refresh / Reload Button -->
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_refresh"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="Reload Page"
+            android:padding="6dp"
+            app:srcCompat="@drawable/ic_refresh"
+            app:tint="?attr/colorTextSecondary" />
+
+    </LinearLayout>
+
+    <!-- Hidden Collapse Header button for backwards compatibility -->
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_collapse_header"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:contentDescription="Collapse Header"
-        android:padding="10dp"
-        app:srcCompat="@drawable/ic_clear"
-        app:tint="?attr/colorTextSecondary" />
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone" />
 
-    <!-- Overflow / More Menu -->
+    <!-- Overflow / 3 Dots Menu -->
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_overflow"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="4dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="@string/settings"
-        android:padding="10dp"
+        android:padding="8dp"
         app:srcCompat="@drawable/ic_menu"
         app:tint="?attr/colorTextPrimary" />
 

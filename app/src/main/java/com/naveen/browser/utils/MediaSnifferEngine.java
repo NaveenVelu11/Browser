@@ -48,26 +48,30 @@ public class MediaSnifferEngine {
         if (lowerUrl.contains(".mp4") || lowerUrl.contains("video/mp4")) {
             mediaType = "Video (MP4)";
             extension = "mp4";
-        } else if (lowerUrl.contains(".m3u8") || lowerUrl.contains("application/x-mpegurl")) {
+        } else if (lowerUrl.contains(".m3u8") || lowerUrl.contains("application/x-mpegurl") || lowerUrl.contains("vnd.apple.mpegurl")) {
             mediaType = "HLS Video Stream";
             extension = "m3u8";
-        } else if (lowerUrl.contains(".webm")) {
+        } else if (lowerUrl.contains(".webm") || lowerUrl.contains("video/webm")) {
             mediaType = "Video (WebM)";
             extension = "webm";
-        } else if (lowerUrl.contains(".jpg") || lowerUrl.contains(".jpeg") || lowerUrl.contains("image/jpeg")) {
-            mediaType = "Image (JPEG)";
-            extension = "jpg";
-        } else if (lowerUrl.contains(".png") || lowerUrl.contains("image/png")) {
-            mediaType = "Image (PNG)";
-            extension = "png";
-        } else if (lowerUrl.contains(".webp") || lowerUrl.contains("image/webp")) {
-            mediaType = "Image (WebP)";
-            extension = "webp";
-        } else if (lowerUrl.contains("twimg.com") || lowerUrl.contains("instagram.com/p/") || lowerUrl.contains("tiktok.com")) {
-            if (lowerUrl.contains(".mp4") || lowerUrl.contains("video")) {
-                mediaType = "Social Media Video";
-                extension = "mp4";
-            }
+        } else if (lowerUrl.contains(".mp3") || lowerUrl.contains("audio/mpeg") || lowerUrl.contains("audio/mp3")) {
+            mediaType = "Audio (MP3)";
+            extension = "mp3";
+        } else if (lowerUrl.contains(".m4a") || lowerUrl.contains("audio/mp4") || lowerUrl.contains("audio/aac")) {
+            mediaType = "Audio (M4A)";
+            extension = "m4a";
+        } else if (lowerUrl.contains(".pdf") || lowerUrl.contains("application/pdf")) {
+            mediaType = "Document (PDF)";
+            extension = "pdf";
+        } else if (lowerUrl.contains(".apk") || lowerUrl.contains("application/vnd.android.package-archive")) {
+            mediaType = "Android Package (APK)";
+            extension = "apk";
+        } else if (lowerUrl.contains(".zip") || lowerUrl.contains("application/zip") || lowerUrl.contains(".rar")) {
+            mediaType = "Archive (ZIP)";
+            extension = "zip";
+        } else if ((lowerUrl.contains("twimg.com/video") || lowerUrl.contains("instagram.com/p/") || lowerUrl.contains("tiktok.com")) && (lowerUrl.contains(".mp4") || lowerUrl.contains("video"))) {
+            mediaType = "Social Media Video";
+            extension = "mp4";
         }
 
         if (mediaType != null) {

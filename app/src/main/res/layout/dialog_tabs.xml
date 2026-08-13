@@ -27,21 +27,21 @@
             android:fontFamily="sans-serif-medium"
             android:textStyle="bold" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_dialog_add_tab"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_add"
+            app:srcCompat="@drawable/ic_add"
             app:tint="@color/colorAccent"
             android:contentDescription="@string/new_tab" />
 
-        <ImageButton
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/btn_dialog_close_tabs"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_close"
+            app:srcCompat="@drawable/ic_close"
             app:tint="@color/textPrimary"
             android:contentDescription="@string/close_tab" />
     </LinearLayout>
@@ -92,10 +92,10 @@
             android:clickable="true"
             android:focusable="true">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="18dp"
                 android:layout_height="18dp"
-                android:src="@drawable/ic_incognito"
+                app:srcCompat="@drawable/ic_incognito"
                 app:tint="@color/incognito_accent"
                 android:contentDescription="Incognito" />
 

@@ -33,14 +33,14 @@
             android:textColor="@color/textSecondary"
             android:textSize="13sp" />
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_close_dashboard"
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:src="@drawable/ic_clear"
+            app:srcCompat="@drawable/ic_clear"
             app:tint="@color/iconTint"
             android:contentDescription="Close" />
     </RelativeLayout>
@@ -61,11 +61,11 @@
             android:orientation="horizontal"
             android:padding="14dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img_security_status"
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/ic_lock"
+                app:srcCompat="@drawable/ic_lock"
                 app:tint="@color/colorAccent"
                 android:contentDescription="Security Lock" />
 
@@ -118,10 +118,10 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_onboarding_adblock"
+                    app:srcCompat="@drawable/ic_onboarding_adblock"
                     app:tint="@color/colorAccent"
                     android:contentDescription="Ad block shield" />
 

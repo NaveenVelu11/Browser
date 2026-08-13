@@ -17,6 +17,8 @@ android {
 
         // Required for Java 8 desugaring on API < 26
         multiDexEnabled true
+
+        vectorDrawables.useSupportLibrary = true
     }
 
     lintOptions {

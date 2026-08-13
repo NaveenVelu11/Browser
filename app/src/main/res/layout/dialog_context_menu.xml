@@ -74,10 +74,10 @@
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_open_in_new"
+                    app:srcCompat="@drawable/ic_open_in_new"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Open in New Tab" />
 
@@ -111,10 +111,10 @@
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_copy"
+                    app:srcCompat="@drawable/ic_copy"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Copy Link Address" />
 
@@ -148,10 +148,10 @@
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_download"
+                    app:srcCompat="@drawable/ic_download"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Download Media" />
 
@@ -185,10 +185,10 @@
                 android:focusable="true"
                 android:background="?attr/selectableItemBackground">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_share"
+                    app:srcCompat="@drawable/ic_share"
                     app:tint="?attr/colorAccentiOS"
                     android:contentDescription="Share Media" />
 

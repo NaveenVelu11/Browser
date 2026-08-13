@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="64dp"
     android:background="?attr/selectableItemBackground"
@@ -10,11 +11,11 @@
     android:paddingStart="16dp"
     android:paddingEnd="16dp">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/img_history_icon"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:src="@drawable/ic_history"
+        app:srcCompat="@drawable/ic_history"
         android:contentDescription="@string/history" />
 
     <LinearLayout
@@ -45,11 +46,11 @@
             android:textSize="12sp" />
     </LinearLayout>
 
-    <ImageButton
+    <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/btn_delete_history"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:background="?attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_delete"
+        app:srcCompat="@drawable/ic_delete"
         android:contentDescription="@string/delete" />
 </LinearLayout>

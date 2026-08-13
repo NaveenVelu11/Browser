@@ -144,7 +144,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         super.onCreate(savedInstanceState);
         prefManager = new PreferenceManager(this);
         setContentView(R.layout.activity_main);
-        dbHelper = new DatabaseHelper(this);
+        dbHelper = DatabaseHelper.getInstance(this);
 
         initViews();
         requestPermissionsIfNecessary();
@@ -203,12 +203,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }));
 
-        ImageButton btnGo = findViewById(R.id.btn_go);
-        ImageButton btnOverflow = findViewById(R.id.btn_overflow);
-        ImageButton btnBack = findViewById(R.id.btn_back);
-        ImageButton btnForward = findViewById(R.id.btn_forward);
-        ImageButton btnRefresh = findViewById(R.id.btn_refresh);
-        ImageButton btnHome = findViewById(R.id.btn_home);
+        View btnGo = findViewById(R.id.btn_go);
+        View btnOverflow = findViewById(R.id.btn_overflow);
+        View btnBack = findViewById(R.id.btn_back);
+        View btnForward = findViewById(R.id.btn_forward);
+        View btnRefresh = findViewById(R.id.btn_refresh);
+        View btnHome = findViewById(R.id.btn_home);
         FrameLayout btnTabsLayout = findViewById(R.id.btn_tabs_layout);
 
         // Native Home Screen Integration
@@ -468,12 +468,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         webView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
-        // Hardware Acceleration Preference
-        if (prefManager.isHardwareAccelEnabled()) {
-            webView.setLayerType(android.view.View.LAYER_TYPE_HARDWARE, null);
-        } else {
-            webView.setLayerType(android.view.View.LAYER_TYPE_SOFTWARE, null);
-        }
+        // Use default LAYER_TYPE_NONE so Chromium hardware renderer draws directly to window surface without offscreen GPU buffer overhead
+        webView.setLayerType(android.view.View.LAYER_TYPE_NONE, null);
 
         WebSettings settings = webView.getSettings();
 
@@ -551,12 +547,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
 
-        // Scroll listener for auto-hiding top toolbar
+        // Scroll listener for auto-hiding top toolbar with anti-jitter threshold
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             webView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-                if (scrollY > oldScrollY + 12) {
+                if (scrollY > oldScrollY + 24) {
                     hideTopHeaderBar();
-                } else if (scrollY < oldScrollY - 12) {
+                } else if (scrollY < oldScrollY - 24) {
                     showTopHeaderBar();
                 }
             });
@@ -735,13 +731,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                         String url = request.getUrl().toString();
                         if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
                             if (AdBlocker.isAdOrTracker(url)) {
-                                runOnUiThread(() -> {
-                                    try {
-                                        WebTab currentTab = getCurrentTab();
-                                        if (currentTab != null) currentTab.incrementBlockedCount();
-                                    } catch (Exception ignored) {}
-                                });
-                                return AdBlocker.createEmptyResource();
+                                WebTab currentTab = getCurrentTab();
+                                if (currentTab != null) currentTab.incrementBlockedCount();
+                                return AdBlocker.createEmptyResource(url);
                             }
                         }
                         checkMediaResource(url, null);
@@ -757,13 +749,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     if (url != null) {
                         if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
                             if (AdBlocker.isAdOrTracker(url)) {
-                                runOnUiThread(() -> {
-                                    try {
-                                        WebTab currentTab = getCurrentTab();
-                                        if (currentTab != null) currentTab.incrementBlockedCount();
-                                    } catch (Exception ignored) {}
-                                });
-                                return AdBlocker.createEmptyResource();
+                                WebTab currentTab = getCurrentTab();
+                                if (currentTab != null) currentTab.incrementBlockedCount();
+                                return AdBlocker.createEmptyResource(url);
                             }
                         }
                         checkMediaResource(url, null);
@@ -816,8 +804,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     }
                     WebTab currentTab = getCurrentTab();
                     if (currentTab != null && !currentTab.isIncognito() && url != null && !url.equals("about:blank")) {
-                        dbHelper.addHistory(new HistoryItem(view.getTitle(), url, System.currentTimeMillis()));
-                        loadRecentVisitedData();
+                        final String pageTitle = view.getTitle();
+                        final String pageUrl = url;
+                        new Thread(() -> {
+                            dbHelper.addHistory(new HistoryItem(pageTitle, pageUrl, System.currentTimeMillis()));
+                            runOnUiThread(MainActivity.this::loadRecentVisitedData);
+                        }).start();
                     }
 
                     if (prefManager.isNightMode() && url != null && !url.equals("about:blank")) {
@@ -1307,27 +1299,133 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void showOverflowMenu(View v) {
         if (isFinishing() || isDestroyed()) return;
-        PopupMenu popup = new PopupMenu(this, v);
-        popup.getMenuInflater().inflate(R.menu.main_overflow_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(this);
 
-        MenuItem desktopItem = popup.getMenu().findItem(R.id.menu_desktop_site);
-        if (desktopItem != null) {
-            WebTab currentTab = getCurrentTab();
-            desktopItem.setChecked(currentTab != null && currentTab.isDesktopMode());
+        com.google.android.material.bottomsheet.BottomSheetDialog bottomSheet = 
+                new com.google.android.material.bottomsheet.BottomSheetDialog(this);
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_menu_overflow, null);
+        bottomSheet.setContentView(dialogView);
+
+        TextView txtMenuTitle = dialogView.findViewById(R.id.txt_menu_title);
+        WebView currentWeb = getCurrentWebView();
+        if (currentWeb != null && currentWeb.getUrl() != null && !currentWeb.getUrl().equals("about:blank")) {
+            if (txtMenuTitle != null) {
+                txtMenuTitle.setText(currentWeb.getTitle() != null ? currentWeb.getTitle() : currentWeb.getUrl());
+            }
         }
 
-        MenuItem nightItem = popup.getMenu().findItem(R.id.menu_night_mode);
-        if (nightItem != null) {
-            nightItem.setChecked(prefManager.isNightMode());
+        androidx.appcompat.widget.SwitchCompat switchDesktop = dialogView.findViewById(R.id.switch_desktop_site);
+        WebTab currentTab = getCurrentTab();
+        if (switchDesktop != null && currentTab != null) {
+            switchDesktop.setChecked(currentTab.isDesktopMode());
         }
 
-        MenuItem adBlockItem = popup.getMenu().findItem(R.id.menu_ad_blocker);
-        if (adBlockItem != null) {
-            adBlockItem.setChecked(prefManager.isAdBlockEnabled());
+        androidx.appcompat.widget.SwitchCompat switchNight = dialogView.findViewById(R.id.switch_night_mode);
+        if (switchNight != null) {
+            switchNight.setChecked(prefManager.isNightMode());
         }
 
-        popup.show();
+        View btnNewTab = dialogView.findViewById(R.id.menu_action_new_tab);
+        if (btnNewTab != null) {
+            btnNewTab.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                createNewTab(prefManager.getHomepage(), false);
+            });
+        }
+
+        View btnIncognito = dialogView.findViewById(R.id.menu_action_incognito);
+        if (btnIncognito != null) {
+            btnIncognito.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                createNewTab(prefManager.getHomepage(), true);
+                Toast.makeText(this, "Incognito Tab Opened", Toast.LENGTH_SHORT).show();
+            });
+        }
+
+        View btnAddBookmark = dialogView.findViewById(R.id.menu_action_add_bookmark);
+        if (btnAddBookmark != null) {
+            btnAddBookmark.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                if (currentWeb != null && currentWeb.getUrl() != null) {
+                    dbHelper.addBookmark(new BookmarkItem(currentWeb.getTitle(), currentWeb.getUrl(), System.currentTimeMillis()));
+                    Toast.makeText(this, R.string.bookmark_added, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "No web page to bookmark", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        View btnShare = dialogView.findViewById(R.id.menu_action_share);
+        if (btnShare != null) {
+            btnShare.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                if (currentWeb != null && currentWeb.getUrl() != null) {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, currentWeb.getUrl());
+                    startActivity(Intent.createChooser(shareIntent, "Share Page"));
+                }
+            });
+        }
+
+        View btnBookmarks = dialogView.findViewById(R.id.menu_action_bookmarks);
+        if (btnBookmarks != null) {
+            btnBookmarks.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                startActivityForResult(new Intent(this, BookmarksActivity.class), REQUEST_BOOKMARKS);
+            });
+        }
+
+        View btnHistory = dialogView.findViewById(R.id.menu_action_history);
+        if (btnHistory != null) {
+            btnHistory.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                startActivityForResult(new Intent(this, HistoryActivity.class), REQUEST_HISTORY);
+            });
+        }
+
+        View btnDownloads = dialogView.findViewById(R.id.menu_action_downloads);
+        if (btnDownloads != null) {
+            btnDownloads.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                startActivity(new Intent(this, DownloadsActivity.class));
+            });
+        }
+
+        View btnDesktopSite = dialogView.findViewById(R.id.menu_action_desktop_site);
+        if (btnDesktopSite != null) {
+            btnDesktopSite.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                if (currentTab != null) {
+                    boolean targetMode = !currentTab.isDesktopMode();
+                    currentTab.setDesktopMode(targetMode);
+                    if (currentTab.getWebView() != null) {
+                        WebUtils.setDesktopMode(currentTab.getWebView(), targetMode);
+                        currentTab.getWebView().reload();
+                    }
+                }
+            });
+        }
+
+        View btnNightMode = dialogView.findViewById(R.id.menu_action_night_mode);
+        if (btnNightMode != null) {
+            btnNightMode.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                boolean targetNight = !prefManager.isNightMode();
+                prefManager.setNightMode(targetNight);
+                prefManager.applyTheme();
+                recreate();
+            });
+        }
+
+        View btnSettings = dialogView.findViewById(R.id.menu_action_settings);
+        if (btnSettings != null) {
+            btnSettings.setOnClickListener(view -> {
+                bottomSheet.dismiss();
+                startActivity(new Intent(this, SettingsActivity.class));
+            });
+        }
+
+        bottomSheet.show();
     }
 
     @Override
