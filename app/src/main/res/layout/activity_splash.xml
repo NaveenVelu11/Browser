@@ -3,16 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/splash_bg"
-    android:gravity="center">
-
-    <!-- Animated gradient background overlay -->
-    <View
-        android:layout_width="260dp"
-        android:layout_height="260dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:background="@drawable/bg_splash_glow" />
+    android:background="#FFFFFF">
 
     <!-- Center Content -->
     <LinearLayout
@@ -23,74 +14,60 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <!-- Logo with shadow container -->
+        <!-- Minimal flat logo container — no shadow, no gradient -->
         <LinearLayout
-            android:layout_width="96dp"
-            android:layout_height="96dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
             android:background="@drawable/bg_splash_logo"
             android:gravity="center">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/splash_logo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 app:srcCompat="@drawable/ic_deerone_logo"
                 android:contentDescription="@string/app_name"
                 android:scaleType="fitCenter" />
         </LinearLayout>
 
-        <!-- App Name -->
+        <!-- App Name — clean weight, tighter tracking -->
         <TextView
             android:id="@+id/splash_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="18dp"
             android:text="DeerOne"
-            android:textColor="@color/splash_text_primary"
-            android:textSize="34sp"
+            android:textColor="#1C1C1E"
+            android:textSize="26sp"
             android:fontFamily="sans-serif-medium"
-            android:letterSpacing="-0.02"
+            android:letterSpacing="-0.01"
             android:textStyle="bold" />
 
-        <!-- Tagline -->
+        <!-- Minimal tagline -->
         <TextView
             android:id="@+id/splash_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="6dp"
-            android:text="Fast · Private · Modern"
-            android:textColor="@color/splash_text_secondary"
-            android:textSize="14sp"
+            android:layout_marginTop="4dp"
+            android:text="Simple. Fast. Private."
+            android:textColor="#8E8E93"
+            android:textSize="13sp"
             android:fontFamily="sans-serif"
-            android:letterSpacing="0.04" />
+            android:letterSpacing="0.02" />
 
     </LinearLayout>
 
-    <!-- Bottom progress indicator -->
-    <LinearLayout
-        android:layout_width="match_parent"
+    <!-- Bottom version label only — no spinner -->
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginBottom="52dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <ProgressBar
-            android:id="@+id/splash_progress"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:indeterminateTint="@color/colorAccent" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Starting up..."
-            android:textColor="@color/splash_text_secondary"
-            android:textSize="11sp"
-            android:fontFamily="sans-serif"
-            android:letterSpacing="0.03" />
-
-    </LinearLayout>
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="40dp"
+        android:text="v1.0"
+        android:textColor="#C7C7CC"
+        android:textSize="11sp"
+        android:fontFamily="sans-serif"
+        android:letterSpacing="0.04" />
 
 </RelativeLayout>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Minimal flat white container with a subtle light blue tint -->
 <shape xmlns:android="http://schemas.android.com/apk/res/android">
-    <solid android:color="@color/colorAccent" />
-    <corners android:radius="48dp" />
+    <solid android:color="#EEF4FF" />
+    <corners android:radius="20dp" />
 </shape>

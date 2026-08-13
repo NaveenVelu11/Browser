@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="60dp"
-    android:height="60dp"
-    android:viewportWidth="100"
-    android:viewportHeight="100">
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+
+    <!-- Clean geometric "D" letter mark — a single open arc -->
+    <!-- Outer circle ring -->
     <path
-        android:fillColor="@color/colorAccent"
-        android:pathData="M50,10 C28.9,10 12,26.9 12,48 C12,69.1 28.9,86 50,86 C71.1,86 88,69.1 88,48 C88,26.9 71.1,10 50,10 Z M50,20 C65.5,20 78,32.5 78,48 C78,63.5 65.5,76 50,76 C34.5,76 22,63.5 22,48 C22,32.5 34.5,20 50,20 Z M45,35 L45,61 L55,61 L55,35 Z" />
+        android:fillColor="#00000000"
+        android:strokeColor="#007AFF"
+        android:strokeWidth="3.2"
+        android:pathData="M24,5 A19,19 0 1,1 23.99,5 Z" />
+
+    <!-- Inner bold "1" vertical bar -->
+    <path
+        android:fillColor="#007AFF"
+        android:pathData="M22,15 L22,33 L26,33 L26,15 Z" />
+
+    <!-- Small horizontal serif top -->
+    <path
+        android:fillColor="#007AFF"
+        android:pathData="M19,15 L29,15 L29,18 L19,18 Z" />
+
 </vector>

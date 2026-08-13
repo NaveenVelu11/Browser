@@ -225,10 +225,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             });
             swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
 
-            swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
-                WebView currentWeb = getCurrentWebView();
-                return currentWeb != null && currentWeb.canScrollVertically(-1);
-            });
+            // setOnChildScrollUpCallback is only available on API 23+ via SwipeRefreshLayout 1.x
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
+                    WebView currentWeb = getCurrentWebView();
+                    return currentWeb != null && currentWeb.canScrollVertically(-1);
+                });
+            }
         }
 
         if (editUrl != null) {
@@ -1034,34 +1037,23 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void hideTopHeaderBar() {
-        if (topBarContainer != null && topBarContainer.getVisibility() == View.VISIBLE) {
-            topBarContainer.animate()
-                    .translationY(-topBarContainer.getHeight())
-                    .setDuration(250)
-                    .withEndAction(() -> {
-                        topBarContainer.setVisibility(View.GONE);
-                        topBarContainer.setTranslationY(0);
-                        if (btnFloatingHeaderTrigger != null) {
-                            btnFloatingHeaderTrigger.setVisibility(View.VISIBLE);
-                        }
-                    })
-                    .start();
+        // In the current minimal design the header is always visible.
+        // The floating trigger button is removed, so we must never hide the address bar
+        // permanently — there is no way to bring it back.
+        if (topBarContainer != null) {
+            topBarContainer.setVisibility(View.VISIBLE);
         }
     }
 
     private void showTopHeaderBar() {
         if (topBarContainer != null) {
             topBarContainer.setVisibility(View.VISIBLE);
-            if (btnFloatingHeaderTrigger != null) {
-                btnFloatingHeaderTrigger.setVisibility(View.GONE);
-            }
-            scheduleHeaderAutoHide();
         }
     }
 
     private void scheduleHeaderAutoHide() {
+        // Auto-hide disabled: no floating trigger exists in the current layout.
         headerAutoHideHandler.removeCallbacks(hideHeaderRunnable);
-        headerAutoHideHandler.postDelayed(hideHeaderRunnable, 4000);
     }
 
     private void showContextMenuBottomSheet(int type, String extraUrl) {
@@ -1209,13 +1201,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void updateSslIcon(String url) {
-        if (btnSslLock != null) {
-            if (url != null && url.startsWith("https://")) {
-                btnSslLock.setImageResource(R.drawable.ic_lock);
-            } else {
-                btnSslLock.setImageResource(R.drawable.ic_warning);
-            }
-        }
+        // btnSslLock is hidden (visibility=gone, size=0x0) for the minimal design.
+        // We keep this method to avoid NPE on callers but do nothing.
     }
 
     private synchronized WebView getCurrentWebView() {
@@ -1409,11 +1396,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         View btnNightMode = dialogView.findViewById(R.id.menu_action_night_mode);
         if (btnNightMode != null) {
             btnNightMode.setOnClickListener(view -> {
-                bottomSheet.dismiss();
                 boolean targetNight = !prefManager.isNightMode();
                 prefManager.setNightMode(targetNight);
                 prefManager.applyTheme();
-                recreate();
+                bottomSheet.setOnDismissListener(d -> {
+                    if (!isFinishing() && !isDestroyed()) recreate();
+                });
+                bottomSheet.dismiss();
             });
         }
 
@@ -1939,24 +1928,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void hideSystemBars() {
-        if (isBarsHidden) return;
-        isBarsHidden = true;
-        if (topBarContainer != null) {
-            topBarContainer.animate()
-                    .translationY(-topBarContainer.getHeight() - 20)
-                    .setDuration(220)
-                    .start();
-        }
+        // Header auto-hide disabled in minimal design — address bar stays visible always.
     }
 
     private void showSystemBars() {
-        if (!isBarsHidden) return;
-        isBarsHidden = false;
-        if (topBarContainer != null) {
-            topBarContainer.animate()
-                    .translationY(0)
-                    .setDuration(220)
-                    .start();
-        }
+        // Header auto-hide disabled in minimal design — address bar stays visible always.
+        if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
     }
 }
