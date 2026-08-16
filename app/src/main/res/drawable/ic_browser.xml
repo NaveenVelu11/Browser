@@ -4,7 +4,19 @@
     android:height="48dp"
     android:viewportWidth="48"
     android:viewportHeight="48">
+
+    <!-- Primary Emblem Squircle -->
     <path
-        android:fillColor="@color/colorAccent"
-        android:pathData="M4,6 C4,4.9 4.9,4 6,4 L42,4 C43.1,4 44,4.9 44,6 L44,42 C44,43.1 43.1,44 42,44 L6,44 C4.9,44 4,43.1 4,42 Z M6,6 L6,12 L42,12 L42,42 L6,42 Z M8,14 L40,14 L40,40 L8,40 Z" />
+        android:fillColor="#007AFF"
+        android:pathData="M12,4 L36,4 C40.4,4 44,7.6 44,12 L44,36 C44,40.4 40.4,44 36,44 L12,44 C7.6,44 4,40.4 4,36 L4,12 C4,7.6 7.6,4 12,4 Z" />
+
+    <!-- Stylized Modern Deer Antlers + Speed Arrow Motif -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,12 L22,12 L20,20 L26,20 L18,34 L20,24 L14,24 Z" />
+
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,14 L34,22 L34,26 L26,20 L26,34 L30,34 L30,38 L18,38 L18,34 L22,34 L22,16 Z" />
+
 </vector>

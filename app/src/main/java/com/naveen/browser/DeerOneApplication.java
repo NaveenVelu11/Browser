@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.multidex.MultiDexApplication;
 
+import com.naveen.browser.utils.CrashHandler;
 import com.naveen.browser.utils.PreferenceManager;
 
 public class DeerOneApplication extends MultiDexApplication {
@@ -16,6 +17,13 @@ public class DeerOneApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         
+        try {
+            // Initialize global crash report handler for catching uncaught errors
+            CrashHandler.init(this);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize CrashHandler", e);
+        }
+
         try {
             // Enable vector drawable support for all API levels
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {

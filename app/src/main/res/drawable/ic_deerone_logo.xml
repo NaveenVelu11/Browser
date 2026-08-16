@@ -5,22 +5,20 @@
     android:viewportWidth="48"
     android:viewportHeight="48">
 
-    <!-- Clean geometric "D" letter mark — a single open arc -->
-    <!-- Outer circle ring -->
-    <path
-        android:fillColor="#00000000"
-        android:strokeColor="#007AFF"
-        android:strokeWidth="3.2"
-        android:pathData="M24,5 A19,19 0 1,1 23.99,5 Z" />
-
-    <!-- Inner bold "1" vertical bar -->
+    <!-- Primary Shield / Emblem Background Squircle -->
     <path
         android:fillColor="#007AFF"
-        android:pathData="M22,15 L22,33 L26,33 L26,15 Z" />
+        android:pathData="M12,4 L36,4 C40.4,4 44,7.6 44,12 L44,36 C44,40.4 40.4,44 36,44 L12,44 C7.6,44 4,40.4 4,36 L4,12 C4,7.6 7.6,4 12,4 Z" />
 
-    <!-- Small horizontal serif top -->
+    <!-- Stylized Modern Deer Antlers + Speed Arrow Motif -->
+    <!-- Left Antler / Speed Wing -->
     <path
-        android:fillColor="#007AFF"
-        android:pathData="M19,15 L29,15 L29,18 L19,18 Z" />
+        android:fillColor="#FFFFFF"
+        android:pathData="M16,12 L22,12 L20,20 L26,20 L18,34 L20,24 L14,24 Z" />
+
+    <!-- Right Antler / Forward Chevron -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M24,14 L34,22 L34,26 L26,20 L26,34 L30,34 L30,38 L18,38 L18,34 L22,34 L22,16 Z" />
 
 </vector>

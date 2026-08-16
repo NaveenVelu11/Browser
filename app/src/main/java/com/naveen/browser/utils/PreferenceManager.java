@@ -167,7 +167,7 @@ public class PreferenceManager {
                 default:
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                         targetNightMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
                         targetNightMode = AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY;
                     } else {
                         targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
