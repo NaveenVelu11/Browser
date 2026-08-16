@@ -60,18 +60,12 @@ public class SplashActivity extends AppCompatActivity {
             navigateAfterSplash();
         };
 
-        handler.postDelayed(navigateRunnable, 700);
+        handler.postDelayed(navigateRunnable, 200);
     }
 
     private void navigateAfterSplash() {
         try {
-            PreferenceManager pm = new PreferenceManager(this);
-            Intent intent;
-            if (pm.isFirstLaunch()) {
-                intent = new Intent(SplashActivity.this, OnboardingActivity.class);
-            } else {
-                intent = new Intent(SplashActivity.this, MainActivity.class);
-            }
+            Intent intent = new Intent(SplashActivity.this, MainActivity.class);
             startActivity(intent);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);

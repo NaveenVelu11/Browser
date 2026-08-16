@@ -142,6 +142,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(
+                    android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                    android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+        }
         prefManager = new PreferenceManager(this);
         setContentView(R.layout.activity_main);
         dbHelper = DatabaseHelper.getInstance(this);
@@ -474,7 +479,18 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         // Use default LAYER_TYPE_NONE so Chromium hardware renderer draws directly to window surface without offscreen GPU buffer overhead
         webView.setLayerType(android.view.View.LAYER_TYPE_NONE, null);
 
+        // Enable hardware acceleration flags for window
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+            getWindow().setFlags(
+                    android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED,
+                    android.view.WindowManager.LayoutParams.FLAG_HARDWARE_ACCELERATED);
+        }
+
         WebSettings settings = webView.getSettings();
+
+        // Speed & Performance Optimizations for Android 5.0/6.0+
+        settings.setRenderPriority(WebSettings.RenderPriority.HIGH);
+        settings.setEnableSmoothTransition(true);
 
         // Javascript & DOM Storage
         boolean enableJs = prefManager.isJavaScriptEnabled();
