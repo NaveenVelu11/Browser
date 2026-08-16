@@ -307,45 +307,6 @@
             android:layout_marginTop="4dp"
             android:nestedScrollingEnabled="false" />
 
-        <!-- ======================================== -->
-        <!--  RECENTLY VISITED                        -->
-        <!-- ======================================== -->
-        <LinearLayout
-            android:id="@+id/section_recent_visited"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="6dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Recently Visited"
-                android:textColor="?attr/colorTextPrimary"
-                android:textSize="13sp"
-                android:fontFamily="sans-serif-medium"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Recent history list -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="0dp"
-            app:cardBackgroundColor="?attr/colorCardBackground">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_recent_visited"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:nestedScrollingEnabled="false" />
-
-        </androidx.cardview.widget.CardView>
-
         <!-- Empty state — shown when no history/shortcuts -->
         <LinearLayout
             android:id="@+id/layout_home_empty_state"

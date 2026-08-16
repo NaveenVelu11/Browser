@@ -151,28 +151,20 @@ public class PreferenceManager {
     }
     public void setThemeMode(int m) { 
         prefs.edit().putInt(KEY_THEME_MODE, m).apply(); 
+        applyTheme();
     }
     
     public void applyTheme() {
         try {
+            boolean night = isNightMode();
             int themeMode = getThemeMode();
             int targetNightMode;
-            switch (themeMode) {
-                case 1:
-                    targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
-                    break;
-                case 2:
-                    targetNightMode = AppCompatDelegate.MODE_NIGHT_YES;
-                    break;
-                default:
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                        targetNightMode = AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM;
-                    } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-                        targetNightMode = AppCompatDelegate.MODE_NIGHT_AUTO_BATTERY;
-                    } else {
-                        targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
-                    }
-                    break;
+            if (night || themeMode == 2) {
+                targetNightMode = AppCompatDelegate.MODE_NIGHT_YES;
+            } else if (themeMode == 1) {
+                targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
+            } else {
+                targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
             }
             if (AppCompatDelegate.getDefaultNightMode() != targetNightMode) {
                 AppCompatDelegate.setDefaultNightMode(targetNightMode);
@@ -241,6 +233,7 @@ public class PreferenceManager {
     }
     public void setNightMode(boolean b) { 
         prefs.edit().putBoolean(KEY_NIGHT_MODE, b).apply(); 
+        applyTheme();
     }
 
     public boolean isDesktopMode() { 

@@ -147,13 +147,18 @@ public class WebUtils {
 
     public static String getNightModeScript() {
         return "javascript:(function() {" +
-                "var css = 'html { filter: invert(90%) hue-rotate(180deg) !important; } " +
-                "img, video, iframe, canvas { filter: invert(100%) hue-rotate(180deg) !important; }';" +
-                "var head = document.getElementsByTagName('head')[0];" +
-                "var style = document.createElement('style');" +
-                "style.type = 'text/css';" +
-                "style.appendChild(document.createTextNode(css));" +
-                "head.appendChild(style);" +
+                "var bg = '#121212';" +
+                "var fg = '#E0E0E0';" +
+                "document.documentElement.style.backgroundColor = bg;" +
+                "document.body.style.backgroundColor = bg;" +
+                "var s = document.createElement('style');" +
+                "s.type = 'text/css';" +
+                "s.appendChild(document.createTextNode(" +
+                "'html, body { background-color: ' + bg + ' !important; color: ' + fg + ' !important; } " +
+                "a { color: #64D2FF !important; } " +
+                "p, span, div, h1, h2, h3, h4, h5, h6 { color: ' + fg + ' !important; }'" +
+                "));" +
+                "(document.head || document.documentElement).appendChild(s);" +
                 "})();";
     }
 

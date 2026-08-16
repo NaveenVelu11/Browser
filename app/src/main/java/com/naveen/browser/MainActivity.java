@@ -107,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private TextView txtTabCount;
     private View homeScreenLayout;
     private View topBarContainer;
+    private View bottomNavigationBar;
     private View btnFloatingHeaderTrigger;
     private View btnFloatingDownloadBadge;
     private View btnCollapseHeader;
@@ -186,6 +187,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         txtTabCount = findViewById(R.id.txt_tab_count);
         homeScreenLayout = findViewById(R.id.home_screen_layout);
         topBarContainer = findViewById(R.id.top_bar_container);
+        bottomNavigationBar = findViewById(R.id.bottom_navigation_bar);
 
         btnFloatingHeaderTrigger = findViewById(R.id.btn_floating_header_trigger);
         btnFloatingDownloadBadge = findViewById(R.id.btn_floating_download_badge);
@@ -222,21 +224,21 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         if (swipeRefresh != null) {
             swipeRefresh.setOnRefreshListener(() -> {
                 WebView currentWeb = getCurrentWebView();
-                if (currentWeb != null) {
+                if (currentWeb != null && currentWeb.getUrl() != null && !currentWeb.getUrl().equals("about:blank")) {
                     currentWeb.reload();
                 } else {
                     swipeRefresh.setRefreshing(false);
                 }
             });
             swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
-
-            // setOnChildScrollUpCallback is only available on API 23+ via SwipeRefreshLayout 1.x
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
-                    WebView currentWeb = getCurrentWebView();
-                    return currentWeb != null && currentWeb.canScrollVertically(-1);
-                });
-            }
+            swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
+                WebView currentWeb = getCurrentWebView();
+                if (currentWeb == null) return false;
+                if (currentWeb.getUrl() == null || currentWeb.getUrl().equals("about:blank")) {
+                    return true;
+                }
+                return currentWeb.getScrollY() > 0 || currentWeb.canScrollVertically(-1);
+            });
         }
 
         if (editUrl != null) {
@@ -336,7 +338,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         if (btnAddShortcut != null) btnAddShortcut.setOnClickListener(v -> showAddShortcutDialog());
 
         recyclerCustomShortcuts = homeScreenLayout.findViewById(R.id.recycler_custom_shortcuts);
-        recyclerRecentVisited = homeScreenLayout.findViewById(R.id.recycler_recent_visited);
         layoutHomeEmptyState = homeScreenLayout.findViewById(R.id.layout_home_empty_state);
 
         if (recyclerCustomShortcuts != null) {
@@ -540,6 +541,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         applyUserAgent(settings, isDesktop);
+
+        webView.setDownloadListener((url, userAgent, contentDisposition, mimeType, contentLength) -> {
+            startDownload(url, userAgent, contentDisposition, mimeType);
+        });
 
         // Cookie Policy
         CookieManager cookieManager = CookieManager.getInstance();
@@ -1046,75 +1051,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
-    private void hideTopHeaderBar() {
-        // In the current minimal design the header is always visible.
-        // The floating trigger button is removed, so we must never hide the address bar
-        // permanently — there is no way to bring it back.
-        if (topBarContainer != null) {
-            topBarContainer.setVisibility(View.VISIBLE);
-        }
-    }
-
-    private void showTopHeaderBar() {
-        if (topBarContainer != null) {
-            topBarContainer.setVisibility(View.VISIBLE);
-        }
-    }
-
     private void scheduleHeaderAutoHide() {
-        // Auto-hide disabled: no floating trigger exists in the current layout.
         headerAutoHideHandler.removeCallbacks(hideHeaderRunnable);
-    }
-
-    private void showContextMenuBottomSheet(int type, String extraUrl) {
-        if (extraUrl == null || extraUrl.trim().isEmpty()) return;
-
-        String title = "Media Link";
-        if (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-            title = "Image Element";
-        } else if (type == WebView.HitTestResult.SRC_ANCHOR_TYPE) {
-            title = "Hyperlink";
-        }
-
-        BottomSheetContextMenuDialog dialog = BottomSheetContextMenuDialog.newInstance(title, extraUrl);
-        dialog.setOnContextMenuActionListener(new BottomSheetContextMenuDialog.OnContextMenuActionListener() {
-            @Override
-            public void onOpenInNewTab(String url) {
-                createNewTab(url, true);
-            }
-
-            @Override
-            public void onCopyLink(String url) {
-                ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-                if (clipboard != null) {
-                    ClipData clip = ClipData.newPlainText("URL", url);
-                    clipboard.setPrimaryClip(clip);
-                    Toast.makeText(MainActivity.this, "URL copied to clipboard ✓", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onDownloadMedia(String url) {
-                if (YtDlpExtractor.isYouTubeUrl(url)) {
-                    WebView web = getCurrentWebView();
-                    String pageTitle = web != null ? web.getTitle() : "YouTube Media";
-                    YtDlpExtractor.VideoDetails details = YtDlpExtractor.extractDetails(url, pageTitle);
-                    FormatPickerBottomSheetDialog picker = FormatPickerBottomSheetDialog.newInstance(details);
-                    picker.show(getSupportFragmentManager(), "FormatPicker");
-                } else {
-                    enqueueDirectDownload(url);
-                }
-            }
-
-            @Override
-            public void onShareMedia(String url) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                intent.putExtra(Intent.EXTRA_TEXT, url);
-                startActivity(Intent.createChooser(intent, "Share Link"));
-            }
-        });
-        dialog.show(getSupportFragmentManager(), "ContextMenu");
     }
 
     private void handleDownloadBadgeClick() {
@@ -1879,9 +1817,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         dialog.show();
     }
 
-    private void showContextMenuBottomSheet(final WebView.HitTestResult result) {
-        int type = result.getType();
-        final String extra = result.getExtra();
+    private void showContextMenuBottomSheet(int type, final String extra) {
         if (extra == null || extra.isEmpty()) return;
 
         BottomSheetDialog dialog = new BottomSheetDialog(this);
@@ -1890,38 +1826,117 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         layout.setBackgroundColor(ContextCompat.getColor(this, R.color.backgroundDark));
         layout.setPadding(16, 16, 16, 24);
 
-        if (type == WebView.HitTestResult.SRC_ANCHOR_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE) {
-            TextView previewHeader = new TextView(this);
-            previewHeader.setPadding(32, 16, 32, 16);
-            previewHeader.setText("Link: " + extra);
-            previewHeader.setTextColor(ContextCompat.getColor(this, R.color.textSecondary));
-            previewHeader.setTextSize(13);
-            previewHeader.setEllipsize(TextUtils.TruncateAt.END);
-            previewHeader.setSingleLine(true);
-            layout.addView(previewHeader);
+        TextView previewHeader = new TextView(this);
+        previewHeader.setPadding(32, 16, 32, 16);
+        previewHeader.setText(extra);
+        previewHeader.setTextColor(ContextCompat.getColor(this, R.color.textSecondary));
+        previewHeader.setTextSize(13);
+        previewHeader.setEllipsize(TextUtils.TruncateAt.END);
+        previewHeader.setSingleLine(true);
+        layout.addView(previewHeader);
 
-            addContextOption(layout, "Open in New Tab", v -> {
-                createNewTab(extra, false);
+        boolean isImage = (type == WebView.HitTestResult.IMAGE_TYPE || type == WebView.HitTestResult.SRC_IMAGE_ANCHOR_TYPE);
+        boolean isVideoOrMedia = (extra.contains(".mp4") || extra.contains(".webm") || extra.contains(".mkv")
+                || extra.contains(".mov") || extra.contains(".avi") || extra.contains(".mp3") || extra.contains(".m4a"));
+
+        if (isImage) {
+            addContextOption(layout, "Download Image", v -> {
                 dialog.dismiss();
+                startDownload(extra, null, null, "image/*");
+            });
+            addContextOption(layout, "Open Image in New Tab", v -> {
+                dialog.dismiss();
+                createNewTab(extra, false);
+            });
+            addContextOption(layout, "Copy Image Address", v -> {
+                dialog.dismiss();
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Image URL", extra);
+                if (clipboard != null) clipboard.setPrimaryClip(clip);
+                Toast.makeText(MainActivity.this, R.string.url_copied, Toast.LENGTH_SHORT).show();
+            });
+            addContextOption(layout, "Share Image", v -> {
+                dialog.dismiss();
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, extra);
+                startActivity(Intent.createChooser(shareIntent, "Share Image"));
+            });
+        } else if (isVideoOrMedia) {
+            addContextOption(layout, "Download Video / Media", v -> {
+                dialog.dismiss();
+                startDownload(extra, null, null, "video/*");
+            });
+            addContextOption(layout, "Open Media in New Tab", v -> {
+                dialog.dismiss();
+                createNewTab(extra, false);
+            });
+            addContextOption(layout, "Copy Media Link", v -> {
+                dialog.dismiss();
+                ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("Media URL", extra);
+                if (clipboard != null) clipboard.setPrimaryClip(clip);
+                Toast.makeText(MainActivity.this, R.string.url_copied, Toast.LENGTH_SHORT).show();
+            });
+            addContextOption(layout, "Share Media Link", v -> {
+                dialog.dismiss();
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, extra);
+                startActivity(Intent.createChooser(shareIntent, "Share Media"));
+            });
+        } else {
+            addContextOption(layout, "Open in New Tab", v -> {
+                dialog.dismiss();
+                createNewTab(extra, false);
+            });
+            addContextOption(layout, "Download Link Target", v -> {
+                dialog.dismiss();
+                startDownload(extra, null, null, null);
             });
             addContextOption(layout, "Copy Link Address", v -> {
+                dialog.dismiss();
                 ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("URL", extra);
                 if (clipboard != null) clipboard.setPrimaryClip(clip);
                 Toast.makeText(MainActivity.this, R.string.url_copied, Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
             });
             addContextOption(layout, "Share Link", v -> {
+                dialog.dismiss();
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 shareIntent.putExtra(Intent.EXTRA_TEXT, extra);
                 startActivity(Intent.createChooser(shareIntent, "Share Link"));
-                dialog.dismiss();
             });
         }
 
         dialog.setContentView(layout);
         dialog.show();
+    }
+
+    private void startDownload(String url, String userAgent, String contentDisposition, String mimeType) {
+        try {
+            if (url == null || url.trim().isEmpty()) return;
+            String filename = android.webkit.URLUtil.guessFileName(url, contentDisposition, mimeType);
+            android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(Uri.parse(url));
+
+            if (userAgent != null) request.addRequestHeader("User-Agent", userAgent);
+            String cookies = CookieManager.getInstance().getCookie(url);
+            if (cookies != null) request.addRequestHeader("Cookie", cookies);
+
+            request.setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+            request.setDestinationInExternalPublicDir(android.os.Environment.DIRECTORY_DOWNLOADS, filename);
+            request.setTitle(filename);
+            request.setDescription("Downloading file...");
+
+            android.app.DownloadManager dm = (android.app.DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+            if (dm != null) {
+                dm.enqueue(request);
+                Toast.makeText(this, "Downloading " + filename, Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
+        }
     }
 
     private void addContextOption(LinearLayout parent, String title, View.OnClickListener listener) {
@@ -1937,12 +1952,37 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         parent.addView(textView);
     }
 
+    private void hideTopHeaderBar() {
+        WebView currentWeb = getCurrentWebView();
+        if (currentWeb == null || currentWeb.getUrl() == null || currentWeb.getUrl().equals("about:blank")) {
+            return;
+        }
+        if (topBarContainer != null && topBarContainer.getVisibility() == View.VISIBLE) {
+            topBarContainer.animate().translationY(-topBarContainer.getHeight()).setDuration(200)
+                    .withEndAction(() -> topBarContainer.setVisibility(View.GONE)).start();
+        }
+        if (bottomNavigationBar != null && bottomNavigationBar.getVisibility() == View.VISIBLE) {
+            bottomNavigationBar.animate().translationY(bottomNavigationBar.getHeight()).setDuration(200)
+                    .withEndAction(() -> bottomNavigationBar.setVisibility(View.GONE)).start();
+        }
+    }
+
+    private void showTopHeaderBar() {
+        if (topBarContainer != null && topBarContainer.getVisibility() != View.VISIBLE) {
+            topBarContainer.setVisibility(View.VISIBLE);
+            topBarContainer.animate().translationY(0).setDuration(200).start();
+        }
+        if (bottomNavigationBar != null && bottomNavigationBar.getVisibility() != View.VISIBLE) {
+            bottomNavigationBar.setVisibility(View.VISIBLE);
+            bottomNavigationBar.animate().translationY(0).setDuration(200).start();
+        }
+    }
+
     private void hideSystemBars() {
-        // Header auto-hide disabled in minimal design — address bar stays visible always.
+        hideTopHeaderBar();
     }
 
     private void showSystemBars() {
-        // Header auto-hide disabled in minimal design — address bar stays visible always.
-        if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
+        showTopHeaderBar();
     }
 }

@@ -4,14 +4,14 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorSurfaceBackground">@android:color/white</item>
-        <item name="colorCardBackground">@android:color/white</item>
-        <item name="colorTextPrimary">@android:color/black</item>
-        <item name="colorTextSecondary">#757575</item>
+        <item name="colorSurfaceBackground">@color/backgroundDark</item>
+        <item name="colorCardBackground">@color/surfaceDark</item>
+        <item name="colorTextPrimary">@color/textPrimary</item>
+        <item name="colorTextSecondary">@color/textSecondary</item>
         <item name="colorAccentiOS">@color/colorAccent</item>
-        <item name="colorDivider">#E0E0E0</item>
-        <item name="android:windowBackground">@android:color/white</item>
-        <item name="android:textColorPrimary">@android:color/black</item>
+        <item name="colorDivider">@color/dividerColor</item>
+        <item name="android:windowBackground">@color/backgroundDark</item>
+        <item name="android:textColorPrimary">@color/textPrimary</item>
         <item name="android:windowAnimationStyle">@style/ActivityTransition</item>
     </style>
 </resources>
