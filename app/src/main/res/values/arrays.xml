@@ -18,11 +18,8 @@
     </string-array>
 
     <string-array name="theme_names">
-        <item>System Default</item>
-        <item>Light Mode</item>
-        <item>Dark Mode</item>
-        <item>AMOLED (Pitch Black)</item>
-        <item>Glass Dark</item>
+        <item>Light Theme</item>
+        <item>Dark Theme</item>
     </string-array>
 
     <string-array name="text_size_names">

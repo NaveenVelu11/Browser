@@ -270,6 +270,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         if (btnClearUrl != null && editUrl != null) {
             editUrl.setOnFocusChangeListener((v, hasFocus) -> {
+                editUrl.setCursorVisible(hasFocus);
                 if (hasFocus) {
                     btnClearUrl.setVisibility(View.VISIBLE);
                 } else {
@@ -319,6 +320,27 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
         if (btnTabsLayout != null) {
             btnTabsLayout.setOnClickListener(v -> showTabsManagerDialog());
+        }
+
+        // Manual header hide/show and restore handle configuration
+        View btnToggleHeader = findViewById(R.id.btn_toggle_header);
+        View restoreHandle = findViewById(R.id.fullscreen_restore_handle);
+        if (btnToggleHeader != null) {
+            btnToggleHeader.setOnClickListener(v -> {
+                boolean target = !isBarsHidden;
+                prefManager.setHeaderHiddenManual(target);
+                if (target) {
+                    hideTopHeaderBarInteractive();
+                } else {
+                    showTopHeaderBarInteractive();
+                }
+            });
+        }
+        if (restoreHandle != null) {
+            restoreHandle.setOnClickListener(v -> {
+                prefManager.setHeaderHiddenManual(false);
+                showTopHeaderBarInteractive();
+            });
         }
     }
 
@@ -606,33 +628,33 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             ((NestedWebView) webView).setOnScrollDeltaListener((dx, dy, event) -> {
                 if (isLayoutTransitioning) return;
 
-                int toolbarHeight = topBarContainer != null && topBarContainer.getHeight() > 0 ?
-                        topBarContainer.getHeight() : (int) (56 * getResources().getDisplayMetrics().density);
+                // If manual fullscreen is preferred, ignore scroll-based auto-restore
+                if (prefManager.isHeaderHiddenManual()) return;
+
+                WebView currentWeb = getCurrentWebView();
+                if (currentWeb == null || currentWeb.getUrl() == null || currentWeb.getUrl().equals("about:blank")) {
+                    return;
+                }
 
                 // If user is at the top of the page, force the header to show
                 if (webView.getScrollY() <= 10) {
-                    currentHeaderTranslationY = 0;
-                    if (topBarContainer != null) topBarContainer.setTranslationY(0);
-                    if (centerContainer != null) centerContainer.setTranslationY(0);
-                    isBarsHidden = false;
+                    if (isBarsHidden) {
+                        showTopHeaderBarInteractive();
+                    }
                     return;
                 }
 
                 if (event.getAction() == android.view.MotionEvent.ACTION_MOVE) {
-                    currentHeaderTranslationY += dy;
-                    currentHeaderTranslationY = Math.max(-toolbarHeight, Math.min(0, currentHeaderTranslationY));
-
-                    if (topBarContainer != null) {
-                        topBarContainer.setTranslationY(currentHeaderTranslationY);
-                    }
-                    if (centerContainer != null) {
-                        centerContainer.setTranslationY(currentHeaderTranslationY);
-                    }
-                } else if (event.getAction() == android.view.MotionEvent.ACTION_UP || event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
-                    if (currentHeaderTranslationY > -toolbarHeight / 2f) {
-                        showTopHeaderBarInteractive();
-                    } else {
-                        hideTopHeaderBarInteractive();
+                    // dy > 8 means user dragged down (scrolling up) -> show header
+                    // dy < -8 means user dragged up (scrolling down) -> hide header
+                    if (dy > 8) {
+                        if (isBarsHidden) {
+                            showTopHeaderBarInteractive();
+                        }
+                    } else if (dy < -8) {
+                        if (!isBarsHidden) {
+                            hideTopHeaderBarInteractive();
+                        }
                     }
                 }
             });
@@ -1017,9 +1039,6 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                         }).start();
                     }
 
-                    if (prefManager.isNightMode() && url != null && !url.equals("about:blank")) {
-                        view.evaluateJavascript(WebUtils.getNightModeScript(), null);
-                    }
                     if (url != null && !url.equals("about:blank")) {
                         view.evaluateJavascript(WebUtils.getLongPressScript(), null);
                     }

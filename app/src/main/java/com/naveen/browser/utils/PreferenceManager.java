@@ -26,6 +26,7 @@ public class PreferenceManager {
     private static final String KEY_SHOW_IMAGES       = "show_images";
     private static final String KEY_OPEN_LINKS_NEW_TAB= "open_links_new_tab";
     private static final String KEY_PULL_REFRESH      = "pull_to_refresh";
+    private static final String KEY_HEADER_HIDDEN_MANUAL = "header_hidden_manual";
 
     // --- Privacy & Security ---
     private static final String KEY_AD_BLOCK          = "ad_block_enabled";
@@ -156,16 +157,8 @@ public class PreferenceManager {
     
     public void applyTheme() {
         try {
-            boolean night = isNightMode();
             int themeMode = getThemeMode();
-            int targetNightMode;
-            if (night || themeMode == 2) {
-                targetNightMode = AppCompatDelegate.MODE_NIGHT_YES;
-            } else if (themeMode == 1) {
-                targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
-            } else {
-                targetNightMode = AppCompatDelegate.MODE_NIGHT_NO;
-            }
+            int targetNightMode = (themeMode == 1) ? AppCompatDelegate.MODE_NIGHT_YES : AppCompatDelegate.MODE_NIGHT_NO;
             if (AppCompatDelegate.getDefaultNightMode() != targetNightMode) {
                 AppCompatDelegate.setDefaultNightMode(targetNightMode);
             }
@@ -229,11 +222,10 @@ public class PreferenceManager {
 
     // ==================== BROWSING ====================
     public boolean isNightMode() { 
-        return prefs.getBoolean(KEY_NIGHT_MODE, false); 
+        return getThemeMode() == 1; 
     }
     public void setNightMode(boolean b) { 
-        prefs.edit().putBoolean(KEY_NIGHT_MODE, b).apply(); 
-        applyTheme();
+        setThemeMode(b ? 1 : 0);
     }
 
     public boolean isDesktopMode() { 
@@ -371,5 +363,12 @@ public class PreferenceManager {
         prefs.edit()
             .remove(KEY_SAVED_SESSIONS)
             .apply();
+    }
+
+    public boolean isHeaderHiddenManual() {
+        return prefs.getBoolean(KEY_HEADER_HIDDEN_MANUAL, false);
+    }
+    public void setHeaderHiddenManual(boolean b) {
+        prefs.edit().putBoolean(KEY_HEADER_HIDDEN_MANUAL, b).apply();
     }
 }

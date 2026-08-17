@@ -70,92 +70,123 @@
             android:layout_marginEnd="16dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="16dp"
-            app:cardElevation="0dp"
+            app:cardElevation="3dp"
             app:cardBackgroundColor="?attr/colorCardBackground">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:padding="16dp">
+                android:padding="20dp">
 
+                <!-- Ads & Trackers Column -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_shield"
+                        app:tint="?attr/colorAccentiOS"
+                        android:layout_marginBottom="6dp" />
                     <TextView
                         android:id="@+id/tv_stat_blocked"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="?attr/colorAccentiOS"
-                        android:textSize="20sp"
+                        android:textColor="?attr/colorTextPrimary"
+                        android:textSize="26sp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Ads &amp; Trackers"
+                        android:text="BLOCKED"
                         android:textColor="?attr/colorTextSecondary"
-                        android:textSize="11sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="?attr/colorDivider" />
+                    android:background="?attr/colorDivider"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
+                <!-- Data Saved Column -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_onboarding_speed"
+                        app:tint="@color/colorSuccess"
+                        android:layout_marginBottom="6dp" />
                     <TextView
                         android:id="@+id/tv_stat_saved"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0 MB"
-                        android:textColor="@color/colorSuccess"
-                        android:textSize="20sp"
+                        android:textColor="?attr/colorTextPrimary"
+                        android:textSize="26sp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Data Saved"
+                        android:text="SAVED"
                         android:textColor="?attr/colorTextSecondary"
-                        android:textSize="11sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
                 </LinearLayout>
 
                 <View
                     android:layout_width="1dp"
                     android:layout_height="match_parent"
-                    android:background="?attr/colorDivider" />
+                    android:background="?attr/colorDivider"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp" />
 
+                <!-- Tabs Opened Column -->
                 <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:gravity="center"
                     android:orientation="vertical">
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        app:srcCompat="@drawable/ic_tabs"
+                        app:tint="?attr/colorTextSecondary"
+                        android:layout_marginBottom="6dp" />
                     <TextView
                         android:id="@+id/tv_stat_tabs"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
                         android:textColor="?attr/colorTextPrimary"
-                        android:textSize="20sp"
+                        android:textSize="26sp"
                         android:fontFamily="sans-serif-medium"
                         android:textStyle="bold" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Tabs Opened"
+                        android:text="TABS OPENED"
                         android:textColor="?attr/colorTextSecondary"
-                        android:textSize="11sp" />
+                        android:textSize="10sp"
+                        android:textStyle="bold"
+                        android:layout_marginTop="2dp" />
                 </LinearLayout>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -196,15 +227,16 @@
                     <EditText
                         android:id="@+id/edit_homepage"
                         android:layout_width="160dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/shape_address_bar_bg"
+                        android:layout_height="48dp"
+                        android:background="@drawable/shape_settings_input_bg"
                         android:gravity="center_vertical"
                         android:inputType="textUri"
                         android:maxLines="1"
-                        android:paddingStart="10dp"
-                        android:paddingEnd="10dp"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="12dp"
+                        android:cursorVisible="false"
                         android:textColor="?attr/colorTextPrimary"
-                        android:textSize="13sp" />
+                        android:textSize="14sp" />
                 </LinearLayout>
 
                 <View
@@ -246,12 +278,32 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5dp"
-                    android:layout_marginStart="16dp"
-                    android:background="?attr/colorDivider" />
+        <!-- SECTION: APPEARANCE -->
+        <TextView
+            style="@style/SectionHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="APPEARANCE"
+            android:paddingStart="24dp"
+            android:paddingTop="20dp"
+            android:paddingBottom="8dp" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="?attr/colorCardBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
                 <!-- Theme -->
                 <LinearLayout style="@style/SettingsRowStyle">

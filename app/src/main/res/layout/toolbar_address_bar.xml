@@ -52,7 +52,8 @@
             android:selectAllOnFocus="true"
             android:textColor="?attr/colorTextPrimary"
             android:textColorHint="?attr/colorTextSecondary"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:cursorVisible="false" />
 
         <!-- Clear URL Button -->
         <androidx.appcompat.widget.AppCompatImageView
@@ -85,6 +86,18 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:visibility="gone" />
+
+    <!-- Toggle Header Visibility Button -->
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/btn_toggle_header"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="4dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Toggle Fullscreen"
+        android:padding="9dp"
+        app:srcCompat="@drawable/ic_hide_header"
+        app:tint="?attr/colorTextPrimary" />
 
     <!-- Tabs Switcher Button -->
     <FrameLayout

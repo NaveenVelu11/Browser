@@ -90,4 +90,26 @@
         android:layout_height="0dp"
         android:visibility="gone" />
 
+    <!-- Fullscreen Restore Handle -->
+    <FrameLayout
+        android:id="@+id/fullscreen_restore_handle"
+        android:layout_width="56dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/shape_restore_handle_bg"
+        android:visibility="gone"
+        android:elevation="6dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/ic_chevron_left"
+            android:rotation="-90"
+            app:tint="#FFFFFF"
+            android:contentDescription="Restore Header" />
+
+    </FrameLayout>
+
 </RelativeLayout>

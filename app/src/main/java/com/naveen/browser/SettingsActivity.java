@@ -47,7 +47,12 @@ public class SettingsActivity extends AppCompatActivity {
 
         // --- GENERAL ---
         editHomepage = findViewById(R.id.edit_homepage);
-        editHomepage.setText(pref.getHomepage());
+        if (editHomepage != null) {
+            editHomepage.setText(pref.getHomepage());
+            editHomepage.setOnFocusChangeListener((v, hasFocus) -> {
+                editHomepage.setCursorVisible(hasFocus);
+            });
+        }
 
         spinnerSearch = findViewById(R.id.spinner_search_engine);
         setSpinner(spinnerSearch, R.array.search_engine_names, pref.getSearchEngineIndex());
