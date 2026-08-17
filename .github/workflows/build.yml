@@ -64,9 +64,24 @@ jobs:
             - Integrated 5 Themes: Light, Dark, AMOLED (Pitch Black), System Default, Glass Dark.
             - Fixed Twitter/X and modern web rendering compatibility." \
             --latest || true
-          gh release upload v1.0.0 \
-            output_apks/DeerOne-Browser-v1.0.0-Debug.apk \
-            output_apks/DeerOne-Browser-v1.0.0-Release.apk \
-            --clobber
+          
+          # Retry loop for uploading assets to handle transient GitHub 503/429 errors
+          for i in {1..5}; do
+            echo "Attempt $i of 5: Uploading release assets..."
+            if gh release upload v1.0.0 \
+              output_apks/DeerOne-Browser-v1.0.0-Debug.apk \
+              output_apks/DeerOne-Browser-v1.0.0-Release.apk \
+              --clobber; then
+              echo "Release assets uploaded successfully!"
+              break
+            else
+              echo "Upload failed on attempt $i. Retrying in 10 seconds..."
+              sleep 10
+            fi
+            if [ $i -eq 5 ]; then
+              echo "Error: Upload failed after 5 attempts."
+              exit 1
+            fi
+          done
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
