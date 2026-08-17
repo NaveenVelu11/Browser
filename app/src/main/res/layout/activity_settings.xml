@@ -528,6 +528,30 @@
                     android:background="?attr/colorDivider" />
 
                 <LinearLayout
+                    android:id="@+id/btn_clear_permissions"
+                    style="@style/SettingsRowStyle"
+                    android:clickable="true"
+                    android:focusable="true">
+                    <TextView
+                        style="@style/TextTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Clear Website Permissions" />
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/ic_forward"
+                        app:tint="?attr/colorTextSecondary" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginStart="16dp"
+                    android:background="?attr/colorDivider" />
+
+                <LinearLayout
                     android:id="@+id/btn_clear_storage"
                     style="@style/SettingsRowStyle"
                     android:clickable="true"

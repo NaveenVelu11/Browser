@@ -10,6 +10,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.naveen.browser.utils.PreferenceManager;
+import com.naveen.browser.utils.SitePermissionManager;
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -88,6 +89,15 @@ public class SettingsActivity extends AppCompatActivity {
                         CookieManager.getInstance().removeAllCookies(null);
                         CookieManager.getInstance().flush();
                         toast("Cookies cleared");
+                    }));
+        }
+
+        View btnClearPermissions = findViewById(R.id.btn_clear_permissions);
+        if (btnClearPermissions != null) {
+            btnClearPermissions.setOnClickListener(v -> confirmClear("Clear Site Permissions?",
+                    "Reset location, camera, and microphone permissions to Ask", () -> {
+                        new SitePermissionManager(this).clearAllPermissions();
+                        toast("Permissions cleared");
                     }));
         }
 

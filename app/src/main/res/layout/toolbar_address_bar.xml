@@ -22,12 +22,16 @@
         android:paddingStart="6dp"
         android:paddingEnd="6dp">
 
-        <!-- SSL Lock / Security Status Icon (Hidden for Ultra Minimal Header) -->
+        <!-- SSL Lock / Security Status Icon -->
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/btn_ssl_lock"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:visibility="gone" />
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="8dp"
+            android:padding="3dp"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_lock"
+            app:tint="?attr/colorTextSecondary" />
 
         <!-- URL Edit Text -->
         <EditText

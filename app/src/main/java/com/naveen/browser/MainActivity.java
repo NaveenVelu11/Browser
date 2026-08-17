@@ -58,7 +58,7 @@ import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.naveen.browser.adapter.HistoryAdapter;
@@ -73,8 +73,10 @@ import com.naveen.browser.model.WebTab;
 import com.naveen.browser.dialog.BottomSheetContextMenuDialog;
 import com.naveen.browser.dialog.FormatPickerBottomSheetDialog;
 import com.naveen.browser.utils.AdBlocker;
+import com.naveen.browser.utils.NestedWebView;
 import com.naveen.browser.utils.MediaSnifferEngine;
 import com.naveen.browser.utils.PreferenceManager;
+import com.naveen.browser.utils.SitePermissionManager;
 import com.naveen.browser.utils.WebEdgeGestureListener;
 import com.naveen.browser.utils.WebUtils;
 import com.naveen.browser.utils.YtDlpExtractor;
@@ -99,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private FrameLayout webViewContainer;
     private FrameLayout customViewContainer;
-    private SwipeRefreshLayout swipeRefresh;
+    private FrameLayout swipeRefresh;
     private ProgressBar progressBar;
     private EditText editUrl;
     private ImageView btnClearUrl;
@@ -117,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private final MediaSnifferEngine mediaSnifferEngine = new MediaSnifferEngine();
     private boolean isBarsHidden = false;
     private boolean isLayoutTransitioning = false;
+    private float currentHeaderTranslationY = 0;
+    private android.animation.ObjectAnimator progressAnimator;
 
     // Media Sniffer
     private TextView txtMediaDetected;
@@ -133,6 +137,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private PreferenceManager prefManager;
     private DatabaseHelper dbHelper;
+    private SitePermissionManager sitePermissionManager;
 
     private final List<WebTab> tabList = new ArrayList<>();
     private int currentTabPosition = -1;
@@ -153,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         prefManager = new PreferenceManager(this);
         setContentView(R.layout.activity_main);
         dbHelper = DatabaseHelper.getInstance(this);
+        sitePermissionManager = new SitePermissionManager(this);
 
         initViews();
         requestPermissionsIfNecessary();
@@ -250,25 +256,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         // Native Home Screen Integration
         setupHomeScreenContent();
 
-        if (swipeRefresh != null) {
-            swipeRefresh.setOnRefreshListener(() -> {
-                WebView currentWeb = getCurrentWebView();
-                if (currentWeb != null && currentWeb.getUrl() != null && !currentWeb.getUrl().equals("about:blank")) {
-                    currentWeb.reload();
-                } else {
-                    swipeRefresh.setRefreshing(false);
-                }
-            });
-            swipeRefresh.setColorSchemeResources(R.color.colorPrimary, R.color.colorAccent);
-            swipeRefresh.setOnChildScrollUpCallback((parent, child) -> {
-                WebView currentWeb = getCurrentWebView();
-                if (currentWeb == null) return false;
-                if (currentWeb.getUrl() == null || currentWeb.getUrl().equals("about:blank")) {
-                    return true;
-                }
-                return currentWeb.getScrollY() > 0 || currentWeb.canScrollVertically(-1);
-            });
-        }
+
 
         if (editUrl != null) {
             editUrl.setOnEditorActionListener((v, actionId, event) -> {
@@ -502,7 +490,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     private WebView createConfiguredWebView(boolean isIncognito, boolean isDesktop) {
-        WebView webView = new WebView(this);
+        WebView webView = new NestedWebView(this);
         webView.setLayoutParams(new FrameLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
 
@@ -613,16 +601,39 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
         }
 
-        // Scroll listener for auto-hiding top toolbar with anti-jitter threshold
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            webView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+        // Scroll listener for auto-hiding top toolbar via smooth raw drag delta tracking
+        if (webView instanceof NestedWebView) {
+            ((NestedWebView) webView).setOnScrollDeltaListener((dx, dy, event) -> {
                 if (isLayoutTransitioning) return;
-                if (scrollY <= 5) {
-                    showTopHeaderBar();
-                } else if (scrollY > oldScrollY + 24) {
-                    hideTopHeaderBar();
-                } else if (scrollY < oldScrollY - 24) {
-                    showTopHeaderBar();
+
+                int toolbarHeight = topBarContainer != null && topBarContainer.getHeight() > 0 ?
+                        topBarContainer.getHeight() : (int) (56 * getResources().getDisplayMetrics().density);
+
+                // If user is at the top of the page, force the header to show
+                if (webView.getScrollY() <= 10) {
+                    currentHeaderTranslationY = 0;
+                    if (topBarContainer != null) topBarContainer.setTranslationY(0);
+                    if (centerContainer != null) centerContainer.setTranslationY(0);
+                    isBarsHidden = false;
+                    return;
+                }
+
+                if (event.getAction() == android.view.MotionEvent.ACTION_MOVE) {
+                    currentHeaderTranslationY += dy;
+                    currentHeaderTranslationY = Math.max(-toolbarHeight, Math.min(0, currentHeaderTranslationY));
+
+                    if (topBarContainer != null) {
+                        topBarContainer.setTranslationY(currentHeaderTranslationY);
+                    }
+                    if (centerContainer != null) {
+                        centerContainer.setTranslationY(currentHeaderTranslationY);
+                    }
+                } else if (event.getAction() == android.view.MotionEvent.ACTION_UP || event.getAction() == android.view.MotionEvent.ACTION_CANCEL) {
+                    if (currentHeaderTranslationY > -toolbarHeight / 2f) {
+                        showTopHeaderBarInteractive();
+                    } else {
+                        hideTopHeaderBarInteractive();
+                    }
                 }
             });
         }
@@ -692,29 +703,24 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             public void onProgressChanged(WebView view, int newProgress) {
                 if (view == getCurrentWebView()) {
                     if (progressBar != null) {
-                        if (progressBar.getVisibility() != View.VISIBLE && newProgress < 100) {
-                            progressBar.setAlpha(1f);
+                        if (newProgress < 100) {
                             progressBar.setVisibility(View.VISIBLE);
+                            progressBar.setAlpha(1f);
                         }
                         
-                        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.HONEYCOMB) {
-                            android.animation.ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), newProgress)
-                                    .setDuration(250)
-                                    .start();
-                        } else {
-                            progressBar.setProgress(newProgress);
+                        if (progressAnimator != null) {
+                            progressAnimator.cancel();
                         }
+                        progressAnimator = android.animation.ObjectAnimator.ofInt(progressBar, "progress", progressBar.getProgress(), newProgress);
+                        progressAnimator.setDuration(200);
+                        progressAnimator.setInterpolator(new android.view.animation.DecelerateInterpolator());
+                        progressAnimator.start();
 
                         if (newProgress == 100) {
-                            if (swipeRefresh != null) swipeRefresh.setRefreshing(false);
-                            progressBar.animate().alpha(0f).setDuration(300).withEndAction(() -> {
+                            progressBar.animate().alpha(0f).setDuration(250).withEndAction(() -> {
                                 progressBar.setVisibility(View.GONE);
                                 progressBar.setProgress(0);
                             }).start();
-                        }
-                    } else {
-                        if (newProgress == 100 && swipeRefresh != null) {
-                            swipeRefresh.setRefreshing(false);
                         }
                     }
                 }
@@ -733,12 +739,107 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-                callback.invoke(origin, !isIncognito, false);
+                if (isFinishing() || isDestroyed()) return;
+                int state = sitePermissionManager.getPermission(origin, "geolocation");
+                if (state == 1) {
+                    callback.invoke(origin, true, false);
+                } else if (state == 2) {
+                    callback.invoke(origin, false, false);
+                } else {
+                    android.widget.CheckBox rememberCheck = new android.widget.CheckBox(MainActivity.this);
+                    rememberCheck.setText("Remember this decision");
+                    rememberCheck.setChecked(true);
+                    rememberCheck.setPadding(16, 16, 16, 16);
+                    
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Location Permission")
+                            .setMessage("Allow " + sitePermissionManager.getHost(origin) + " to access your location?")
+                            .setView(rememberCheck)
+                            .setPositiveButton("Allow", (dialog, which) -> {
+                                if (rememberCheck.isChecked()) {
+                                    sitePermissionManager.setPermission(origin, "geolocation", 1);
+                                }
+                                callback.invoke(origin, true, false);
+                            })
+                            .setNegativeButton("Block", (dialog, which) -> {
+                                if (rememberCheck.isChecked()) {
+                                    sitePermissionManager.setPermission(origin, "geolocation", 2);
+                                }
+                                callback.invoke(origin, false, false);
+                            })
+                            .setOnCancelListener(dialog -> callback.invoke(origin, false, false))
+                            .show();
+                }
             }
 
             @Override
             public void onPermissionRequest(PermissionRequest request) {
-                if (request != null) request.grant(request.getResources());
+                if (request == null) return;
+                if (isFinishing() || isDestroyed()) {
+                    request.deny();
+                    return;
+                }
+                
+                final String origin = request.getOrigin() != null ? request.getOrigin().toString() : "";
+                final String[] resources = request.getResources();
+                
+                boolean wantsCamera = false;
+                boolean wantsMicrophone = false;
+                for (String r : resources) {
+                    if (PermissionRequest.RESOURCE_VIDEO_CAPTURE.equals(r)) wantsCamera = true;
+                    if (PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(r)) wantsMicrophone = true;
+                }
+                
+                if (!wantsCamera && !wantsMicrophone) {
+                    request.grant(resources);
+                    return;
+                }
+                
+                int cameraState = wantsCamera ? sitePermissionManager.getPermission(origin, "camera") : 1;
+                int microState = wantsMicrophone ? sitePermissionManager.getPermission(origin, "microphone") : 1;
+                
+                if (cameraState == 2 || microState == 2) {
+                    request.deny();
+                } else if (cameraState == 1 && microState == 1) {
+                    request.grant(resources);
+                } else {
+                    String msg = "Allow " + sitePermissionManager.getHost(origin) + " to access your ";
+                    if (wantsCamera && wantsMicrophone) {
+                        msg += "Camera and Microphone?";
+                    } else if (wantsCamera) {
+                        msg += "Camera?";
+                    } else {
+                        msg += "Microphone?";
+                    }
+                    
+                    android.widget.CheckBox rememberCheck = new android.widget.CheckBox(MainActivity.this);
+                    rememberCheck.setText("Remember this decision");
+                    rememberCheck.setChecked(true);
+                    rememberCheck.setPadding(16, 16, 16, 16);
+                    
+                    final boolean finalWantsCamera = wantsCamera;
+                    final boolean finalWantsMicrophone = wantsMicrophone;
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("Permission Request")
+                            .setMessage(msg)
+                            .setView(rememberCheck)
+                            .setPositiveButton("Allow", (dialog, which) -> {
+                                if (rememberCheck.isChecked()) {
+                                    if (finalWantsCamera) sitePermissionManager.setPermission(origin, "camera", 1);
+                                    if (finalWantsMicrophone) sitePermissionManager.setPermission(origin, "microphone", 1);
+                                }
+                                request.grant(resources);
+                            })
+                            .setNegativeButton("Block", (dialog, which) -> {
+                                if (rememberCheck.isChecked()) {
+                                    if (finalWantsCamera) sitePermissionManager.setPermission(origin, "camera", 2);
+                                    if (finalWantsMicrophone) sitePermissionManager.setPermission(origin, "microphone", 2);
+                                }
+                                request.deny();
+                            })
+                            .setOnCancelListener(dialog -> request.deny())
+                            .show();
+                }
             }
 
             @Override
@@ -1238,8 +1339,19 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     }
 
     private void updateSslIcon(String url) {
-        // btnSslLock is hidden (visibility=gone, size=0x0) for the minimal design.
-        // We keep this method to avoid NPE on callers but do nothing.
+        if (btnSslLock == null) return;
+        if (url == null || url.isEmpty() || url.equals("about:blank") || (homeScreenLayout != null && homeScreenLayout.getVisibility() == View.VISIBLE)) {
+            btnSslLock.setVisibility(View.GONE);
+            return;
+        }
+        btnSslLock.setVisibility(View.VISIBLE);
+        if (url.startsWith("https://")) {
+            btnSslLock.setImageResource(R.drawable.ic_lock);
+            btnSslLock.setColorFilter(ContextCompat.getColor(this, R.color.colorSuccess));
+        } else {
+            btnSslLock.setImageResource(R.drawable.ic_warning);
+            btnSslLock.setColorFilter(ContextCompat.getColor(this, R.color.colorError));
+        }
     }
 
     private synchronized WebView getCurrentWebView() {
@@ -2143,37 +2255,52 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         parent.addView(textView);
     }
 
+    private void showTopHeaderBarInteractive() {
+        int toolbarHeight = topBarContainer != null && topBarContainer.getHeight() > 0 ?
+                topBarContainer.getHeight() : (int) (56 * getResources().getDisplayMetrics().density);
+        isBarsHidden = false;
+        isLayoutTransitioning = true;
+
+        if (topBarContainer != null) {
+            topBarContainer.animate().translationY(0).setDuration(150)
+                    .withEndAction(() -> {
+                        isLayoutTransitioning = false;
+                    }).start();
+        }
+        if (centerContainer != null) {
+            centerContainer.animate().translationY(0).setDuration(150).start();
+        }
+        currentHeaderTranslationY = 0;
+    }
+
+    private void hideTopHeaderBarInteractive() {
+        int toolbarHeight = topBarContainer != null && topBarContainer.getHeight() > 0 ?
+                topBarContainer.getHeight() : (int) (56 * getResources().getDisplayMetrics().density);
+        isBarsHidden = true;
+        isLayoutTransitioning = true;
+
+        if (topBarContainer != null) {
+            topBarContainer.animate().translationY(-toolbarHeight).setDuration(150)
+                    .withEndAction(() -> {
+                        isLayoutTransitioning = false;
+                    }).start();
+        }
+        if (centerContainer != null) {
+            centerContainer.animate().translationY(-toolbarHeight).setDuration(150).start();
+        }
+        currentHeaderTranslationY = -toolbarHeight;
+    }
+
     private void hideTopHeaderBar() {
         WebView currentWeb = getCurrentWebView();
         if (currentWeb == null || currentWeb.getUrl() == null || currentWeb.getUrl().equals("about:blank")) {
             return;
         }
-        if (topBarContainer != null && !isBarsHidden) {
-            isBarsHidden = true;
-            isLayoutTransitioning = true;
-            int height = topBarContainer.getHeight() > 0 ? topBarContainer.getHeight() : (int) (56 * getResources().getDisplayMetrics().density);
-            topBarContainer.animate().translationY(-height).setDuration(220)
-                    .withEndAction(() -> {
-                        topBarContainer.postDelayed(() -> isLayoutTransitioning = false, 150);
-                    }).start();
-            if (centerContainer != null) {
-                centerContainer.animate().translationY(-height).setDuration(220).start();
-            }
-        }
+        hideTopHeaderBarInteractive();
     }
 
     private void showTopHeaderBar() {
-        if (topBarContainer != null && isBarsHidden) {
-            isBarsHidden = false;
-            isLayoutTransitioning = true;
-            topBarContainer.animate().translationY(0).setDuration(220)
-                    .withEndAction(() -> {
-                        topBarContainer.postDelayed(() -> isLayoutTransitioning = false, 150);
-                    }).start();
-            if (centerContainer != null) {
-                centerContainer.animate().translationY(0).setDuration(220).start();
-            }
-        }
+        showTopHeaderBarInteractive();
     }
 
     private void hideSystemBars() {

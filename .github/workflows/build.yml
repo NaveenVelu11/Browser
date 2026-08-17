@@ -54,6 +54,7 @@ jobs:
       - name: Publish GitHub Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
         run: |
+          gh release delete v1.0.0 --yes || true
           gh release create v1.0.0 \
             --title "DeerOne Browser v1.0.0 Release" \
             --notes "## 🚀 DeerOne Browser v1.0.0 Official Release
