@@ -53,24 +53,20 @@ jobs:
 
       - name: Publish GitHub Release
         if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: v1.0.0
-          name: DeerOne Browser v1.0.0 Release
-          body: |
-            ## 🚀 DeerOne Browser v1.0.0 Official Release
+        run: |
+          gh release create v1.0.0 \
+            --title "DeerOne Browser v1.0.0 Release" \
+            --notes "## 🚀 DeerOne Browser v1.0.0 Official Release
 
             - **Ultra-Fast & Modern Android Browsing**
             - Complete UI redesign with Top Floating Toolbar and Glassmorphism accents.
             - Built-in Ad & Tracker Shields, Media Sniffer Engine, SSL Inspector.
             - Integrated 5 Themes: Light, Dark, AMOLED (Pitch Black), System Default, Glass Dark.
-            - Fixed Twitter/X and modern web rendering compatibility.
-          draft: false
-          prerelease: false
-          make_latest: true
-          overwrite: true
-          files: |
-            output_apks/DeerOne-Browser-v1.0.0-Debug.apk
-            output_apks/DeerOne-Browser-v1.0.0-Release.apk
+            - Fixed Twitter/X and modern web rendering compatibility." \
+            --latest || true
+          gh release upload v1.0.0 \
+            output_apks/DeerOne-Browser-v1.0.0-Debug.apk \
+            output_apks/DeerOne-Browser-v1.0.0-Release.apk \
+            --clobber
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
