@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF">
+    android:background="?attr/colorSurfaceBackground">
 
     <!-- Center Content -->
     <LinearLayout
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:text="DeerOne"
-            android:textColor="#1C1C1E"
+            android:textColor="?attr/colorTextPrimary"
             android:textSize="26sp"
             android:fontFamily="sans-serif-medium"
             android:letterSpacing="-0.01"
@@ -50,7 +50,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Simple. Fast. Private."
-            android:textColor="#8E8E93"
+            android:textColor="?attr/colorTextSecondary"
             android:textSize="13sp"
             android:fontFamily="sans-serif"
             android:letterSpacing="0.02" />
@@ -65,7 +65,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
         android:text="v1.0"
-        android:textColor="#C7C7CC"
+        android:textColor="?attr/colorTextSecondary"
         android:textSize="11sp"
         android:fontFamily="sans-serif"
         android:letterSpacing="0.04" />

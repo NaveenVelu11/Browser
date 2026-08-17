@@ -39,97 +39,16 @@
     </LinearLayout>
 
     <!-- =========================================================== -->
-    <!--  BOTTOM NAVIGATION TOOLBAR                                    -->
-    <!-- =========================================================== -->
-    <LinearLayout
-        android:id="@+id/bottom_navigation_bar"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:background="?attr/colorSurfaceBackground"
-        android:elevation="8dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp">
-
-        <!-- Back Button (<) -->
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_back"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/back"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_back"
-            app:tint="?attr/colorAccentiOS" />
-
-        <!-- Forward Button (>) -->
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_forward"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="@string/forward"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_forward"
-            app:tint="?attr/colorAccentiOS" />
-
-        <!-- Home Button -->
-        <androidx.appcompat.widget.AppCompatImageButton
-            android:id="@+id/btn_home"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:contentDescription="Home"
-            android:padding="12dp"
-            app:srcCompat="@drawable/ic_home"
-            app:tint="?attr/colorAccentiOS" />
-
-        <!-- Tabs Button Container -->
-        <FrameLayout
-            android:id="@+id/btn_tabs_layout"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true">
-
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="22dp"
-                android:layout_height="22dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/ic_tabs"
-                app:tint="?attr/colorAccentiOS"
-                android:contentDescription="@string/tabs" />
-
-            <TextView
-                android:id="@+id/txt_tab_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="sans-serif-medium"
-                android:text="1"
-                android:textColor="?attr/colorAccentiOS"
-                android:textSize="10sp"
-                android:textStyle="bold" />
-        </FrameLayout>
-
-    </LinearLayout>
-
-    <!-- =========================================================== -->
     <!--  MAIN CONTENT AREA — WebView + Home Screen                  -->
     <!-- =========================================================== -->
     <FrameLayout
         android:id="@+id/center_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/top_bar_container"
-        android:layout_above="@id/bottom_navigation_bar">
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="-56dp"
+        android:paddingTop="56dp">
 
         <!-- Swipe Refresh + WebView Layout -->
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -151,48 +70,6 @@
             layout="@layout/layout_home_screen"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
-
-        <!-- Floating Download Pill Action Badge [↓ Download Media] (Bottom Right) -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btn_floating_download_badge"
-            android:layout_width="wrap_content"
-            android:layout_height="42dp"
-            android:layout_gravity="bottom|end"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="21dp"
-            app:cardElevation="6dp"
-            app:cardBackgroundColor="?attr/colorCardBackground"
-            android:visibility="gone"
-            android:clickable="true"
-            android:focusable="true">
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:orientation="horizontal"
-                android:paddingStart="14dp"
-                android:paddingEnd="16dp">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="18dp"
-                    android:layout_height="18dp"
-                    app:srcCompat="@drawable/ic_download"
-                    app:tint="?attr/colorAccentiOS"
-                    android:contentDescription="Download Media" />
-
-                <TextView
-                    android:id="@+id/txt_media_detected"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:text="Download Media"
-                    android:textColor="?attr/colorTextPrimary"
-                    android:textSize="12sp"
-                    android:fontFamily="sans-serif-medium" />
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
 
     </FrameLayout>
 

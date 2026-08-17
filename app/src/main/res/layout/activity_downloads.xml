@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/backgroundDark"
+    android:background="?attr/colorSurfaceBackground"
     android:orientation="vertical">
 
     <!-- Header Toolbar -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="@color/surfaceDark"
+        android:background="?attr/colorCardBackground"
         android:gravity="center_vertical"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingStart="@dimen/spacing_md"
+        android:paddingEnd="@dimen/spacing_md"
         android:elevation="4dp">
 
         <androidx.appcompat.widget.AppCompatImageButton
@@ -23,14 +23,14 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             app:srcCompat="@drawable/ic_back"
             android:contentDescription="@string/back"
-            app:tint="@color/iconTint" />
+            app:tint="?attr/colorTextSecondary" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="@dimen/spacing_md"
             android:text="Downloads"
-            android:textColor="@color/textPrimary"
+            android:textColor="?attr/colorTextPrimary"
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>

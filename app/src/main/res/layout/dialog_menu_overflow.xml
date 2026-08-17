@@ -5,14 +5,14 @@
     android:layout_height="wrap_content"
     android:background="@android:color/transparent"
     android:orientation="vertical"
-    android:paddingStart="12dp"
-    android:paddingEnd="12dp"
-    android:paddingBottom="16dp">
+    android:paddingStart="@dimen/spacing_sm"
+    android:paddingEnd="@dimen/spacing_sm"
+    android:paddingBottom="@dimen/spacing_md">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="24dp"
+        app:cardCornerRadius="@dimen/radius_lg"
         app:cardElevation="6dp"
         app:cardBackgroundColor="?attr/colorCardBackground">
 
@@ -63,6 +63,57 @@
                     android:ellipsize="end"
                     android:maxLines="1" />
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp"
+                android:gravity="center"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/menu_nav_back"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_back"
+                    app:tint="?attr/colorTextPrimary"
+                    android:contentDescription="Back" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/menu_nav_forward"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_forward"
+                    app:tint="?attr/colorTextPrimary"
+                    android:contentDescription="Forward" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/menu_nav_home"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_home"
+                    app:tint="?attr/colorTextPrimary"
+                    android:contentDescription="Home" />
+
+                <androidx.appcompat.widget.AppCompatImageButton
+                    android:id="@+id/menu_nav_refresh"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackgroundBorderless"
+                    app:srcCompat="@drawable/ic_refresh"
+                    app:tint="?attr/colorTextPrimary"
+                    android:contentDescription="Refresh" />
             </LinearLayout>
 
             <View

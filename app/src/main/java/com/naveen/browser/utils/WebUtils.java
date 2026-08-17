@@ -147,18 +147,47 @@ public class WebUtils {
 
     public static String getNightModeScript() {
         return "javascript:(function() {" +
-                "var bg = '#121212';" +
-                "var fg = '#E0E0E0';" +
-                "document.documentElement.style.backgroundColor = bg;" +
-                "document.body.style.backgroundColor = bg;" +
                 "var s = document.createElement('style');" +
                 "s.type = 'text/css';" +
+                "s.id = 'dark-mode-style';" +
                 "s.appendChild(document.createTextNode(" +
-                "'html, body { background-color: ' + bg + ' !important; color: ' + fg + ' !important; } " +
-                "a { color: #64D2FF !important; } " +
-                "p, span, div, h1, h2, h3, h4, h5, h6 { color: ' + fg + ' !important; }'" +
+                "'html { filter: invert(1) hue-rotate(180deg) !important; background-color: #000000 !important; } " +
+                "img, video, canvas, iframe, svg, [style*=\"background-image\"] { filter: invert(1) hue-rotate(180deg) !important; }'" +
                 "));" +
-                "(document.head || document.documentElement).appendChild(s);" +
+                "if (!document.getElementById('dark-mode-style')) {" +
+                "    (document.head || document.documentElement).appendChild(s);" +
+                "}" +
+                "})();";
+    }
+
+    public static String getLongPressScript() {
+        return "javascript:(function() {" +
+                "window.addEventListener('contextmenu', function(e) {" +
+                "    var elem = e.target;" +
+                "    var tag = elem.tagName.toLowerCase();" +
+                "    var extra = '';" +
+                "    var type = 'unknown';" +
+                "    if (tag === 'img') {" +
+                "        type = 'image';" +
+                "        extra = elem.src;" +
+                "    } else if (tag === 'video' || tag === 'audio') {" +
+                "        type = 'video';" +
+                "        extra = elem.src || (elem.querySelector('source') ? elem.querySelector('source').src : '');" +
+                "    } else if (elem.closest('a')) {" +
+                "        var anchor = elem.closest('a');" +
+                "        var imgInside = anchor.querySelector('img');" +
+                "        if (imgInside) {" +
+                "            type = 'image_link';" +
+                "            extra = JSON.stringify({link: anchor.href, img: imgInside.src});" +
+                "        } else {" +
+                "            type = 'link';" +
+                "            extra = anchor.href;" +
+                "        }" +
+                "    }" +
+                "    if (type !== 'unknown' && extra) {" +
+                "        AndroidLongPress.onLongPress(type, extra);" +
+                "    }" +
+                "});" +
                 "})();";
     }
 
