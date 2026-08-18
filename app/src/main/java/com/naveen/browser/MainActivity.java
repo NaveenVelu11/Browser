@@ -687,6 +687,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     }
                 }
             }
+
+            if (event.getPointerCount() == 2 && 
+               (event.getActionMasked() == android.view.MotionEvent.ACTION_MOVE || 
+                event.getActionMasked() == android.view.MotionEvent.ACTION_POINTER_DOWN)) {
+                if (isBarsHidden) {
+                    showTopHeaderBarInteractive();
+                }
+            }
+
             boolean handled = edgeGestureListener.onTouch(v, event);
             if (!handled) {
                 gestureDetector.onTouchEvent(event);
@@ -760,9 +769,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 if (view == getCurrentWebView()) {
                     WebTab currentTab = getCurrentTab();
                     if (currentTab != null) currentTab.setTitle(title);
-                    if (editUrl != null && !editUrl.hasFocus()) {
-                        editUrl.setText(view.getUrl());
-                    }
+                    updateAddressBarDisplay(view.getUrl(), title);
                 }
             }
 
@@ -927,6 +934,16 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 }
                 customView = view;
                 customViewCallback = callback;
+
+                setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE);
+                getWindow().getDecorView().setSystemUiVisibility(
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_FULLSCREEN
+                                | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+
                 if (topBarContainer != null) topBarContainer.setVisibility(View.GONE);
                 if (customViewContainer != null) {
                     customViewContainer.setLayerType(View.LAYER_TYPE_HARDWARE, null);
@@ -939,6 +956,10 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             @Override
             public void onHideCustomView() {
                 if (customView == null) return;
+
+                setRequestedOrientation(android.content.pm.ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
+
                 if (customViewContainer != null) {
                     customViewContainer.removeView(customView);
                     customViewContainer.setVisibility(View.GONE);
@@ -1009,6 +1030,15 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             }
 
             @Override
+            public void doUpdateVisitedHistory(WebView view, String url, boolean isReload) {
+                super.doUpdateVisitedHistory(view, url, isReload);
+                if (view == getCurrentWebView()) {
+                    updateAddressBarDisplay(url, view.getTitle());
+                    checkHomeScreenVisibility(url);
+                }
+            }
+
+            @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 if (view == getCurrentWebView()) {
                     detectedMediaList.clear();
@@ -1018,23 +1048,20 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     checkHomeScreenVisibility(url);
                     if (editUrl != null) {
                         editUrl.clearFocus();
-                        if (!editUrl.hasFocus()) {
-                            editUrl.setText(url != null && url.equals("about:blank") ? "" : url);
-                        }
                         android.view.inputmethod.InputMethodManager imm = 
                                 (android.view.inputmethod.InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
                         if (imm != null) {
                             imm.hideSoftInputFromWindow(editUrl.getWindowToken(), 0);
                         }
                     }
-                    updateSslIcon(url);
+                    updateAddressBarDisplay(url, view.getTitle());
                 }
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 if (view == getCurrentWebView()) {
-                    updateSslIcon(url);
+                    updateAddressBarDisplay(url, view.getTitle());
                     if (url != null && !url.equalsIgnoreCase("about:blank")) {
                         scheduleHeaderAutoHide();
                         mediaSnifferEngine.inspectUrl(url);
@@ -1335,13 +1362,11 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 webViewContainer.addView(currentWeb);
             }
         }
-        String currentUrl = currentWeb != null ? currentWeb.getUrl() : "";
-        if (editUrl != null) {
-            editUrl.setText(currentUrl == null || currentUrl.equals("about:blank") ? "" : currentUrl);
+        if (currentWeb != null) {
+            updateAddressBarDisplay(currentWeb.getUrl(), currentWeb.getTitle());
+            checkHomeScreenVisibility(currentWeb.getUrl());
         }
         updateTabCount();
-        updateSslIcon(currentUrl);
-        checkHomeScreenVisibility(currentUrl);
     }
 
     private void closeTab(int position) {
@@ -2128,8 +2153,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
         if (txtHostname != null) txtHostname.setText(hostname);
 
-        int currentBlocked = currentTab != null ? currentTab.getBlockedCount() : 0;
-        int lifetimeBlocked = prefManager.getLifetimeBlockedAds();
+        final String cleanHost = (hostname != null ? hostname : "").toLowerCase().replace("www.", "");
+        boolean isDisabled = prefManager.isSiteShieldsDisabled(cleanHost);
+        int siteAds = AdBlocker.getBlockedAdsCount(cleanHost);
+        int siteTrackers = AdBlocker.getBlockedTrackersCount(cleanHost);
+
+        int currentBlocked = (currentTab != null ? currentTab.getBlockedCount() : 0) + siteAds + siteTrackers;
+        int lifetimeBlocked = prefManager.getLifetimeBlockedAds() + prefManager.getLifetimeBlockedTrackers();
         if (txtBlockedCurrent != null) txtBlockedCurrent.setText(String.valueOf(currentBlocked));
         if (txtBlockedLifetime != null) txtBlockedLifetime.setText(String.valueOf(lifetimeBlocked));
 
@@ -2423,6 +2453,27 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void showSystemBars() {
         showTopHeaderBar();
+    }
+
+    private void updateAddressBarDisplay(String url, String title) {
+        if (editUrl == null) return;
+        if (editUrl.hasFocus()) return;
+
+        if (url == null || url.trim().isEmpty() || url.equalsIgnoreCase("about:blank")) {
+            editUrl.setText("");
+            updateSslIcon("about:blank");
+            return;
+        }
+
+        String displayText = url;
+        if (title != null && !title.trim().isEmpty() && !title.equalsIgnoreCase("about:blank") && !title.startsWith("http")) {
+            displayText = title + " - " + WebUtils.formatUrlForDisplay(url);
+        } else {
+            displayText = WebUtils.formatUrlForDisplay(url);
+        }
+
+        editUrl.setText(displayText);
+        updateSslIcon(url);
     }
 
     @Override

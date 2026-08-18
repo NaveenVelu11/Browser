@@ -396,4 +396,34 @@ public class PreferenceManager {
         if (mode == 2) return getHomepage();
         return "about:blank";
     }
+
+    // --- Per-Site Shields Whitelist & Tracker Stats ---
+    private static final String KEY_DISABLED_SHIELD_DOMAINS = "disabled_shield_domains";
+    private static final String KEY_LIFETIME_TRACKERS_BLOCKED = "lifetime_trackers_blocked";
+
+    public int getLifetimeBlockedTrackers() {
+        return prefs.getInt(KEY_LIFETIME_TRACKERS_BLOCKED, 0);
+    }
+    public void incrementLifetimeBlockedTrackers(int n) {
+        prefs.edit().putInt(KEY_LIFETIME_TRACKERS_BLOCKED, getLifetimeBlockedTrackers() + n).apply();
+    }
+
+    public boolean isSiteShieldsDisabled(String host) {
+        if (host == null || host.isEmpty()) return false;
+        String cleanHost = host.toLowerCase().replace("www.", "");
+        java.util.Set<String> set = prefs.getStringSet(KEY_DISABLED_SHIELD_DOMAINS, new java.util.HashSet<>());
+        return set.contains(cleanHost);
+    }
+
+    public void setSiteShieldsDisabled(String host, boolean disabled) {
+        if (host == null || host.isEmpty()) return;
+        String cleanHost = host.toLowerCase().replace("www.", "");
+        java.util.Set<String> set = new java.util.HashSet<>(prefs.getStringSet(KEY_DISABLED_SHIELD_DOMAINS, new java.util.HashSet<>()));
+        if (disabled) {
+            set.add(cleanHost);
+        } else {
+            set.remove(cleanHost);
+        }
+        prefs.edit().putStringSet(KEY_DISABLED_SHIELD_DOMAINS, set).apply();
+    }
 }

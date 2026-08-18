@@ -33,6 +33,18 @@ public class WebUtils {
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
 
+    public static String formatUrlForDisplay(String url) {
+        if (url == null || url.trim().isEmpty() || url.equalsIgnoreCase("about:blank")) return "";
+        try {
+            Uri uri = Uri.parse(url);
+            String host = uri.getHost();
+            if (host != null && !host.isEmpty()) {
+                return host.replace("www.", "");
+            }
+        } catch (Exception ignored) {}
+        return url;
+    }
+
     public static final String TABLET_USER_AGENT =
             "Mozilla/5.0 (Linux; Android 10; Tablet) AppleWebKit/537.36 " +
             "(KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36";
