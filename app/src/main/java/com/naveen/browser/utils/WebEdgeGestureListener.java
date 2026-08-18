@@ -8,9 +8,9 @@ import android.webkit.WebView;
 import android.widget.Toast;
 
 /**
- * iOS HIG-inspired Edge Swipe Gesture Listener for WebView navigation.
- * - Swiping right from the left edge (< 30dp) triggers webView.goBack()
- * - Swiping left from the right edge (> width - 30dp) triggers webView.goForward()
+ * Modern Edge Swipe Gesture Listener for WebView back and forward navigation.
+ * - Swiping right from left edge zone triggers webView.goBack()
+ * - Swiping left from right edge zone triggers webView.goForward()
  */
 public class WebEdgeGestureListener implements View.OnTouchListener {
 
@@ -29,9 +29,9 @@ public class WebEdgeGestureListener implements View.OnTouchListener {
         this.webView = webView;
         DisplayMetrics metrics = context.getResources().getDisplayMetrics();
         this.screenWidthPx = metrics.widthPixels;
-        this.edgeThresholdPx = 30 * metrics.density; // 30dp edge zone
-        this.swipeThresholdPx = 60 * metrics.density; // 60dp drag gesture distance
-        this.maxVerticalVariancePx = 80 * metrics.density;
+        this.edgeThresholdPx = 50 * metrics.density; // 50dp edge activation zone
+        this.swipeThresholdPx = 50 * metrics.density; // 50dp drag threshold
+        this.maxVerticalVariancePx = 90 * metrics.density;
     }
 
     @Override

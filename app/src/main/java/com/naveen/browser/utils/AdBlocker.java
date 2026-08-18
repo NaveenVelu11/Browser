@@ -33,6 +33,18 @@ public class AdBlocker {
         BLOCKED_DOMAINS.add("segment.io");
         BLOCKED_DOMAINS.add("hotjar.com");
         BLOCKED_DOMAINS.add("bugsnag.com");
+        BLOCKED_DOMAINS.add("popads.net");
+        BLOCKED_DOMAINS.add("popcash.net");
+        BLOCKED_DOMAINS.add("adform.net");
+        BLOCKED_DOMAINS.add("rubiconproject.com");
+        BLOCKED_DOMAINS.add("pubmatic.com");
+        BLOCKED_DOMAINS.add("moatads.com");
+        BLOCKED_DOMAINS.add("openx.net");
+        BLOCKED_DOMAINS.add("exponential.com");
+        BLOCKED_DOMAINS.add("adcolony.com");
+        BLOCKED_DOMAINS.add("vungle.com");
+        BLOCKED_DOMAINS.add("clarity.ms");
+        BLOCKED_DOMAINS.add("newrelic.com");
     }
 
     public static boolean isAdOrTracker(String url) {

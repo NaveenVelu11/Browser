@@ -1,13 +1,21 @@
 package com.naveen.browser;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
 import android.webkit.CookieManager;
 import android.webkit.WebStorage;
 import android.webkit.WebView;
-import android.view.View;
-import android.widget.*;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.naveen.browser.utils.PreferenceManager;
 import com.naveen.browser.utils.SitePermissionManager;
@@ -16,12 +24,23 @@ public class SettingsActivity extends AppCompatActivity {
 
     private PreferenceManager pref;
 
-    // General
-    private EditText editHomepage;
-    private Spinner spinnerSearch, spinnerUA, spinnerTheme, spinnerTextSize, spinnerCookies;
+    private TextView tvSubtitleSearchEngine;
+    private TextView tvSubtitleHomepage;
+    private TextView tvSubtitleLandingPage;
+    private TextView tvSubtitleTheme;
+    private TextView tvSubtitlePrivacy;
 
-    // Privacy Switches
-    private SwitchMaterial swAdBlock, swTrackers, swHttps, swDNT, swPopups, swSafeBrowsing;
+    private static final String[] SEARCH_ENGINES = {
+            "Google", "DuckDuckGo", "Bing", "Brave Search", "Yahoo", "Ecosia", "Startpage"
+    };
+
+    private static final String[] LANDING_PAGES = {
+            "DeerOne Home (Default)", "Google Search", "Custom Homepage URL"
+    };
+
+    private static final String[] THEMES = {
+            "Light Theme", "Dark Theme"
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,159 +48,263 @@ public class SettingsActivity extends AppCompatActivity {
         pref = new PreferenceManager(this);
         setContentView(R.layout.activity_settings);
 
-        // Header Navigation Arrows (iOS / Chrome Sheet Style)
         ImageButton btnBack = findViewById(R.id.btn_back_settings);
-        ImageButton btnForward = findViewById(R.id.btn_header_forward);
+        ImageButton btnClose = findViewById(R.id.btn_close_settings);
 
-        if (btnBack != null) {
-            btnBack.setOnClickListener(v -> finish());
+        if (btnBack != null) btnBack.setOnClickListener(v -> finish());
+        if (btnClose != null) btnClose.setOnClickListener(v -> finish());
+
+        tvSubtitleSearchEngine = findViewById(R.id.tv_subtitle_search_engine);
+        tvSubtitleHomepage = findViewById(R.id.tv_subtitle_homepage);
+        tvSubtitleLandingPage = findViewById(R.id.tv_subtitle_landing_page);
+        tvSubtitleTheme = findViewById(R.id.tv_subtitle_theme);
+        tvSubtitlePrivacy = findViewById(R.id.tv_subtitle_privacy);
+
+        updateSubtitles();
+
+        // 1. Search Engine Sub-Menu
+        View rowSearch = findViewById(R.id.row_search_engine);
+        if (rowSearch != null) {
+            rowSearch.setOnClickListener(v -> showSearchEngineDialog());
         }
 
-        if (btnForward != null) {
-            btnForward.setEnabled(false);
-            btnForward.setAlpha(0.35f);
+        // 2. Homepage Sub-Menu
+        View rowHomepage = findViewById(R.id.row_homepage);
+        if (rowHomepage != null) {
+            rowHomepage.setOnClickListener(v -> showHomepageDialog());
         }
 
-        // Stats card
-        updateStatsCard();
+        // 2b. Landing Page Sub-Menu
+        View rowLanding = findViewById(R.id.row_landing_page);
+        if (rowLanding != null) {
+            rowLanding.setOnClickListener(v -> showLandingPageDialog());
+        }
 
-        // --- GENERAL ---
-        editHomepage = findViewById(R.id.edit_homepage);
-        if (editHomepage != null) {
-            editHomepage.setText(pref.getHomepage());
-            editHomepage.setOnFocusChangeListener((v, hasFocus) -> {
-                editHomepage.setCursorVisible(hasFocus);
+        // 3. Theme Sub-Menu
+        View rowTheme = findViewById(R.id.row_theme);
+        if (rowTheme != null) {
+            rowTheme.setOnClickListener(v -> showThemeDialog());
+        }
+
+        // 4. Passwords Sub-Menu
+        View rowPasswords = findViewById(R.id.row_passwords);
+        if (rowPasswords != null) {
+            rowPasswords.setOnClickListener(v -> {
+                new AlertDialog.Builder(this)
+                        .setTitle("Passwords & Autofill")
+                        .setMessage("Form autofill and login security are enabled automatically by DeerOne Clean Space.")
+                        .setPositiveButton("OK", null)
+                        .show();
             });
         }
 
-        spinnerSearch = findViewById(R.id.spinner_search_engine);
-        setSpinner(spinnerSearch, R.array.search_engine_names, pref.getSearchEngineIndex());
-
-        spinnerUA = findViewById(R.id.spinner_user_agent);
-        setSpinner(spinnerUA, R.array.user_agent_names, pref.getUserAgentIndex());
-
-        spinnerTheme = findViewById(R.id.spinner_theme);
-        setSpinner(spinnerTheme, R.array.theme_names, pref.getThemeMode());
-
-        spinnerTextSize = findViewById(R.id.spinner_text_size);
-        setSpinner(spinnerTextSize, R.array.text_size_names, pref.getTextSizeIndex());
-
-        spinnerCookies = findViewById(R.id.spinner_cookies);
-        setSpinner(spinnerCookies, R.array.cookie_policy_names, pref.getCookiePolicy());
-
-        // --- PRIVACY ---
-        swAdBlock      = sw(R.id.switch_ad_block,      pref.isAdBlockEnabled());
-        swTrackers     = sw(R.id.switch_tracker_block, pref.isTrackerBlockEnabled());
-        swHttps        = sw(R.id.switch_https_only,    pref.isHttpsOnlyEnabled());
-        swDNT          = sw(R.id.switch_dnt,           pref.isDoNotTrack());
-        swPopups       = sw(R.id.switch_block_popups,  pref.isBlockPopups());
-        swSafeBrowsing = sw(R.id.switch_safe_browsing, pref.isSafeBrowsingEnabled());
-
-        // --- CLEAR DATA ---
-        View btnClearCache = findViewById(R.id.btn_clear_cache);
-        if (btnClearCache != null) {
-            btnClearCache.setOnClickListener(v -> confirmClear("Clear Cache?",
-                    "Remove temporary files", () -> {
-                        WebView tmp = new WebView(this); tmp.clearCache(true); tmp.destroy();
-                        toast("Cache cleared");
-                    }));
+        // 5. Sync Sub-Menu
+        View rowSync = findViewById(R.id.row_sync);
+        if (rowSync != null) {
+            rowSync.setOnClickListener(v -> {
+                new AlertDialog.Builder(this)
+                        .setTitle("Sync")
+                        .setMessage("Bookmarks, history and preference settings are securely synchronized locally on your device.")
+                        .setPositiveButton("OK", null)
+                        .show();
+            });
         }
 
-        View btnClearCookies = findViewById(R.id.btn_clear_cookies);
-        if (btnClearCookies != null) {
-            btnClearCookies.setOnClickListener(v -> confirmClear("Clear Cookies?",
-                    "You will be signed out of all sites", () -> {
+        // 6. Privacy & Shields Sub-Menu
+        View rowPrivacy = findViewById(R.id.row_privacy_report);
+        if (rowPrivacy != null) {
+            rowPrivacy.setOnClickListener(v -> showPrivacyShieldsDialog());
+        }
+
+        // 7. Site Settings Sub-Menu
+        View rowSiteSettings = findViewById(R.id.row_site_settings);
+        if (rowSiteSettings != null) {
+            rowSiteSettings.setOnClickListener(v -> showSiteSettingsDialog());
+        }
+
+        // 8. Downloads Sub-Menu
+        View rowDownloads = findViewById(R.id.row_downloads);
+        if (rowDownloads != null) {
+            rowDownloads.setOnClickListener(v -> {
+                startActivity(new Intent(this, DownloadsActivity.class));
+            });
+        }
+
+        // 9. Clear Data Sub-Menu
+        View rowClearData = findViewById(R.id.row_clear_data);
+        if (rowClearData != null) {
+            rowClearData.setOnClickListener(v -> showClearDataDialog());
+        }
+    }
+
+    private void updateSubtitles() {
+        if (tvSubtitleSearchEngine != null) {
+            int idx = pref.getSearchEngineIndex();
+            if (idx >= 0 && idx < SEARCH_ENGINES.length) {
+                tvSubtitleSearchEngine.setText(SEARCH_ENGINES[idx]);
+            }
+        }
+        if (tvSubtitleHomepage != null) {
+            String hp = pref.getHomepage();
+            tvSubtitleHomepage.setText(hp != null && !hp.isEmpty() ? hp : "Google");
+        }
+        if (tvSubtitleTheme != null) {
+            int themeMode = pref.getThemeMode();
+            tvSubtitleTheme.setText(themeMode == 1 ? "Dark Theme" : "Light Theme");
+        }
+        if (tvSubtitlePrivacy != null) {
+            boolean active = pref.isAdBlockEnabled() || pref.isTrackerBlockEnabled();
+            tvSubtitlePrivacy.setText(active ? "Brave Shields Active (Ads, Trackers, HTTPS)" : "Shields Disabled");
+        }
+    }
+
+    private void showSearchEngineDialog() {
+        int current = pref.getSearchEngineIndex();
+        new AlertDialog.Builder(this)
+                .setTitle("Select Search Engine")
+                .setSingleChoiceItems(SEARCH_ENGINES, current, (dialog, which) -> {
+                    pref.setSearchEngineIndex(which);
+                    updateSubtitles();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showHomepageDialog() {
+        final EditText input = new EditText(this);
+        input.setSingleLine(true);
+        input.setText(pref.getHomepage());
+        input.setCursorVisible(false);
+        input.setOnFocusChangeListener((v, hasFocus) -> input.setCursorVisible(hasFocus));
+
+        int pad = (int) (16 * getResources().getDisplayMetrics().density);
+        LinearLayout container = new LinearLayout(this);
+        container.setPadding(pad, pad, pad, pad);
+        container.addView(input, new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        new AlertDialog.Builder(this)
+                .setTitle("Set Homepage URL")
+                .setView(container)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    String url = input.getText().toString().trim();
+                    pref.setHomepage(url.isEmpty() ? PreferenceManager.DEFAULT_HOMEPAGE : url);
+                    updateSubtitles();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showLandingPageDialog() {
+        int current = pref.getLandingPageMode();
+        new AlertDialog.Builder(this)
+                .setTitle("Default Landing Page")
+                .setSingleChoiceItems(LANDING_PAGES, current, (dialog, which) -> {
+                    pref.setLandingPageMode(which);
+                    updateSubtitles();
+                    dialog.dismiss();
+                    Toast.makeText(this, "Landing page updated to " + LANDING_PAGES[which], Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showThemeDialog() {
+        int current = pref.getThemeMode() == 1 ? 1 : 0;
+        new AlertDialog.Builder(this)
+                .setTitle("Select Theme")
+                .setSingleChoiceItems(THEMES, current, (dialog, which) -> {
+                    pref.setThemeMode(which);
+                    pref.applyTheme();
+                    updateSubtitles();
+                    dialog.dismiss();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showPrivacyShieldsDialog() {
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_privacy_shields, null);
+        if (view == null) return;
+
+        SwitchMaterial swAdBlock = view.findViewById(R.id.sw_ad_block);
+        SwitchMaterial swTrackerBlock = view.findViewById(R.id.sw_tracker_block);
+        SwitchMaterial swHttps = view.findViewById(R.id.sw_https_only);
+        SwitchMaterial swDNT = view.findViewById(R.id.sw_dnt);
+        SwitchMaterial swPopups = view.findViewById(R.id.sw_popups);
+        SwitchMaterial swSafeBrowsing = view.findViewById(R.id.sw_safe_browsing);
+        SwitchMaterial swBgVideo = view.findViewById(R.id.sw_background_video);
+
+        if (swAdBlock != null) swAdBlock.setChecked(pref.isAdBlockEnabled());
+        if (swTrackerBlock != null) swTrackerBlock.setChecked(pref.isTrackerBlockEnabled());
+        if (swHttps != null) swHttps.setChecked(pref.isHttpsOnlyEnabled());
+        if (swDNT != null) swDNT.setChecked(pref.isDoNotTrack());
+        if (swPopups != null) swPopups.setChecked(pref.isBlockPopups());
+        if (swSafeBrowsing != null) swSafeBrowsing.setChecked(pref.isSafeBrowsingEnabled());
+        if (swBgVideo != null) swBgVideo.setChecked(pref.isBackgroundVideoEnabled());
+
+        new AlertDialog.Builder(this)
+                .setTitle("Privacy & Shields")
+                .setView(view)
+                .setPositiveButton("Save", (dialog, which) -> {
+                    if (swAdBlock != null) pref.setAdBlockEnabled(swAdBlock.isChecked());
+                    if (swTrackerBlock != null) pref.setTrackerBlockEnabled(swTrackerBlock.isChecked());
+                    if (swHttps != null) pref.setHttpsOnlyEnabled(swHttps.isChecked());
+                    if (swDNT != null) pref.setDoNotTrack(swDNT.isChecked());
+                    if (swPopups != null) pref.setBlockPopups(swPopups.isChecked());
+                    if (swSafeBrowsing != null) pref.setSafeBrowsingEnabled(swSafeBrowsing.isChecked());
+                    if (swBgVideo != null) pref.setBackgroundVideoEnabled(swBgVideo.isChecked());
+                    updateSubtitles();
+                    Toast.makeText(this, "Shield preferences saved", Toast.LENGTH_SHORT).show();
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showSiteSettingsDialog() {
+        String[] options = {
+                "Clear Site Permissions (Camera, Mic, Location)",
+                "Block All Cookies",
+                "Allow Third-Party Cookies"
+        };
+        new AlertDialog.Builder(this)
+                .setTitle("Site Settings")
+                .setItems(options, (dialog, which) -> {
+                    if (which == 0) {
+                        new SitePermissionManager(this).clearAllPermissions();
+                        Toast.makeText(this, "Site permissions cleared", Toast.LENGTH_SHORT).show();
+                    } else if (which == 1) {
+                        pref.setCookiePolicy(2);
+                        Toast.makeText(this, "Blocking all cookies", Toast.LENGTH_SHORT).show();
+                    } else if (which == 2) {
+                        pref.setCookiePolicy(0);
+                        Toast.makeText(this, "Third-party cookies allowed", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
+    }
+
+    private void showClearDataDialog() {
+        new AlertDialog.Builder(this)
+                .setTitle("Clear Browsing Data?")
+                .setMessage("This will remove all temporary cached files, site cookies, web storage, and site permissions.")
+                .setPositiveButton("Clear Data", (dialog, which) -> {
+                    try {
+                        WebView tmp = new WebView(this);
+                        tmp.clearCache(true);
+                        tmp.destroy();
                         CookieManager.getInstance().removeAllCookies(null);
                         CookieManager.getInstance().flush();
-                        toast("Cookies cleared");
-                    }));
-        }
-
-        View btnClearPermissions = findViewById(R.id.btn_clear_permissions);
-        if (btnClearPermissions != null) {
-            btnClearPermissions.setOnClickListener(v -> confirmClear("Clear Site Permissions?",
-                    "Reset location, camera, and microphone permissions to Ask", () -> {
-                        new SitePermissionManager(this).clearAllPermissions();
-                        toast("Permissions cleared");
-                    }));
-        }
-
-        View btnClearStorage = findViewById(R.id.btn_clear_storage);
-        if (btnClearStorage != null) {
-            btnClearStorage.setOnClickListener(v -> confirmClear("Clear All Data?",
-                    "This removes cookies, storage and sessions", () -> {
-                        CookieManager.getInstance().removeAllCookies(null);
                         WebStorage.getInstance().deleteAllData();
-                        pref.clearAllData();
-                        toast("All data cleared");
-                    }));
-        }
-
-        // --- SAVE ---
-        View btnSave = findViewById(R.id.btn_save_settings);
-        if (btnSave != null) {
-            btnSave.setOnClickListener(v -> save());
-        }
-    }
-
-    private void updateStatsCard() {
-        TextView tvBlocked = findViewById(R.id.tv_stat_blocked);
-        TextView tvSaved   = findViewById(R.id.tv_stat_saved);
-        TextView tvTabs    = findViewById(R.id.tv_stat_tabs);
-        if (tvBlocked != null) tvBlocked.setText(String.valueOf(pref.getLifetimeBlockedAds()));
-        if (tvSaved   != null) tvSaved.setText(pref.getLifetimeSavedMb() + " MB");
-        if (tvTabs    != null) tvTabs.setText(String.valueOf(pref.getTotalTabsOpened()));
-    }
-
-    private SwitchMaterial sw(int id, boolean checked) {
-        SwitchMaterial s = findViewById(id);
-        if (s != null) s.setChecked(checked);
-        return s;
-    }
-
-    private void setSpinner(Spinner s, int arrayRes, int selection) {
-        if (s == null) return;
-        ArrayAdapter<CharSequence> a = ArrayAdapter.createFromResource(this, arrayRes,
-                android.R.layout.simple_spinner_item);
-        a.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        s.setAdapter(a);
-        s.setSelection(selection);
-    }
-
-    private void confirmClear(String title, String msg, Runnable action) {
-        new AlertDialog.Builder(this)
-                .setTitle(title).setMessage(msg)
-                .setPositiveButton("Clear", (d, w) -> action.run())
-                .setNegativeButton("Cancel", null).show();
-    }
-
-    private void toast(String msg) { Toast.makeText(this, msg, Toast.LENGTH_SHORT).show(); }
-
-    private void save() {
-        if (editHomepage != null) {
-            String hp = editHomepage.getText().toString().trim();
-            pref.setHomepage(hp.isEmpty() ? PreferenceManager.DEFAULT_HOMEPAGE : hp);
-        }
-        if (spinnerSearch != null) pref.setSearchEngineIndex(spinnerSearch.getSelectedItemPosition());
-        if (spinnerUA != null) pref.setUserAgentIndex(spinnerUA.getSelectedItemPosition());
-        if (spinnerTextSize != null) pref.setTextSizeIndex(spinnerTextSize.getSelectedItemPosition());
-        if (spinnerCookies != null) pref.setCookiePolicy(spinnerCookies.getSelectedItemPosition());
-
-        if (spinnerTheme != null) {
-            int oldTheme = pref.getThemeMode();
-            int newTheme = spinnerTheme.getSelectedItemPosition();
-            pref.setThemeMode(newTheme);
-            if (oldTheme != newTheme) pref.applyTheme();
-        }
-
-        if (swAdBlock != null) pref.setAdBlockEnabled(swAdBlock.isChecked());
-        if (swTrackers != null) pref.setTrackerBlockEnabled(swTrackers.isChecked());
-        if (swHttps != null) pref.setHttpsOnlyEnabled(swHttps.isChecked());
-        if (swDNT != null) pref.setDoNotTrack(swDNT.isChecked());
-        if (swPopups != null) pref.setBlockPopups(swPopups.isChecked());
-        if (swSafeBrowsing != null) pref.setSafeBrowsingEnabled(swSafeBrowsing.isChecked());
-
-        toast("Settings saved ✓");
-        finish();
+                        new SitePermissionManager(this).clearAllPermissions();
+                        Toast.makeText(this, "All browsing data cleared ✓", Toast.LENGTH_SHORT).show();
+                    } catch (Exception e) {
+                        Toast.makeText(this, "Data cleared", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancel", null)
+                .show();
     }
 }

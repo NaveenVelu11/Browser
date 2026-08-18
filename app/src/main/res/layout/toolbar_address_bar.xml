@@ -102,30 +102,23 @@
     <!-- Tabs Switcher Button -->
     <FrameLayout
         android:id="@+id/btn_tabs_layout"
-        android:layout_width="38dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="4dp"
-        android:background="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="2dp"
+        android:background="@drawable/shape_tab_badge_bg"
         android:clickable="true"
         android:focusable="true">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center"
-            app:srcCompat="@drawable/ic_tabs"
-            app:tint="?attr/colorTextPrimary"
-            android:contentDescription="Tabs" />
 
         <TextView
             android:id="@+id/txt_tab_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="sans-serif-bold"
             android:text="1"
             android:textColor="?attr/colorTextPrimary"
-            android:textSize="9sp"
+            android:textSize="11sp"
             android:textStyle="bold" />
     </FrameLayout>
 

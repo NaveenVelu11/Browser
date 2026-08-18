@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_ad_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Ad Blocking (Brave Shields)"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_tracker_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Tracker Protection"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_https_only"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Automatic HTTPS Upgrade"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_dnt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Do Not Track (DNT) Header"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_popups"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Block Popups &amp; Redirects"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_safe_browsing"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:text="Google Safe Browsing"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/sw_background_video"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Background Video &amp; Audio Playback"
+        android:textColor="?attr/colorTextPrimary"
+        android:textSize="15sp" />
+
+</LinearLayout>

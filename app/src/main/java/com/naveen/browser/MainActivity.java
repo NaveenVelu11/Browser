@@ -269,8 +269,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
 
         if (btnClearUrl != null && editUrl != null) {
+            editUrl.setCursorVisible(false);
             editUrl.setOnFocusChangeListener((v, hasFocus) -> {
-                editUrl.setCursorVisible(hasFocus);
+                editUrl.setCursorVisible(false);
                 if (hasFocus) {
                     btnClearUrl.setVisibility(View.VISIBLE);
                 } else {
@@ -495,6 +496,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void createNewTab(String url, boolean isIncognito) {
         prefManager.incrementTabsOpened();
+        if (url == null || url.trim().isEmpty()) {
+            url = prefManager.getLandingPageUrl();
+        }
         String finalUrl = prefManager.isHttpsOnlyEnabled() ? WebUtils.upgradeToHttps(url) : url;
         WebView webView = createConfiguredWebView(isIncognito, false);
         WebTab tab = new WebTab(UUID.randomUUID().toString(), "New Tab", finalUrl, webView, isIncognito);
@@ -622,6 +626,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 cookieManager.setAcceptThirdPartyCookies(webView, cookiePolicy == 0);
             }
         }
+
+        // Attach iOS HIG-inspired Edge Swipe Gesture Listener for back and forward navigation
+        webView.setOnTouchListener(new com.naveen.browser.utils.WebEdgeGestureListener(this, webView));
 
         // Scroll listener for auto-hiding top toolbar via smooth raw drag delta tracking
         if (webView instanceof NestedWebView) {
@@ -920,7 +927,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 }
                 customView = view;
                 customViewCallback = callback;
+                if (topBarContainer != null) topBarContainer.setVisibility(View.GONE);
                 if (customViewContainer != null) {
+                    customViewContainer.setLayerType(View.LAYER_TYPE_HARDWARE, null);
                     customViewContainer.addView(view);
                     customViewContainer.setVisibility(View.VISIBLE);
                 }
@@ -935,6 +944,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     customViewContainer.setVisibility(View.GONE);
                 }
                 if (webViewContainer != null) webViewContainer.setVisibility(View.VISIBLE);
+                if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
                 if (customViewCallback != null) customViewCallback.onCustomViewHidden();
                 customView = null;
                 customViewCallback = null;
@@ -1041,6 +1051,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
                     if (url != null && !url.equals("about:blank")) {
                         view.evaluateJavascript(WebUtils.getLongPressScript(), null);
+                        if (prefManager.isAdBlockEnabled()) {
+                            view.evaluateJavascript("(function(){var s=document.createElement('style');s.innerHTML='ins.adsbygoogle,.ad-container,.ad-slot,.ad-wrapper,[id^=\"google_ads\"],.native-ad,.sponsored-post{display:none!important;}';document.head.appendChild(s);})();", null);
+                        }
                     }
                 }
             }
@@ -1930,10 +1943,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     @Override
     protected void onPause() {
         super.onPause();
-        WebView currentWeb = getCurrentWebView();
-        if (currentWeb != null) {
-            currentWeb.onPause();
-            currentWeb.pauseTimers();
+        if (!prefManager.isBackgroundVideoEnabled()) {
+            WebView currentWeb = getCurrentWebView();
+            if (currentWeb != null) {
+                currentWeb.onPause();
+                currentWeb.pauseTimers();
+            }
         }
         if (prefManager.isSessionRestoreEnabled()) {
             saveSession();
@@ -2033,9 +2048,12 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
         }
     }
 
+    private long backPressedTime = 0;
+
     @Override
     public void onBackPressed() {
-        if (customView != null) {
+        // 1. If full screen custom view (e.g. video) is active, dismiss it
+        if (customView != null || (customViewContainer != null && customViewContainer.getVisibility() == View.VISIBLE)) {
             if (customViewCallback != null) {
                 customViewCallback.onCustomViewHidden();
             }
@@ -2051,13 +2069,26 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             return;
         }
 
+        // 2. If current webview can go back, navigate back in web history
         WebView currentWeb = getCurrentWebView();
         if (currentWeb != null && currentWeb.canGoBack()) {
             currentWeb.goBack();
-        } else if (tabList.size() > 1) {
-            closeTab(currentTabPosition);
-        } else {
+            return;
+        }
+
+        // 3. If on a webpage (not on native home screen), return to native home screen
+        if (currentWeb != null && currentWeb.getUrl() != null && !currentWeb.getUrl().equals("about:blank")
+                && (homeScreenLayout == null || homeScreenLayout.getVisibility() != View.VISIBLE)) {
+            checkHomeScreenVisibility("about:blank");
+            return;
+        }
+
+        // 4. Double back tap on native home screen to prevent accidental app exit
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
             super.onBackPressed();
+        } else {
+            Toast.makeText(this, "Press back again to exit DeerOne", Toast.LENGTH_SHORT).show();
+            backPressedTime = System.currentTimeMillis();
         }
     }
 
@@ -2239,12 +2270,43 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
     private void startDownload(String url, String userAgent, String contentDisposition, String mimeType) {
         try {
             if (url == null || url.trim().isEmpty()) return;
+            url = url.trim();
+
+            if (url.startsWith("data:")) {
+                saveDataUriFile(url, mimeType);
+                return;
+            }
+
             String filename = android.webkit.URLUtil.guessFileName(url, contentDisposition, mimeType);
+            if (filename == null || filename.isEmpty() || filename.endsWith(".bin")) {
+                if (url.contains(".png")) {
+                    filename = "Image_" + System.currentTimeMillis() + ".png";
+                } else if (url.contains(".jpg") || url.contains(".jpeg")) {
+                    filename = "Image_" + System.currentTimeMillis() + ".jpg";
+                } else if (url.contains(".gif")) {
+                    filename = "Image_" + System.currentTimeMillis() + ".gif";
+                } else if (url.contains(".webp")) {
+                    filename = "Image_" + System.currentTimeMillis() + ".webp";
+                } else if (url.contains(".mp4")) {
+                    filename = "Video_" + System.currentTimeMillis() + ".mp4";
+                }
+            }
+
             android.app.DownloadManager.Request request = new android.app.DownloadManager.Request(Uri.parse(url));
 
-            if (userAgent != null) request.addRequestHeader("User-Agent", userAgent);
+            if (userAgent != null && !userAgent.isEmpty()) {
+                request.addRequestHeader("User-Agent", userAgent);
+            } else {
+                WebView web = getCurrentWebView();
+                if (web != null && web.getSettings() != null) {
+                    request.addRequestHeader("User-Agent", web.getSettings().getUserAgentString());
+                }
+            }
+
             String cookies = CookieManager.getInstance().getCookie(url);
-            if (cookies != null) request.addRequestHeader("Cookie", cookies);
+            if (cookies != null && !cookies.isEmpty()) {
+                request.addRequestHeader("Cookie", cookies);
+            }
 
             request.setNotificationVisibility(android.app.DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setDestinationInExternalPublicDir(android.os.Environment.DIRECTORY_DOWNLOADS, filename);
@@ -2254,11 +2316,44 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
             android.app.DownloadManager dm = (android.app.DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
             if (dm != null) {
                 dm.enqueue(request);
-                Toast.makeText(this, "Downloading " + filename, Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Downloading " + filename + "...", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Download failed: " + e.getMessage(), Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void saveDataUriFile(String dataUri, String defaultMimeType) {
+        new Thread(() -> {
+            try {
+                int commaIndex = dataUri.indexOf(",");
+                if (commaIndex == -1) return;
+                String header = dataUri.substring(0, commaIndex);
+                String base64Data = dataUri.substring(commaIndex + 1);
+                byte[] decodedBytes = android.util.Base64.decode(base64Data, android.util.Base64.DEFAULT);
+
+                String ext = "jpg";
+                if (header.contains("image/png")) ext = "png";
+                else if (header.contains("image/gif")) ext = "gif";
+                else if (header.contains("image/webp")) ext = "webp";
+
+                String filename = "Saved_Image_" + System.currentTimeMillis() + "." + ext;
+                java.io.File targetDir = android.os.Environment.getExternalStoragePublicDirectory(android.os.Environment.DIRECTORY_PICTURES);
+                if (!targetDir.exists()) targetDir.mkdirs();
+
+                java.io.File file = new java.io.File(targetDir, filename);
+                java.io.FileOutputStream fos = new java.io.FileOutputStream(file);
+                fos.write(decodedBytes);
+                fos.flush();
+                fos.close();
+
+                android.media.MediaScannerConnection.scanFile(this, new String[]{file.getAbsolutePath()}, null, null);
+
+                runOnUiThread(() -> Toast.makeText(this, "Image saved to Pictures: " + filename, Toast.LENGTH_SHORT).show());
+            } catch (Exception e) {
+                runOnUiThread(() -> Toast.makeText(this, "Failed to save image: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+            }
+        }).start();
     }
 
     private void addContextOption(LinearLayout parent, String title, View.OnClickListener listener) {
@@ -2328,5 +2423,38 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
 
     private void showSystemBars() {
         showTopHeaderBar();
+    }
+
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (customViewContainer != null && customViewContainer.getVisibility() == View.VISIBLE) {
+                try {
+                    android.app.PictureInPictureParams.Builder builder = new android.app.PictureInPictureParams.Builder();
+                    android.util.Rational aspectRatio = new android.util.Rational(16, 9);
+                    builder.setAspectRatio(aspectRatio);
+                    enterPictureInPictureMode(builder.build());
+                } catch (Exception e) {
+                    try {
+                        enterPictureInPictureMode();
+                    } catch (Exception ignored) {}
+                }
+            }
+        }
+    }
+
+    @Override
+    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode, android.content.res.Configuration newConfig) {
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
+        if (isInPictureInPictureMode) {
+            if (topBarContainer != null) topBarContainer.setVisibility(View.GONE);
+        } else {
+            if (customViewContainer != null && customViewContainer.getVisibility() == View.VISIBLE) {
+                if (topBarContainer != null) topBarContainer.setVisibility(View.GONE);
+            } else {
+                if (topBarContainer != null) topBarContainer.setVisibility(View.VISIBLE);
+            }
+        }
     }
 }

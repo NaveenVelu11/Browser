@@ -371,4 +371,29 @@ public class PreferenceManager {
     public void setHeaderHiddenManual(boolean b) {
         prefs.edit().putBoolean(KEY_HEADER_HIDDEN_MANUAL, b).apply();
     }
+
+    // --- Background Video & Landing Page ---
+    private static final String KEY_BACKGROUND_VIDEO = "background_video_enabled";
+    private static final String KEY_LANDING_PAGE_MODE = "landing_page_mode";
+
+    public boolean isBackgroundVideoEnabled() {
+        return prefs.getBoolean(KEY_BACKGROUND_VIDEO, true);
+    }
+    public void setBackgroundVideoEnabled(boolean b) {
+        prefs.edit().putBoolean(KEY_BACKGROUND_VIDEO, b).apply();
+    }
+
+    public int getLandingPageMode() {
+        return prefs.getInt(KEY_LANDING_PAGE_MODE, 0);
+    }
+    public void setLandingPageMode(int mode) {
+        prefs.edit().putInt(KEY_LANDING_PAGE_MODE, mode).apply();
+    }
+
+    public String getLandingPageUrl() {
+        int mode = getLandingPageMode();
+        if (mode == 1) return "https://www.google.com";
+        if (mode == 2) return getHomepage();
+        return "about:blank";
+    }
 }
