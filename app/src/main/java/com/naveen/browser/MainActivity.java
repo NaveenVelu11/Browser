@@ -980,7 +980,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     if (request != null && request.getUrl() != null) {
                         String url = request.getUrl().toString();
                         if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
-                            if (AdBlocker.isAdOrTracker(url)) {
+                            String pageHost = null;
+                            if (view != null && view.getUrl() != null) {
+                                try {
+                                    pageHost = Uri.parse(view.getUrl()).getHost();
+                                } catch (Exception ignored) {}
+                            }
+                            if (AdBlocker.isAdOrTracker(url, pageHost, prefManager)) {
                                 WebTab currentTab = getCurrentTab();
                                 if (currentTab != null) currentTab.incrementBlockedCount();
                                 return AdBlocker.createEmptyResource(url);
@@ -998,7 +1004,13 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                 try {
                     if (url != null) {
                         if (prefManager.isAdBlockEnabled() || prefManager.isTrackerBlockEnabled()) {
-                            if (AdBlocker.isAdOrTracker(url)) {
+                            String pageHost = null;
+                            if (view != null && view.getUrl() != null) {
+                                try {
+                                    pageHost = Uri.parse(view.getUrl()).getHost();
+                                } catch (Exception ignored) {}
+                            }
+                            if (AdBlocker.isAdOrTracker(url, pageHost, prefManager)) {
                                 WebTab currentTab = getCurrentTab();
                                 if (currentTab != null) currentTab.incrementBlockedCount();
                                 return AdBlocker.createEmptyResource(url);
@@ -1056,6 +1068,9 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     }
                     updateAddressBarDisplay(url, view.getTitle());
                 }
+                if (url != null && !url.equals("about:blank") && prefManager.isAdBlockEnabled()) {
+                    view.evaluateJavascript(AdBlocker.getCosmeticAdBlockScript(), null);
+                }
             }
 
             @Override
@@ -1079,7 +1094,7 @@ public class MainActivity extends AppCompatActivity implements PopupMenu.OnMenuI
                     if (url != null && !url.equals("about:blank")) {
                         view.evaluateJavascript(WebUtils.getLongPressScript(), null);
                         if (prefManager.isAdBlockEnabled()) {
-                            view.evaluateJavascript("(function(){var s=document.createElement('style');s.innerHTML='ins.adsbygoogle,.ad-container,.ad-slot,.ad-wrapper,[id^=\"google_ads\"],.native-ad,.sponsored-post{display:none!important;}';document.head.appendChild(s);})();", null);
+                            view.evaluateJavascript(AdBlocker.getCosmeticAdBlockScript(), null);
                         }
                     }
                 }
